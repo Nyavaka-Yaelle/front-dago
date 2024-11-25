@@ -183,6 +183,20 @@ class _OtpScreenState extends State<OtpScreen> {
                     color: MaterialTheme.lightScheme().primary,
                   )
                 ),
+                const SizedBox(height: 12.0),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'Renvoyez le code ?',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5,
+                      color: MaterialTheme.lightScheme().primary,
+                    ),
+                  ),
+                ),
               ],
             ],
           ),

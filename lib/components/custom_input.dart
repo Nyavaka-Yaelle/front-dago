@@ -69,7 +69,12 @@ class _CustomInputState extends State<CustomInput> {
     if (value.isEmpty && !widget.isFacultatif) {
       _hasError = true;
       return 'Ce champ ne peut pas être vide';
-    } else if (widget.isNumero) {
+    }   
+    else if (value.isEmpty && widget.isFacultatif) {
+      _hasError = false;
+      return null;
+    }
+    else if (widget.isNumero) {
       final regex = RegExp(r'^\d{3} \d{2} \d{3} \d{2}$');
       if (!regex.hasMatch(value)) {
         _hasError = true;
@@ -89,10 +94,6 @@ class _CustomInputState extends State<CustomInput> {
         _hasError = true;
         return 'Veuillez entrer une adresse email valide';
       }
-    }
-    else if (value.isEmpty && widget.isFacultatif) {
-      _hasError = false;
-      return null;
     }
     _hasError = false;
     widget.errorText = '';
