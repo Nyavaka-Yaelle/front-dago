@@ -15,6 +15,14 @@ class HorizontalLine extends StatelessWidget {
       height: thickness,
       width: double.infinity, // Prend toute la largeur disponible
       color: color, // La couleur de la ligne
+      // child: 
+      // Expanded(
+      //   child: Divider(
+      //     color: color,
+      //     thickness: thickness,
+      //     endIndent: 8.0, // Espace avant le texte
+      //   ),
+      // ),
     );
   }
 }
