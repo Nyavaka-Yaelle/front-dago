@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../screens/signup_screen.dart';
-import '../screens/login_screen.dart';
-import './custom_button.dart';
-import './horizontal_line.dart';
 import '../theme.dart';
+import './service_card.dart';
 
 class ServicesCard extends StatelessWidget {
   final VoidCallback? onActionTap; // Callback pour l'action
@@ -15,48 +12,72 @@ class ServicesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return 
+    Padding(
+      padding: EdgeInsets.all(12),
+      child: Container(
       // color: MaterialTheme.lightScheme().surfaceContainerLow,
-      width: MediaQuery.of(context).size.width, // Largeur du container
-      height: 128,
-      clipBehavior: Clip.none,
-      decoration: BoxDecoration(
-        color: MaterialTheme.lightScheme().surfaceContainerLow,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20), // Rayon en haut à gauche
-          topRight: Radius.circular(20),  // Pas de rayon en haut à droite
-          bottomLeft: Radius.circular(0), // Rayon en bas à gauche
-          bottomRight: Radius.circular(0), // Pas de rayon en bas à droite
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.24), // Couleur de l'ombre
-            blurRadius: 2, // Rayon de flou
-            offset: Offset(0, 0), // Décalage horizontal et vertical
+        width: MediaQuery.of(context).size.width, // Largeur du container
+        height: 120,
+        clipBehavior: Clip.none,
+        decoration: BoxDecoration(
+          // color: Theme.of(context).colorScheme.surfaceVariant,
+          border: Border.all(
+            width: 1.0,
+            color: MaterialTheme.lightScheme().outlineVariant, // Définit la couleur de la bordure
           ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Texte "Vous n'êtes pas encore connecté"
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                "Ridee",
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: MaterialTheme.lightScheme().onSurface,
-                ),
-              ),
-            ),
-            const SizedBox(height: 32), // Espace entre le texte et le bouton
-
-          ],
+          borderRadius: const BorderRadius.all(Radius.circular(12)), // Bordure arrondie
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(12, 16, 8, 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ServiceCard(label: "Ridee",image:"ridee_service"),
+              ServiceCard(label: "Caree",image:"caree_service"),
+              ServiceCard(label: "Foodee",image:"foodee_service"),
+              ServiceCard(label: "Packee",image:"packee_service"),
+              // Texte "Vous n'êtes pas encore connecté"
+              // Column(
+              //   children: [
+              //     Container(
+              //       width: MediaQuery.of(context).size.width/5, // Largeur du container
+              //       height: 62,
+              //       clipBehavior: Clip.none,
+              //       decoration: BoxDecoration(
+              //         // color: Theme.of(context).colorScheme.surfaceVariant,
+              //         border: Border.all(
+              //           width: 1.0,
+              //           color: MaterialTheme.lightScheme().onSurfaceVariant, // Définit la couleur de la bordure
+              //         ),
+              //         borderRadius: const BorderRadius.all(Radius.circular(16)), // Bordure arrondie
+              //       ),
+              //        child:Align(
+              //         alignment: Alignment.center,
+              //         child: Image.asset(
+              //           'assets/images/ridee_service.png',
+              //           height: 30.0,
+              //           fit: BoxFit.contain,
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(height: 8),
+              //     Align(
+              //       alignment: Alignment.center,
+              //       child: Text(
+              //         "Ridee",
+              //         style: TextStyle(
+              //           fontFamily: 'Roboto',
+              //           fontSize: 12,
+              //           fontWeight: FontWeight.w500,
+              //           color: MaterialTheme.lightScheme().onSurface,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+            ]
+          )
         ),
       ),
     );

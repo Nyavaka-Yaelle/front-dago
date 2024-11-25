@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import '../components/connexion_button.dart';
-import '../components/ridee_info.dart';
-import '../components/foodee_info.dart';
+import '../components/services_card.dart';
 import '../theme.dart';
 
-class PageInfo extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final int idService;
 
-  const PageInfo({
+  const HomeScreen({
     Key? key,
     this.idService = 0, 
     // Valeur par défaut
   }) : super(key: key);
 
   @override
-  _PageInfoState createState() => _PageInfoState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _PageInfoState extends State<PageInfo> {
+class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
 
@@ -56,22 +54,13 @@ class _PageInfoState extends State<PageInfo> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 24),
-          child: Column(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              if(widget.idService==0) RideeInfo(),
-              if(widget.idService==1) FoodeeInfo(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.085),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: ConnexionButton(),
-              ),
+              ServicesCard(),
             ],
           ),
         ),
-      ),
     );
   }
 }
