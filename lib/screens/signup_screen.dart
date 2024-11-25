@@ -242,7 +242,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
               SizedBox(height: 4.0),
-                 CustomButton(
+              CustomButton(
                 label: "S'inscrire",
                 isDisabled: !isButtonEnabled,
                 onPressed: isButtonEnabled

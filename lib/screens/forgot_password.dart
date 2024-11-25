@@ -14,11 +14,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController telController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  bool isButtonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    telController.addListener(_updateButtonState);
   }
 
   @override
@@ -36,7 +38,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }
-
+  void _updateButtonState() {
+    setState(() {
+      isButtonEnabled = RegExp(r'^\d{3} \d{2} \d{3} \d{2}$').hasMatch(telController.text);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,13 +139,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   width: 140.0,
                   child: CustomButton(
                     label: "Suivant",
-                    onPressed: () {
+                    isDisabled: !isButtonEnabled,
+                    onPressed:  isButtonEnabled
+                      ? (){
                       print("Button pressed!");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => NewPassword()),
                       );
-                    },
+                    }: null,
                     color: MaterialTheme.lightScheme().primary,
                   ),
                 )

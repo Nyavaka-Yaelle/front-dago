@@ -14,11 +14,14 @@ class _NewPasswordState extends State<NewPassword> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  bool isButtonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    passwordController.addListener(_updateButtonState);
+    confirmPasswordController.addListener(_updateButtonState);
   }
 
   @override
@@ -36,7 +39,11 @@ class _NewPasswordState extends State<NewPassword> {
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }
-
+  void _updateButtonState() {
+    setState(() {
+      isButtonEnabled = RegExp(r'^.{6,}$').hasMatch(passwordController.text) && passwordController.text.compareTo(confirmPasswordController.text)==0;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,9 +173,11 @@ class _NewPasswordState extends State<NewPassword> {
               SizedBox(height: 32.0),
               CustomButton(
                 label: "Réinitialiser",
-                onPressed: () {
+                isDisabled: !isButtonEnabled,
+                onPressed: isButtonEnabled
+                  ? () {
                   print("Button pressed!");
-                },
+                }: null,
                 color: MaterialTheme.lightScheme().primary,
               ),
             ],

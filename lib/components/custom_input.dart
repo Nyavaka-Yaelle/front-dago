@@ -92,7 +92,7 @@ class _CustomInputState extends State<CustomInput> {
     }
     else if (value.isEmpty && widget.isFacultatif) {
       _hasError = false;
-      return '';
+      return null;
     }
     _hasError = false;
     widget.errorText = '';

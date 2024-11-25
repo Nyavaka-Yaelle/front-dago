@@ -19,11 +19,16 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  bool isButtonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+
+    telController.addListener(_updateButtonState);
+    passwordController.addListener(_updateButtonState);
+
   }
 
   @override
@@ -42,6 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  void _updateButtonState() {
+    setState(() {
+      isButtonEnabled = telController.text.isNotEmpty &&
+          passwordController.text.length>=6;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,10 +209,13 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 32.0),
               CustomButton(
                 label: "Connexion",
-                onPressed: () {
-                  print("Button pressed!");
-                },
-                color: MaterialTheme.lightScheme().primary,
+                isDisabled: !isButtonEnabled,
+                onPressed: isButtonEnabled
+                  ? () {
+                    print("Button pressed!");
+                  }
+                  : null,
+                color: MaterialTheme.lightScheme().primary
               ),
               SizedBox(height: 32.0),
               HorizontalLine(
