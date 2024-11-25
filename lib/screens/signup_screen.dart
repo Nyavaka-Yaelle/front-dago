@@ -23,11 +23,18 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-
+  bool isButtonEnabled = false;
+  
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    
+    // Ajouter des écouteurs aux champs obligatoires
+    nomController.addListener(_updateButtonState);
+    prenomController.addListener(_updateButtonState);
+    telController.addListener(_updateButtonState);
+    passwordController.addListener(_updateButtonState);
   }
 
   @override
@@ -46,6 +53,14 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
+  void _updateButtonState() {
+    setState(() {
+      isButtonEnabled = nomController.text.isNotEmpty &&
+          prenomController.text.isNotEmpty &&
+          telController.text.isNotEmpty &&
+          passwordController.text.length>=6;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,6 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintText: "Nom",
                           labelText: "Nom",
                           controller: nomController,
+                          isFacultatif: false,
                         ),
                       ),
                     ],
@@ -120,6 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintText: "Prénom",
                           labelText: "Prénom",
                           controller: prenomController,
+                          isFacultatif: false,
                         ),
                       ),
                     ],
@@ -200,6 +217,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           suffixIcon: Icons.visibility_off_outlined,
                           controller: passwordController,
                           isPassword: true,
+                          isFacultatif: false,
                         ),
                       ),
                     ],
@@ -224,18 +242,22 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
               SizedBox(height: 4.0),
-              CustomButton(
+                 CustomButton(
                 label: "S'inscrire",
-                onPressed: () {
-                  print("Button pressed!");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => OtpScreen(
-                      numero: telController.text
-                    )),
-                  );
-                },
-                color: MaterialTheme.lightScheme().primary,
+                isDisabled: !isButtonEnabled,
+                onPressed: isButtonEnabled
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OtpScreen(
+                              numero: telController.text,
+                            ),
+                          ),
+                        );
+                      }
+                    : null,
+                color: MaterialTheme.lightScheme().primary
               ),
               SizedBox(height: 32.0),
               HorizontalLine(

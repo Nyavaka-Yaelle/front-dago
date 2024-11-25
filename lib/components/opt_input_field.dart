@@ -3,8 +3,13 @@ import '../theme.dart';
 
 class OtpInputField extends StatefulWidget {
   final int length;
+  final Function(bool) onChanged; // Callback pour informer le parent
 
-  const OtpInputField({Key? key, this.length = 6}) : super(key: key);
+  const OtpInputField({
+    Key? key,
+    this.length = 6,
+    required this.onChanged, // Ajout du callback
+  }) : super(key: key);
 
   @override
   _OtpInputFieldState createState() => _OtpInputFieldState();
@@ -36,6 +41,10 @@ class _OtpInputFieldState extends State<OtpInputField> {
       focusNode.dispose();
     }
     super.dispose();
+  }
+  
+  bool _areAllFieldsFilled() {
+    return controllers.every((controller) => controller.text.isNotEmpty);
   }
 
   @override
@@ -69,6 +78,9 @@ class _OtpInputFieldState extends State<OtpInputField> {
               border: InputBorder.none,
             ),
             onChanged: (value) {
+              // Appelle le callback uniquement quand un champ est modifié
+              widget.onChanged(_areAllFieldsFilled());
+
               if (value.isNotEmpty) {
                 // Si un chiffre est saisi, passe au champ suivant
                 if (index + 1 < widget.length) {

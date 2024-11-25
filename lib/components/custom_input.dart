@@ -67,6 +67,7 @@ class _CustomInputState extends State<CustomInput> {
   String? _validateInput(String value) {
     // Regex pour vérifier que le texte contient uniquement des chiffres et ne dépasse pas 10 caractères
     if (value.isEmpty && !widget.isFacultatif) {
+      _hasError = true;
       return 'Ce champ ne peut pas être vide';
     } else if (widget.isNumero) {
       final regex = RegExp(r'^\d{3} \d{2} \d{3} \d{2}$');
@@ -74,19 +75,24 @@ class _CustomInputState extends State<CustomInput> {
         _hasError = true;
         return 'Le numéro doit contenir 10 chiffres';
       }
-    } else if (widget.isPassword) {
+    } 
+    else if (widget.isPassword) {
       final regex = RegExp(r'^.{6,}$');
       if (!regex.hasMatch(value)) {
         _hasError = true;
         return 'Le mot de passe doit contenir au moins 6 caractères';
       }
     }
-     else if (widget.isEmail) {
+    else if (widget.isEmail) {
       final regex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'); // Regex pour email
       if (!regex.hasMatch(value)) {
         _hasError = true;
         return 'Veuillez entrer une adresse email valide';
       }
+    }
+    else if (value.isEmpty && widget.isFacultatif) {
+      _hasError = false;
+      return '';
     }
     _hasError = false;
     widget.errorText = '';

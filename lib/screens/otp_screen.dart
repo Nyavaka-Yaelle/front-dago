@@ -10,8 +10,7 @@ class OtpScreen extends StatefulWidget {
   const OtpScreen({
     Key? key,
     this.isvalidate = false, // Valeur par défaut
-    // required 
-    this.numero='123456789',
+    this.numero = '', // Valeur par défaut
   }) : super(key: key);
 
   @override
@@ -21,6 +20,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  bool isButtonEnabled = false; // Pour activer/désactiver le bouton
 
   @override
   void initState() {
@@ -41,16 +41,27 @@ class _OtpScreenState extends State<OtpScreen> {
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }
-  String getNumero() {
-    String visiblePart = widget.numero.isNotEmpty ? widget.numero.substring(1, widget.numero.length): '32 00 123 45'; // Partie visible
-    return '+ 261 '+visiblePart;
-  }
-  String hintNumero() {
 
-    String visiblePart = widget.numero.isNotEmpty ? widget.numero.substring(1, widget.numero.length - 9): '32 '; // Partie visible
+  String getNumero() {
+    String visiblePart = widget.numero.isNotEmpty
+        ? widget.numero.substring(1, widget.numero.length)
+        : '32 00 123 45'; // Partie visible
+    return '+ 261 ' + visiblePart;
+  }
+
+  String hintNumero() {
+    String visiblePart = widget.numero.isNotEmpty
+        ? widget.numero.substring(1, widget.numero.length - 9)
+        : '32 '; // Partie visible
     String hiddenPart = '** *** **'; // Partie masquée
-    return '+ 261 '+visiblePart + hiddenPart;
-    // return '+261 3* ** *** **';
+    return '+ 261 ' + visiblePart + hiddenPart;
+  }
+
+  // Fonction qui sera appelée pour mettre à jour l'état du bouton
+  void _updateButtonState(bool areAllFieldsFilled) {
+    setState(() {
+      isButtonEnabled = areAllFieldsFilled;
+    });
   }
 
   @override
@@ -103,7 +114,6 @@ class _OtpScreenState extends State<OtpScreen> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    // widget.numero,
                     getNumero(),
                     style: TextStyle(
                       fontFamily: 'Roboto',
@@ -114,20 +124,18 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ),
                 ),
-              ] ,
-              if (!widget.isvalidate) ...[ 
-                // Column( 
-                // children: [
+              ],
+              if (!widget.isvalidate) ...[
                 Align(
                   alignment: Alignment.topCenter,
-                  child: const Text(
+                  child: Text(
                     'Un code a été envoyé au numéro',
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
-                      color: Colors.grey,
+                      color: MaterialTheme.lightScheme().secondary,
                     ),
                   ),
                 ),
@@ -146,30 +154,36 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                 ),
                 const SizedBox(height: 24.0),
-                const OtpInputField(), // Composant OTP
+                // Composant OTP
+                OtpInputField(
+                  length: 6, // Nombre de champs
+                  onChanged: _updateButtonState, // Callback pour notifier la mère
+                ),
                 const SizedBox(height: 56.0),
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: CustomButton(
                     label: "Valider",
-                    onPressed: () {
-                      setState(() {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OtpScreen(
-                              isvalidate: true,
-                              numero: widget.numero,
-                            ),
-                          ),
-                        );
-                      });
-                    },
+                    isDisabled: !isButtonEnabled,
+                    onPressed: isButtonEnabled
+                        ? () {
+                            setState(() {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OtpScreen(
+                                    isvalidate: true,
+                                    numero: widget.numero,
+                                  ),
+                                ),
+                              );
+                            });
+                          }
+                        : null, // Si isButtonEnabled est false, on désactive le bouton (null)
                     color: MaterialTheme.lightScheme().primary,
-                  ),
+                  )
                 ),
               ],
-            // )],
             ],
           ),
         ),
