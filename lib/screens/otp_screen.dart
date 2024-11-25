@@ -10,7 +10,8 @@ class OtpScreen extends StatefulWidget {
   const OtpScreen({
     Key? key,
     this.isvalidate = false, // Valeur par défaut
-    required this.numero,
+    // required 
+    this.numero='123456789',
   }) : super(key: key);
 
   @override
@@ -41,11 +42,12 @@ class _OtpScreenState extends State<OtpScreen> {
     });
   }
   String getNumero() {
-    String visiblePart = widget.numero.substring(1, widget.numero.length); // Partie visible
+    String visiblePart = widget.numero.isNotEmpty ? widget.numero.substring(1, widget.numero.length): '32 00 123 45'; // Partie visible
     return '+ 261 '+visiblePart;
   }
   String hintNumero() {
-    String visiblePart = widget.numero.substring(1, widget.numero.length - 9); // Partie visible
+
+    String visiblePart = widget.numero.isNotEmpty ? widget.numero.substring(1, widget.numero.length - 9): '32 '; // Partie visible
     String hiddenPart = '** *** **'; // Partie masquée
     return '+ 261 '+visiblePart + hiddenPart;
     // return '+261 3* ** *** **';
