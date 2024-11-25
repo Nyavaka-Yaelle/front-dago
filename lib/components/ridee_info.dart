@@ -13,7 +13,7 @@ class RideeInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.0025),
         Align(
           alignment: Alignment.center,
           child: Image.asset(

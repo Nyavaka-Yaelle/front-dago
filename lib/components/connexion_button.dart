@@ -54,7 +54,7 @@ class ConnexionButton extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 32), // Espace entre le texte et le bouton
+            const SizedBox(height: 24), // Espace entre le texte et le bouton
 
             // Bouton "Créer un compte"
             CustomButton(
@@ -69,7 +69,7 @@ class ConnexionButton extends StatelessWidget {
               },
             ),
 
-            const SizedBox(height: 16), // Espace entre les boutons
+            const SizedBox(height: 12), // Espace entre les boutons
 
             // Ligne horizontale avec le texte "OU"
             Row(
@@ -92,7 +92,7 @@ class ConnexionButton extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 16), // Espace entre la ligne et le bouton "Se connecter"
+            const SizedBox(height: 12), // Espace entre la ligne et le bouton "Se connecter"
 
             // Bouton "Se connecter"
             CustomButton(

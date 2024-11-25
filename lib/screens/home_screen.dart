@@ -9,7 +9,7 @@ class PageInfo extends StatefulWidget {
 
   const PageInfo({
     Key? key,
-    this.idService = 1, 
+    this.idService = 0, 
     // Valeur par défaut
   }) : super(key: key);
 
@@ -57,13 +57,13 @@ class _PageInfoState extends State<PageInfo> {
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if(widget.idService==0) RideeInfo(),
               if(widget.idService==1) FoodeeInfo(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.12),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.085),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: ConnexionButton(),
