@@ -3,6 +3,7 @@ import '../components/custom_input.dart';
 import '../components/custom_button.dart';
 import '../components/horizontal_line.dart';
 import '../components/account_text.dart';
+import '../components/toast_util.dart';
 import './signup_screen.dart';
 import './splash_screen.dart';
 import './forgot_password.dart';
@@ -18,8 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController telController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  Color appBarColor =
+      MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
   bool isButtonEnabled = false;
+  String loginError = '';
 
   @override
   void initState() {
@@ -28,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     telController.addListener(_updateButtonState);
     passwordController.addListener(_updateButtonState);
-
   }
 
   @override
@@ -49,10 +51,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _updateButtonState() {
     setState(() {
-      isButtonEnabled = telController.text.isNotEmpty &&
-          passwordController.text.length>=6;
+      isButtonEnabled =
+          telController.text.isNotEmpty && passwordController.text.length >= 6;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
+        // ToastUtil.showToast('Le numéro doit contenir 10 chiffres');
         child: Padding(
           // padding: const EdgeInsets.all(24.0),
           padding: const EdgeInsets.fromLTRB(24.0, 0, 24, 24),
@@ -100,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 12.0),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0,0,0,8),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                 child: Text(
                   'Accéder à dagô pour des services faites sur mesure pour vous.',
                   style: TextStyle(
@@ -172,7 +176,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           suffixIcon: Icons.visibility_off_outlined,
                           controller: passwordController,
                           isPassword: true,
-
                         ),
                       ),
                     ],
@@ -180,7 +183,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               SizedBox(height: 4.0),
-
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
@@ -208,24 +210,27 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 32.0),
               CustomButton(
-                label: "Connexion",
-                isDisabled: !isButtonEnabled,
-                onPressed: isButtonEnabled
-                  ? () {
-                    print("Button pressed!");
-                  }
-                  : null,
-                color: MaterialTheme.lightScheme().primary
-              ),
+                  label: "Connexion",
+                  isDisabled: !isButtonEnabled,
+                  onPressed: isButtonEnabled
+                      ? () {
+                          print("Button pressed!");
+                          if (loginError != null || loginError == '') {
+                            ToastUtil.showToast(
+                                'Numéro ou mot de passe erroné'); // Afficher un toast d'erreur pour le téléphone
+                          }
+                        }
+                      : null,
+                  color: MaterialTheme.lightScheme().primary),
               SizedBox(height: 32.0),
               HorizontalLine(
                 color: MaterialTheme.lightScheme().outlineVariant,
                 thickness: 1.0,
               ),
               SizedBox(height: 32.0),
-               Align(
+              Align(
                 alignment: Alignment.center,
-                child:AccountText(
+                child: AccountText(
                   message: "Vous n'avez pas encore de compte ?",
                   actionText: "Inscrivez-vous",
                   messageColor: MaterialTheme.lightScheme().onSurface,
@@ -238,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                 ),
-               ),
+              ),
             ],
           ),
         ),
