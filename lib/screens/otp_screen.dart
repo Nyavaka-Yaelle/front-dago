@@ -186,6 +186,11 @@ class _OtpScreenState extends State<OtpScreen> {
                 const SizedBox(height: 12.0),
                 Align(
                   alignment: Alignment.topCenter,
+                  child: InkWell(
+                  onTap: () {
+                    // Action à effectuer lors du clic
+                    print('Renvoyer le code !');
+                  },
                   child: Text(
                     'Renvoyez le code ?',
                     style: TextStyle(
@@ -195,6 +200,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       height: 1.5,
                       color: MaterialTheme.lightScheme().primary,
                     ),
+                  ),
                   ),
                 ),
               ],
