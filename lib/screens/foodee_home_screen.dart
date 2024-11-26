@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/search_bar.dart';
+import '../components/tab_items.dart';
+import '../components/categories.dart';
 import '../components/address_position.dart';
 import '../theme.dart';
 
@@ -19,6 +21,7 @@ class FoodeeHomeScreen extends StatefulWidget {
 class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
 
   @override
   void initState() {
@@ -44,6 +47,7 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor,
       // appBar: AppBar(
       //   leading: IconButton(
       //     icon: const Icon(Icons.arrow_back, size: 24.0),
@@ -66,6 +70,8 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
                 ),
               // SizedBox(height: 4),
               SearchBar(),
+              TabItems(),
+              Categories(),
             ],
           ),
         ),
