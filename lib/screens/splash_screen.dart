@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import './login_screen.dart';
+import '../theme.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -43,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest, 
       body: Center(
         child: ScaleTransition(
           scale: _animation,

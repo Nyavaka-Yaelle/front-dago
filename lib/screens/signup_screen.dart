@@ -7,6 +7,7 @@ import '../components/account_text.dart';
 import './login_screen.dart';
 import './otp_screen.dart';
 import '../theme.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
   bool isButtonEnabled = false;
   
   @override
@@ -65,18 +67,19 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor, 
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
           },
         ),
-        backgroundColor: appBarColor, // Couleur dynamique
-        title: Text('Créer un compte'),
-        
+        backgroundColor: appBarColor, 
+        elevation: 0, 
+        title: Text('Créer un compte'),        
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
@@ -88,17 +91,17 @@ class _SignupScreenState extends State<SignupScreen> {
             children: [
               Align(
                 alignment: Alignment.centerLeft,
-                child: Image.asset(
-                  'assets/images/login_image.png',
-                  height: 56.0,
+                child: SvgPicture.asset(
+                  'assets/images/login_image.svg',
+                  height: 48.0,
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(height: 12.0),
+              SizedBox(height: 16.0),
               Table(
                 columnWidths: {
-                  0: FlexColumnWidth(0.1),
-                  1: FlexColumnWidth(0.9),
+                  0: FlexColumnWidth(0.12),
+                  1: FlexColumnWidth(0.88),
                 },
                 children: [
                   TableRow(

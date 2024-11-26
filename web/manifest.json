@@ -1,6 +1,6 @@
 {
-    "name": "project1",
-    "short_name": "project1",
+    "name": "dago",
+    "short_name": "dago",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

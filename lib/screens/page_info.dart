@@ -20,6 +20,7 @@ class PageInfo extends StatefulWidget {
 class _PageInfoState extends State<PageInfo> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
 
   @override
   void initState() {
@@ -45,27 +46,40 @@ class _PageInfoState extends State<PageInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 24.0),
+          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: appBarColor,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Padding(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              if(widget.idService==0) RideeInfo(),
-              if(widget.idService==1) FoodeeInfo(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.12),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical:0,horizontal:16),
+                child: Column(
+                  children: [
+                    if(widget.idService==0) RideeInfo(),
+                    if(widget.idService==1) FoodeeInfo(),
+                ])
+              ),
+              //  Expanded(
+              //   child: Container(), // Cet Expanded prend l'espace restant, poussant le bouton vers le bas
+              // ),
+              // SizedBox(height: MediaQuery.of(context).size.height * 0.12),
+              Spacer(),
               Align(
-                alignment: Alignment.bottomLeft,
+                alignment: Alignment.bottomCenter,
                 child: ConnexionButton(),
               ),
             ],

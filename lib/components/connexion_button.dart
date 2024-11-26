@@ -18,7 +18,7 @@ class ConnexionButton extends StatelessWidget {
     return Container(
       // color: MaterialTheme.lightScheme().surfaceContainerLow,
       width: MediaQuery.of(context).size.width, // Largeur du container
-      height: 235,
+      // height: 235,
       clipBehavior: Clip.none,
       decoration: BoxDecoration(
         color: MaterialTheme.lightScheme().surfaceContainerLow,
@@ -37,7 +37,7 @@ class ConnexionButton extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 116),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

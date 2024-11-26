@@ -8,6 +8,7 @@ import './signup_screen.dart';
 import './splash_screen.dart';
 import './forgot_password.dart';
 import '../theme.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,8 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController telController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Color appBarColor =
-      MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
   bool isButtonEnabled = false;
   String loginError = '';
 
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
       appBarColor = _scrollController.offset > 50
-          ? MaterialTheme.lightScheme().surfaceContainerLowest
+          ? MaterialTheme.lightScheme().surfaceContainerLowest.withOpacity(0.5)
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }
@@ -60,9 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor, 
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             // Navigator.pop(context); // Retour à l'écran précédent
@@ -72,26 +74,25 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
         ),
-        backgroundColor: appBarColor, // Couleur dynamique
+        backgroundColor: appBarColor,
+        elevation: 0, 
       ),
       body: SingleChildScrollView(
-        controller: _scrollController, // Ajout du ScrollController
-        // ToastUtil.showToast('Le numéro doit contenir 10 chiffres');
+        controller: _scrollController, 
         child: Padding(
-          // padding: const EdgeInsets.all(24.0),
           padding: const EdgeInsets.fromLTRB(24.0, 0, 24, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Align(
                 alignment: Alignment.centerLeft,
-                child: Image.asset(
-                  'assets/images/login_image.png',
-                  height: 56.0,
+                child: SvgPicture.asset(
+                  'assets/images/login_image.svg',
+                  height: 48.0,
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(height: 12.0),
+              SizedBox(height: 16.0),
               Text(
                 'Connexion',
                 style: TextStyle(
@@ -119,8 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 24.0),
               Table(
                 columnWidths: {
-                  0: FlexColumnWidth(0.1),
-                  1: FlexColumnWidth(0.9),
+                  0: FlexColumnWidth(0.12),
+                  1: FlexColumnWidth(0.88),
                 },
                 children: [
                   TableRow(
@@ -171,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.center,
                         child: CustomInput(
-                          hintText: "Entrez votre mot de passe",
+                          hintText: "Mot de passe",
                           labelText: "Mot de passe",
                           suffixIcon: Icons.visibility_off_outlined,
                           controller: passwordController,
@@ -216,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? () {
                           print("Button pressed!");
                           if (loginError != null || loginError == '') {
-                            ToastUtil.showToast(
+                            ToastUtil.showToast(context,
                                 'Numéro ou mot de passe erroné'); // Afficher un toast d'erreur pour le téléphone
                           }
                         }
@@ -247,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
-      ),
+      ) 
     );
   }
 }

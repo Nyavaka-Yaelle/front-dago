@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import '../components/horizontal_line.dart';
-import '../components/services_card.dart';
+import '../components/search_bar.dart';
+import '../components/address_position.dart';
 import '../theme.dart';
 
-class HomeScreen extends StatefulWidget {
+class FoodeeHomeScreen extends StatefulWidget {
   final int idService;
 
-  const HomeScreen({
+  const FoodeeHomeScreen({
     Key? key,
     this.idService = 0, 
     // Valeur par défaut
   }) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _FoodeeHomeScreenState createState() => _FoodeeHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceBright;
 
   @override
   void initState() {
@@ -45,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: bodyColor,
       // appBar: AppBar(
       //   leading: IconButton(
       //     icon: const Icon(Icons.arrow_back, size: 24.0),
@@ -60,27 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ServicesCard(),
-              SizedBox(height: 12),
-              HorizontalLine(
-                color: MaterialTheme.lightScheme().outlineVariant,
-                thickness: 1.0,
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(24, 12, 12, 12),
-                child: Text(
-                    'Pour vous',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      height: 1,
-                      // decoration: TextDecoration.underline,
-                      color: MaterialTheme.lightScheme().onPrimaryFixed,
-                      letterSpacing: 0.5,
-                    )
+                AddressPosition(
+                  iconPath: "assets/images/location_on.png", // Chemin vers l'icône
+                  title: "Votre position",
+                  subtitle: "3GMQ 8H6, Antananarivo",
+                  imagePath: "assets/images/foodee_service.png", // Chemin vers l'image
                 ),
-              )
+              // SizedBox(height: 4),
+              SearchBar(),
             ],
           ),
         ),

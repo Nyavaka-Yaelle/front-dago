@@ -20,6 +20,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
   bool isButtonEnabled = false; // Pour activer/désactiver le bouton
 
   @override
@@ -68,15 +69,17 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor, 
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 24.0),
+          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: appBarColor,
+        elevation: 0, 
         title: const Text('Vérification'),
       ),
       body: SingleChildScrollView(

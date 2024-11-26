@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import './service_card.dart';
+import '../screens/page_info.dart';
 
 class ServicesCard extends StatelessWidget {
   final VoidCallback? onActionTap; // Callback pour l'action
@@ -14,7 +15,7 @@ class ServicesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return 
     Padding(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.fromLTRB(12, 64, 12, 12),
       child: Container(
       // color: MaterialTheme.lightScheme().surfaceContainerLow,
         width: MediaQuery.of(context).size.width, // Largeur du container
@@ -23,21 +24,31 @@ class ServicesCard extends StatelessWidget {
         decoration: BoxDecoration(
           // color: Theme.of(context).colorScheme.surfaceVariant,
           border: Border.all(
-            width: 1.0,
+            width: 0.5,
             color: MaterialTheme.lightScheme().outlineVariant, // Définit la couleur de la bordure
           ),
           borderRadius: const BorderRadius.all(Radius.circular(12)), // Bordure arrondie
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 16, 8, 12),
+          padding: const EdgeInsets.fromLTRB(12, 16, 0, 12),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ServiceCard(label: "Ridee",image:"ridee_service"),
-              ServiceCard(label: "Caree",image:"caree_service"),
-              ServiceCard(label: "Foodee",image:"foodee_service"),
-              ServiceCard(label: "Packee",image:"packee_service"),
-              // Texte "Vous n'êtes pas encore connecté"
+              Expanded(
+                child: ServiceCard(label: "Ridee", image: "ridee_service", idService: 0),
+              ),
+              // const SizedBox(width: 8), // Espace de 8px
+              Expanded(
+                child: ServiceCard(label: "Caree", image: "caree_service", idService: 0),
+              ),
+              // const SizedBox(width: 8), // Espace de 8px
+              Expanded(
+                child: ServiceCard(label: "Foodee", image: "foodee_service", idService: 1),
+              ),
+              // const SizedBox(width: 8), // Espace de 8px
+              Expanded(
+                child: ServiceCard(label: "Packee", image: "packee_service", idService: 0),
+              ),              // Texte "Vous n'êtes pas encore connecté"
               // Column(
               //   children: [
               //     Container(

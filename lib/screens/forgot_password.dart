@@ -14,6 +14,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController telController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
   bool isButtonEnabled = false;
 
   @override
@@ -30,9 +31,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   void _onScroll() {
-    // Modifier la couleur selon la position de défilement
     setState(() {
-      // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
       appBarColor = _scrollController.offset > 50
           ? MaterialTheme.lightScheme().surfaceContainerLowest
           : MaterialTheme.lightScheme().surfaceContainerLowest;
@@ -47,20 +46,21 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor, 
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
           },
         ),
-        backgroundColor: appBarColor, // Couleur dynamique
+        backgroundColor: appBarColor, 
+        elevation: 0, 
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
         child: Padding(
-          // padding: const EdgeInsets.all(24.0),
           padding: const EdgeInsets.fromLTRB(24.0, 0, 24, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,8 +101,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               SizedBox(height: 24.0),
               Table(
                 columnWidths: {
-                  0: FlexColumnWidth(0.1),
-                  1: FlexColumnWidth(0.9),
+                  0: FlexColumnWidth(0.12),
+                  1: FlexColumnWidth(0.88),
                 },
                 children: [
                   TableRow(
@@ -136,7 +136,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Container(
-                  width: 140.0,
+                  width: 160.0,
                   child: CustomButton(
                     label: "Suivant",
                     isDisabled: !isButtonEnabled,

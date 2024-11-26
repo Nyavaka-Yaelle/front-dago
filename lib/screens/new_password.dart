@@ -14,6 +14,7 @@ class _NewPasswordState extends State<NewPassword> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
   bool isButtonEnabled = false;
 
   @override
@@ -48,15 +49,17 @@ class _NewPasswordState extends State<NewPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: bodyColor, 
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
           },
         ),
-        backgroundColor: appBarColor, // Couleur dynamique
+        backgroundColor: appBarColor,
+        elevation: 0, 
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
@@ -116,8 +119,8 @@ class _NewPasswordState extends State<NewPassword> {
               SizedBox(height: 24.0),
               Table(
                 columnWidths: {
-                  0: FlexColumnWidth(0.1),
-                  1: FlexColumnWidth(0.9),
+                  0: FlexColumnWidth(0.12),
+                  1: FlexColumnWidth(0.88),
                 },
                 children: [
                   TableRow(

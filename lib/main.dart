@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
+import 'screens/page_info.dart';
+import 'screens/home_screen.dart';
+import 'screens/foodee_home_screen.dart';
 import 'screens/splash_screen.dart';
 import 'theme.dart';
 
@@ -21,6 +24,9 @@ class MyApp extends StatelessWidget {
               DagoTheme.outline, // Utiliser la couleur définie dans DagoTheme
         ),
       ),
+      // home: PageInfo(),
+      // home: FoodeeHomeScreen(),
+      // home: HomeScreen(),
       home: SplashScreen(),
     );
   }
