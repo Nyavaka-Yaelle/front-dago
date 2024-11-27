@@ -80,7 +80,12 @@ class _OtpScreenState extends State<OtpScreen> {
         ),
         backgroundColor: appBarColor,
         elevation: 0, 
-        title: const Text('Vérification'),
+        title: Text('Vérification',
+          style: TextStyle(
+              fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
+              fontSize: 22.0, // Exemple de taille de police (fontSize)
+              color: MaterialTheme.lightScheme().onSurface
+          )),
       ),
       body: SingleChildScrollView(
         controller: _scrollController,

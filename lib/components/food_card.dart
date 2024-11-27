@@ -80,11 +80,14 @@ class FoodCard extends StatelessWidget {
                 child:
                 Row(
                   children: [
-                    Image.asset(
-                      imageResto,
-                      height: 20.0,
-                      width: 20.0,
-                      fit: BoxFit.cover,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100.0),
+                      child: Image.asset(
+                        imageResto,
+                        height: 20.0,
+                        width: 20.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(width: 8),
                     Expanded(

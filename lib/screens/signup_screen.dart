@@ -79,7 +79,15 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
         backgroundColor: appBarColor, 
         elevation: 0, 
-        title: Text('Créer un compte'),        
+        title: Text(
+          'Créer un compte',
+          style: TextStyle(
+            fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
+            fontSize: 22.0, // Exemple de taille de police (fontSize)
+            color: MaterialTheme.lightScheme().onSurface
+          ), // Couleur du texte (foregroundColor)
+        ),
+        foregroundColor: MaterialTheme.lightScheme().onSurface,        
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
