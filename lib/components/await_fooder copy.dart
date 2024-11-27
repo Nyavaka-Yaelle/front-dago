@@ -4,12 +4,12 @@ import '../theme.dart';
 
 class AwaitFooder extends StatelessWidget {
   final String nomResto;
-  final VoidCallback? onPressed;
+  final VoidCallback? onPressed; // `VoidCallback?` pour permettre un bouton désactivé
 
   const AwaitFooder({
     required this.nomResto,
     this.onPressed,
-    Key? key,
+    Key? key, // Ajout d'une clé pour respecter les bonnes pratiques
   }) : super(key: key);
 
   @override
@@ -17,18 +17,18 @@ class AwaitFooder extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest, // Utilisation de Scaffold pour une structure plus propre
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(height: mediaQuery.height / 2.5),
-          // Roue de chargement avec animation
+          // Roue de chargement
           Align(
             alignment: Alignment.center,
-            child: _RotatingImage(
-              assetPath: 'assets/images/loading_wheel.png',
-              size: 48.0,
-              duration: const Duration(seconds: 1),
+            child: Image.asset(
+              'assets/images/loading_wheel.png',
+              height: 48.0,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(height: 12),
@@ -46,7 +46,7 @@ class AwaitFooder extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          // Sous-texte
+          // Sous-texte d'attente
           Align(
             alignment: Alignment.center,
             child: Text(
@@ -57,7 +57,7 @@ class AwaitFooder extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: MaterialTheme.lightScheme().secondary,
               ),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.center, // Centrage du texte
             ),
           ),
           const Spacer(),
@@ -70,59 +70,12 @@ class AwaitFooder extends StatelessWidget {
               color: Colors.transparent,
               onPressed: onPressed ??
                   () {
+                    // Gestion d'une fonction par défaut si `onPressed` est null
                     print("Naviguer vers d'autres délices");
                   },
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _RotatingImage extends StatefulWidget {
-  final String assetPath;
-  final double size;
-  final Duration duration;
-
-  const _RotatingImage({
-    required this.assetPath,
-    required this.size,
-    required this.duration,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<_RotatingImage> createState() => _RotatingImageState();
-}
-
-class _RotatingImageState extends State<_RotatingImage>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    )..repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return RotationTransition(
-      turns: _controller,
-      child: Image.asset(
-        widget.assetPath,
-        height: widget.size,
-        fit: BoxFit.contain,
       ),
     );
   }
