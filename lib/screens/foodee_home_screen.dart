@@ -25,6 +25,7 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   int _selectedIndex = 0; 
+  bool noItems = false;
   @override
   void initState() {
     super.initState();
@@ -82,7 +83,23 @@ void _handleTabChange(int index) {
                 onTabChanged: _handleTabChange, // Passe la méthode callback
               ),              Categories(),
               if(_selectedIndex==0) FoodCards()
-              else if(_selectedIndex==1) RestoCards()
+              else if(_selectedIndex==1) RestoCards(),
+              if(noItems) 
+              Container(
+                height: MediaQuery.of(context).size.height/2-56,
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Text(
+                    'Aucun résultat trouvé',
+                    style:TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w500,
+                      color: MaterialTheme.lightScheme().onSurfaceVariant
+                    )
+                  )
+                ),
+              )
 
             ],
           ),
