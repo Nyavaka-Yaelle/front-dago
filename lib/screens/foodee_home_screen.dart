@@ -4,6 +4,8 @@ import '../components/tab_items.dart';
 import '../components/categories.dart';
 import '../components/address_position.dart';
 import '../theme.dart';
+import '../components/food_cards.dart';
+import '../components/resto_cards.dart';
 
 class FoodeeHomeScreen extends StatefulWidget {
   final int idService;
@@ -22,7 +24,7 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-
+  int _selectedIndex = 0; 
   @override
   void initState() {
     super.initState();
@@ -42,7 +44,11 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }
-
+void _handleTabChange(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,22 +65,29 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
       // ),
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
+        child: Container(
+          padding: EdgeInsets.only(top: 32),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-                AddressPosition(
-                  iconPath: "assets/images/location_on.png", // Chemin vers l'icône
-                  title: "Votre position",
-                  subtitle: "3GMQ 8H6, Antananarivo",
-                  imagePath: "assets/images/foodee_service.png", // Chemin vers l'image
-                ),
+                // AddressPosition(
+                //   iconPath: "assets/images/location_on.png", // Chemin vers l'icône
+                //   title: "Votre position",
+                //   subtitle: "3GMQ 8H6, Antananarivo",
+                //   imagePath: "assets/images/foodee_service.png", // Chemin vers l'image
+                // ),
               // SizedBox(height: 4),
               SearchBar(),
-              TabItems(),
-              Categories(),
+              TabItems(
+                onTabChanged: _handleTabChange, // Passe la méthode callback
+              ),              Categories(),
+              if(_selectedIndex==0) FoodCards()
+              else if(_selectedIndex==1) RestoCards()
+
             ],
           ),
-        ),
+        )
+      ),
     );
   }
 }

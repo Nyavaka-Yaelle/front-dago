@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project1/components/custom_item.dart';
 import './custom_icon_button.dart';
-import './food_card.dart';
 import '../theme.dart'; // Importez le fichier TabItem si nécessaire
 
 class Categories extends StatefulWidget {
@@ -30,7 +29,7 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(12),
       child: Column(children: [
         Row(
           children: [
@@ -91,15 +90,35 @@ class _CategoriesState extends State<Categories> {
             )
           )
         ),
-        Padding(
-          padding: EdgeInsets.all(12),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(children: [
-              FoodCard(nomPlat: "Atin'ny coucou", nomResto: "Pakopako", prix: 15000.0, star: 4.6,)
-            ]), // Permet le défilement horizontal
-          )
-        )
+
+      //   Container(
+      //     padding: EdgeInsets.symmetric(vertical:12),
+      //     width: MediaQuery.of(context).size.width,
+      //    child: SingleChildScrollView(
+      //       scrollDirection: Axis.vertical,
+      //       child: Wrap(
+      //         spacing: 6.0, // Espace horizontal entre les éléments
+      //         runSpacing: 16.0, // Espace vertical entre les lignes d'éléments
+      //         children: [
+      //           if(_selectedIndex==0) 
+      //           // Column(
+      //           //   children: [
+      //               FoodCard(nomPlat: "Atin'ny coucou", nomResto: "Pakopako", prix: 15000.0, star: 4.6),
+      //               FoodCard(nomPlat: "Poulet Roti", nomResto: "Chez Mama", prix: 20000.0, star: 4.8),
+      //               FoodCard(nomPlat: "Burger Deluxe", nomResto: "FastFood Pro", prix: 12000.0, star: 4.2),
+      //               FoodCard(nomPlat: "Pizza Royale", nomResto: "Pizzaland", prix: 18000.0, star: 4.7),
+      //             // ],
+      //           // ),
+      //           if (_selectedIndex==1) Column(
+      //             children: [
+      //               RestoCard(nomResto: "Extra Pizza", ouvert: true, description: "Créateur de la pizza feuilletée et Leader du French tacos à Madagascar",star: 4.6)
+      //             ],
+      //           )
+      //         ],
+      //       ),
+      //     )
+
+      //   )
       ]),
     );
   }
