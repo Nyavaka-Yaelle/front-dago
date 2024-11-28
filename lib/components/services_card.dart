@@ -39,15 +39,15 @@ class ServicesCard extends StatelessWidget {
               ),
               // const SizedBox(width: 8), // Espace de 8px
               Expanded(
-                child: ServiceCard(label: "Caree", image: "caree_service", idService: 0),
+                child: ServiceCard(label: "Caree", image: "caree_service", idService: 1),
               ),
               // const SizedBox(width: 8), // Espace de 8px
               Expanded(
-                child: ServiceCard(label: "Foodee", image: "foodee_service", idService: 1),
+                child: ServiceCard(label: "Foodee", image: "foodee_service", idService: 2),
               ),
               // const SizedBox(width: 8), // Espace de 8px
               Expanded(
-                child: ServiceCard(label: "Packee", image: "packee_service", idService: 0),
+                child: ServiceCard(label: "Packee", image: "packee_service", idService: 3),
               ),              // Texte "Vous n'êtes pas encore connecté"
               // Column(
               //   children: [

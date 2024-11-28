@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../components/connexion_button.dart';
 import '../components/ridee_info.dart';
+import '../components/caree_info.dart';
 import '../components/foodee_info.dart';
+import '../components/packee_info.dart';
 import '../theme.dart';
 
 class PageInfo extends StatefulWidget {
@@ -70,7 +72,9 @@ class _PageInfoState extends State<PageInfo> {
                 child: Column(
                   children: [
                     if(widget.idService==0) RideeInfo(),
-                    if(widget.idService==1) FoodeeInfo(),
+                    if(widget.idService==1) CareeInfo(),
+                    if(widget.idService==2) FoodeeInfo(),
+                    if(widget.idService==3) PackeeInfo(),
                 ])
               ),
               //  Expanded(

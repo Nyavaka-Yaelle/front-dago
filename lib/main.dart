@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project1/screens/wallet_configuration.dart';
 import 'screens/login_screen.dart';
 import 'screens/page_info.dart';
 import 'screens/home_screen.dart';
@@ -6,7 +7,11 @@ import 'screens/foodee_home_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/food_card_extended.dart';
 import 'screens/your_card_screen.dart';
+import 'screens/wallet_configuration.dart';
+import 'screens/fund_added_screen.dart';
+import 'screens/add_fund_screen.dart';
 import 'components/await_fooder.dart';
+import 'components/await_adding_fund.dart';
 import 'theme.dart';
 
 void main() {
@@ -29,14 +34,18 @@ class MyApp extends StatelessWidget {
       ),
       // home: PageInfo(),
       // home: AwaitFooder(nomResto: "Pakopako",),
-      home: FoodCardExtended(
+      // home: AwaitAddingFund(),
+      /*home: FoodCardExtended(
         nomPlat: "Biriani akoho machiaka",
         nomResto: "Pakopako",
         descriptionPlat: "Ity zengy akoho karana tafa teo aminy fiainana miaraka Vary, Akoho, Epices, Sauce, Lasary",
         descriptionResto: "Cuisine traditionnelle de Majunga",
-        ),
+        ),*/
       // home: FoodeeHomeScreen(),
       // home: YourCardSreen(),
+      home: AddFundScreen(),
+      // home: WalletConfiguration(),
+      // home: FundAddedScreen(), 
       // home: HomeScreen(),
       // home: SplashScreen(),
       // home: LoginScreen(),

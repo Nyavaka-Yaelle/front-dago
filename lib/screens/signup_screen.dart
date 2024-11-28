@@ -83,7 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
           'Créer un compte',
           style: TextStyle(
             fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
-            fontSize: 22.0, // Exemple de taille de police (fontSize)
+            fontSize: 21.0, // Exemple de taille de police (fontSize)
             color: MaterialTheme.lightScheme().onSurface
           ), // Couleur du texte (foregroundColor)
         ),
