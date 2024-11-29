@@ -14,7 +14,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
   final TextEditingController montantController = TextEditingController();
   bool memorizeNumber = false;
   bool isButtonEnabled = false;
-  int selectedAmount = -1; // Variable pour stocker le montant sélectionné
+  double selectedAmount = -1; // Variable pour stocker le montant sélectionné
 
   @override
   void initState() {
@@ -32,12 +32,14 @@ class _AddFundScreenState extends State<AddFundScreen> {
 
   void _updateButtonState() {
     setState(() {
-      double? parsedValue = double.tryParse(montantController.text.replaceAll(" ", ""));
+      double? parsedValue =
+          double.tryParse(montantController.text.replaceAll(' ',''));
 
-      isButtonEnabled = numeroController.text.isNotEmpty &&
+      isButtonEnabled = numeroController.text.length>=13 &&
           montantController.text.isNotEmpty &&
-          parsedValue != null && parsedValue >= 1000;
-
+          parsedValue != null &&
+          parsedValue >= 1000;
+      selectedAmount = parsedValue!=null? parsedValue: -1;
     });
   }
 
@@ -190,7 +192,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [2000, 5000, 10000, 20000].map((amount) {
+                  children: [2000.0, 5000.0, 10000.0, 20000.0].map((amount) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: OutlinedButton(
@@ -210,17 +212,15 @@ class _AddFundScreenState extends State<AddFundScreen> {
                             fontWeight: FontWeight.w400,
                           ),
                           foregroundColor: selectedAmount == amount
-                                ? MaterialTheme.lightScheme().onSecondaryContainer
-                                : MaterialTheme
-                                    .lightScheme()
-                                    .onSurfaceVariant,
+                              ? MaterialTheme.lightScheme().onSecondaryContainer
+                              : MaterialTheme.lightScheme().onSurfaceVariant,
                           side: BorderSide(
                             width: 0.5,
                             color: selectedAmount == amount
                                 ? MaterialTheme.lightScheme().secondaryContainer
-                                : MaterialTheme
-                                    .lightScheme()
-                                    .onSurfaceVariant.withOpacity(0.8),
+                                : MaterialTheme.lightScheme()
+                                    .onSurfaceVariant
+                                    .withOpacity(0.8),
                           ),
                           backgroundColor: selectedAmount == amount
                               ? MaterialTheme.lightScheme().secondaryContainer
@@ -233,13 +233,16 @@ class _AddFundScreenState extends State<AddFundScreen> {
                               Icon(
                                 Icons.check,
                                 size: 14,
-                                color: MaterialTheme.lightScheme().onSecondaryContainer,
+                                color: MaterialTheme.lightScheme()
+                                    .onSecondaryContainer,
                               ),
-                            if (selectedAmount == amount)  SizedBox(width: 4,),
+                            if (selectedAmount == amount)
+                              SizedBox(
+                                width: 4,
+                              ),
                             Text(
                               "${amount.toInt().toString().replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (match) => "${match[1]} ")}",
                             ),
-                            
                           ],
                         ),
                       ),

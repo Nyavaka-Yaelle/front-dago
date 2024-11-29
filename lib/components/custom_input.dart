@@ -73,35 +73,31 @@ class _CustomInputState extends State<CustomInput> {
     if (value.isEmpty && !widget.isFacultatif) {
       _hasError = true;
       return 'Ce champ ne peut pas être vide';
-    }   
-    else if (value.isEmpty && widget.isFacultatif) {
+    } else if (value.isEmpty && widget.isFacultatif) {
       _hasError = false;
       return null;
-    }
-    else if (widget.isNumero) {
+    } else if (widget.isNumero) {
       final regex = RegExp(r'^\d{3} \d{2} \d{3} \d{2}$');
       if (!regex.hasMatch(value)) {
         _hasError = true;
         return 'Le numéro doit contenir 10 chiffres';
       }
-    } 
-    else if (widget.isPassword) {
+    } else if (widget.isPassword) {
       final regex = RegExp(r'^.{6,}$');
       if (!regex.hasMatch(value)) {
         _hasError = true;
         return 'Le mot de passe doit contenir au moins 6 caractères';
       }
-    }
-    else if (widget.isEmail) {
-      final regex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'); // Regex pour email
+    } else if (widget.isEmail) {
+      final regex = RegExp(
+          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'); // Regex pour email
       if (!regex.hasMatch(value)) {
         _hasError = true;
         return 'Veuillez entrer une adresse email valide';
       }
-    }
-    else if (widget.isNumber) {
-      final regex = RegExp(r'^[+-]?\d+([.]\d+)?$');
-      if (!regex.hasMatch(value)) {
+    } else if (widget.isNumber) {
+      final regex = RegExp(r'^[+-]?\d+([.,]\d+)?$');
+      if (!regex.hasMatch(cleanText(value))) {
         _hasError = true;
         return 'Veuillez entrer un nombre valide';
       }
@@ -110,12 +106,66 @@ class _CustomInputState extends State<CustomInput> {
     widget.errorText = '';
     return null;
   }
+
   // TextInputFormatter getHideFormat() {
   //   if (_obscurePassword && widget.isPassword) {
   //     return '*' * widget.controller.text.length;
   //   }
   //   return widget.controller.text;
   // }
+  String cleanText(value) {
+    return value.replaceAll(' ', '');
+  }
+String _formatNumber(String value) {
+  // Nettoyer le texte pour éviter les erreurs
+  if (value.isEmpty) return value;
+
+  try {
+    // Supprimer les espaces pour parser correctement
+    String cleanValue = value.replaceAll(' ', '');
+
+    // Vérifier si la valeur contient un point décimal
+    bool hasDecimal = cleanValue.contains('.');
+
+    // Séparer la partie entière et la partie décimale si applicable
+    List<String> parts = cleanValue.split('.');
+
+    // Formater la partie entière avec des séparateurs de milliers
+    String formattedInteger = parts[0].replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (match) => "${match[1]} ",
+    );
+
+    // Si le texte contient un point décimal, conserver la partie décimale
+    if (hasDecimal && parts.length > 1) {
+      return "$formattedInteger.${parts[1]}";
+    }
+
+    // Retourner seulement la partie entière formatée si pas de point
+    return formattedInteger;
+  } catch (e) {
+    // En cas d'erreur, retourner la valeur brute
+    return value;
+  }
+}
+
+  // String _formatNumber(String value) {
+  //   if (value.isEmpty) return value;
+
+  //   try {
+  //     // Remplace les espaces pour éviter les erreurs de conversion
+  //     int number = int.parse(value.replaceAll(' ', ''));
+
+  //     // Ajoute des espaces pour les séparateurs de milliers
+  //     return number.toString().replaceAllMapped(
+  //           RegExp(r'(\d)(?=(\d{3})+$)'),
+  //           (match) => "${match[1]} ",
+  //         );
+  //   } catch (e) {
+  //     return value; // Si l'entrée n'est pas valide, on retourne la valeur telle quelle
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     Color mainColor;
@@ -142,7 +192,7 @@ class _CustomInputState extends State<CustomInput> {
           children: [
             // Le Container contenant le TextField
             Container(
-              height: widget.isNumber? 96.0: 56.0,
+              height: widget.isNumber ? 96.0 : 56.0,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: mainColor,
@@ -170,38 +220,50 @@ class _CustomInputState extends State<CustomInput> {
                   //     // Icon( 'visibility_off_rounded' as IconData?, color: mainColor )
                   //     : null,
                   suffixIcon: widget.isPassword
-                    ? IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                          color: mainColor,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      )
+                      ? IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: mainColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        )
                       : null,
-                  contentPadding: const EdgeInsets.symmetric( vertical: 16.0, horizontal: 16.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 16.0),
                 ),
                 keyboardType: widget.isNumero
                     ? TextInputType.number
                     : TextInputType.text, // Clavier conditionnel
-                inputFormatters: 
-                  widget.isNumero ? [PhoneNumberFormatter()] :
-                  // _obscurePassword ?[getHideFormat()] :
-                  [], // Application du formateur
+                inputFormatters: widget.isNumero
+                    ? [PhoneNumberFormatter()]
+                    :
+                    // _obscurePassword ?[getHideFormat()] :
+                    [], // Application du formateur
                 // validator: (value) => _validateInput(value ?? ''),// Validation lors de la soumission du formulaire
                 onChanged: (value) {
                   setState(() {
+                    if (widget.isNumber) {
+                      widget.controller.text = _formatNumber(value);
+                      widget.controller.selection = TextSelection.collapsed(
+                          offset: widget.controller.text.length);
+                    }
                     widget.errorText =
                         _validateInput(value); // Valide à chaque changement
                   });
                 },
                 // style: TextStyle(fontSize: 16.0, color: mainColor),
-                style: TextStyle(fontSize: widget.isNumber ? 44.0 : 16.0, color: mainColor),
-                textAlign: widget.isNumber ? TextAlign.center : TextAlign.start, // Centrer le texte si c'est un nombre
-  
+                style: TextStyle(
+                    fontSize: widget.isNumber ? 44.0 : 16.0, color: mainColor),
+                textAlign: widget.isNumber
+                    ? TextAlign.center
+                    : TextAlign.start, // Centrer le texte si c'est un nombre
+
                 cursorColor: mainColor,
               ),
             ),
@@ -218,19 +280,22 @@ class _CustomInputState extends State<CustomInput> {
                         ? 1.0
                         : 0.0,
                 duration: Duration(milliseconds: 300),
-                child: widget.isLabel ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
-                  color: Colors.white,
-                  child: Text(
-                    widget.labelText,
-                    style: TextStyle(
-                      color: mainColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ): null,
+                child: widget.isLabel
+                    ? Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 4.0, vertical: 2.0),
+                        color: Colors.white,
+                        child: Text(
+                          widget.labelText,
+                          style: TextStyle(
+                            color: mainColor,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14.0,
+                            fontFamily: 'Roboto',
+                          ),
+                        ),
+                      )
+                    : null,
               ),
             ),
           ],
