@@ -97,7 +97,7 @@ class RestoCard extends StatelessWidget {
                             Icon(
                               Icons.star_rate_rounded,
                               size: 20.0,
-                              color: Colors.red,
+                              color: MaterialTheme.lightScheme().error,
                             ),
                             const SizedBox(width: 4.0),
                             Text(
@@ -124,7 +124,7 @@ class RestoCard extends StatelessWidget {
                                 ? MaterialTheme.lightScheme()
                                     .primaryContainer
                                     .withOpacity(0.85)
-                                : Colors.red.withOpacity(0.2),
+                                : MaterialTheme.lightScheme().error.withOpacity(0.2),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20), // Rayon en haut à gauche
                               topRight: Radius.circular(0),  // Pas de rayon en haut à droite
@@ -141,7 +141,7 @@ class RestoCard extends StatelessWidget {
                                   color: ouvert
                                       ? MaterialTheme.lightScheme()
                                           .onPrimaryContainer
-                                      : Colors.red,
+                                      : MaterialTheme.lightScheme().error,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: 'Roboto',

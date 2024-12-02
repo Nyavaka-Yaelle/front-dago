@@ -177,7 +177,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                           color: MaterialTheme.lightScheme().tertiary),
                       const SizedBox(width: 4),
                       Text(
-                        "Ajout de fond minimum pour 1 000 AR",
+                        "Ajout de fond minimum pour 1 000 coins",
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 11,

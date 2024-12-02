@@ -50,7 +50,7 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
       appBarColor = _scrollController.offset > 50
-          ? MaterialTheme.lightScheme().surfaceContainerLowest
+          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.5)
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }

@@ -10,6 +10,10 @@ import 'screens/your_card_screen.dart';
 import 'screens/wallet_configuration.dart';
 import 'screens/fund_added_screen.dart';
 import 'screens/add_fund_screen.dart';
+import 'screens/notif_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/change_profile_picture.dart';
+import 'screens/account_profile.dart';
 import 'components/await_fooder.dart';
 import 'components/await_adding_fund.dart';
 import 'theme.dart';
@@ -43,12 +47,16 @@ class MyApp extends StatelessWidget {
         ),*/
       // home: FoodeeHomeScreen(),
       // home: YourCardSreen(),
-      home: AddFundScreen(),
+      // home: AddFundScreen(),
       // home: WalletConfiguration(),
       // home: FundAddedScreen(), 
       // home: HomeScreen(),
       // home: SplashScreen(),
+      // home: NotifScreen(),
       // home: LoginScreen(),
+      // home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
+      // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
+      home: AccountProfile(),
     );
   }
 }

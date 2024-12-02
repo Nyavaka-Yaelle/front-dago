@@ -114,7 +114,8 @@ class _CustomInputState extends State<CustomInput> {
   //   return widget.controller.text;
   // }
   String cleanText(value) {
-    return value.replaceAll(' ', '');
+    String returnValue = value.replaceAll(' ', '');
+    return returnValue.replaceAll(' Ar','');
   }
 String _formatNumber(String value) {
   // Nettoyer le texte pour éviter les erreurs
@@ -122,7 +123,7 @@ String _formatNumber(String value) {
 
   try {
     // Supprimer les espaces pour parser correctement
-    String cleanValue = value.replaceAll(' ', '');
+    String cleanValue = cleanText(value);
 
     // Vérifier si la valeur contient un point décimal
     bool hasDecimal = cleanValue.contains('.');
@@ -142,7 +143,7 @@ String _formatNumber(String value) {
     }
 
     // Retourner seulement la partie entière formatée si pas de point
-    return formattedInteger;
+    return formattedInteger+"";
   } catch (e) {
     // En cas d'erreur, retourner la valeur brute
     return value;

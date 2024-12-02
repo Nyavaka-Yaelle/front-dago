@@ -35,7 +35,7 @@ class FoodCard extends StatelessWidget {
       // margin: const EdgeInsets.all(8.0),
       // padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        // color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12.0),
         // boxShadow: [
         //   BoxShadow(
@@ -50,6 +50,7 @@ class FoodCard extends StatelessWidget {
         children: [
           // Image
           ClipRRect(
+            
             borderRadius: BorderRadius.circular(12.0),
             child: Image.asset(
               imagePlat,
@@ -108,7 +109,7 @@ class FoodCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(Icons.star_rate_rounded, size: 20.0, color: Colors.red),
+                  Icon(Icons.star_rate_rounded, size: 20.0, color: MaterialTheme.lightScheme().error),
                   SizedBox(width: 1.0),
                   Padding(
                     padding: const EdgeInsets.only(right: 20.0),
@@ -157,7 +158,7 @@ class FoodCard extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+                    backgroundColor: Colors.transparent,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),

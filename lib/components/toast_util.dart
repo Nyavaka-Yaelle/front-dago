@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme.dart';
 
 class ToastUtil {
   // Fonction pour afficher un toast
@@ -23,10 +24,10 @@ class ToastUtil {
         child: Material(
           color: Colors.transparent,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
             decoration: BoxDecoration(
               color: Colors.red,
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(100.0),
             ),
             child: Text(
               message,
