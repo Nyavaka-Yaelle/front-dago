@@ -37,8 +37,8 @@ class _OtpScreenState extends State<OtpScreen> {
 
   void _onScroll() {
     setState(() {
-      appBarColor = _scrollController.offset > 50
-          ? MaterialTheme.lightScheme().surfaceContainerLowest
+      appBarColor = _scrollController.offset > 10
+          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }

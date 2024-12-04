@@ -32,8 +32,8 @@ class _YourCardSreenState extends State<YourCardSreen> {
 
   void _onScroll() {
     setState(() {
-      appBarColor = _scrollController.offset > 50
-          ? MaterialTheme.lightScheme().surfaceContainerLow
+      appBarColor = _scrollController.offset > 10
+          ? MaterialTheme.lightScheme().surfaceContainer
           : MaterialTheme.lightScheme().surfaceContainerLow;
     });
   }

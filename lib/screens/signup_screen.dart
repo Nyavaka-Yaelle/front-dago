@@ -49,8 +49,8 @@ class _SignupScreenState extends State<SignupScreen> {
     // Modifier la couleur selon la position de défilement
     setState(() {
       // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-      appBarColor = _scrollController.offset > 50
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.5)
+      appBarColor = _scrollController.offset > 10
+          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
           : MaterialTheme.lightScheme().surfaceContainerLowest;
     });
   }
