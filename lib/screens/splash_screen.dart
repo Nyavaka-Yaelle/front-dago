@@ -46,16 +46,33 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest, 
-      body: Center(
-        child: ScaleTransition(
-          scale: _animation,
-          child: Image.asset(
-            'assets/images/ridee_logo.png', // Remplace par le chemin de ton logo
-            width: 100, // Taille initiale
-            height: 100,
+      body: 
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: ScaleTransition(
+              scale: _animation,
+              child: Image.asset(
+                'assets/images/ridee_logo.png', // Remplace par le chemin de ton logo
+                width: 100, // Taille initiale
+                height: 100,
+              ),
+            ),
           ),
-        ),
-      ),
+          SizedBox(height: 8),
+          Center(
+            child: ScaleTransition(
+              scale: _animation,
+              child: Image.asset(
+                'assets/images/logo.png', // Remplace par le chemin de ton logo
+                width: 120, // Taille initiale
+                height: 56,
+              ),
+            ),
+          ),
+          SizedBox(height: 96),
+      ])
     );
   }
 }

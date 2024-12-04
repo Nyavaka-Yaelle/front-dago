@@ -54,9 +54,9 @@ class MyApp extends StatelessWidget {
       // home: SplashScreen(),
       // home: NotifScreen(),
       // home: LoginScreen(),
-      // home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
+      home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
-      home: AccountProfile(),
+      // home: AccountProfile(),
     );
   }
 }

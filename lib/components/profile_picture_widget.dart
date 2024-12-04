@@ -54,6 +54,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
               shape: BoxShape.circle,
               border: Border.all(
                 width: _photoUrl == null ? 10 : 0,
+                color: _photoUrl == null ? MaterialTheme.lightScheme().onSecondaryContainer: Colors.transparent,
               ),
             ),
             child: CircleAvatar(
@@ -84,25 +85,41 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
           ),
           Positioned(
             bottom: _photoUrl == null ? -0 : 0,
-            right: _photoUrl == null ? -0 : null,
-            left: _photoUrl == null ? null : 50,
+            // right: _photoUrl == null ? -0 : null,
+            // left: _photoUrl == null ? null : 50,
+            left: 50,
             child: GestureDetector(
               onTap: _pickImage, // Ouvre la galerie pour choisir une image
-              child: CircleAvatar(
-                radius: 15,
-                backgroundColor: _photoUrl == null
-                    ? MaterialTheme.lightScheme().secondaryContainer
-                    : Colors.transparent,
-                child: Icon(
-                  Icons.camera_alt,
-                  size: 20,
-                  color: _photoUrl == null
-                      ? MaterialTheme.lightScheme().onSecondaryContainer
-                      : MaterialTheme.lightScheme().surfaceContainerLowest,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(48, 0, 0, 0),
+                      blurRadius: 24, // Flou
+                      offset: Offset(0, 0), // Décalage
+                    ),
+                  ],
+                ),
+                child: CircleAvatar(
+                  radius: 15,
+                  backgroundColor: _photoUrl == null
+                      // ? MaterialTheme.lightScheme().secondaryContainer
+                      ? MaterialTheme.lightScheme().secondaryContainer.withOpacity(0)
+                      : Colors.transparent,
+                  child: Icon(
+                    Icons.camera_alt,
+                    size: 20,
+                    color: _photoUrl == null
+                        // ? MaterialTheme.lightScheme().onSecondaryContainer
+                        ? MaterialTheme.lightScheme().surfaceContainerLowest
+                        : MaterialTheme.lightScheme().surfaceContainerLowest,
+                  ),
                 ),
               ),
             ),
           ),
+
         ],
       ),
     );
