@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         descriptionPlat: "Ity zengy akoho karana tafa teo aminy fiainana miaraka Vary, Akoho, Epices, Sauce, Lasary",
         descriptionResto: "Cuisine traditionnelle de Majunga",
         ),*/
-      // home: FoodeeHomeScreen(),
+      home: FoodeeHomeScreen(),
       // home: YourCardSreen(),
       // home: AddFundScreen(),
       // home: WalletConfiguration(),
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       // home: SplashScreen(),
       // home: NotifScreen(),
       // home: LoginScreen(),
-      home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
+      // home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: AccountProfile(),
     );
