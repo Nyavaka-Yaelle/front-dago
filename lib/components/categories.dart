@@ -29,8 +29,10 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(12),
-      child: Column(children: [
+      child: Column(
+        children: [
         Row(
           children: [
             Text(
@@ -52,10 +54,11 @@ class _CategoriesState extends State<Categories> {
                 color: MaterialTheme.lightScheme().primaryContainer)
           ],
         ),
-        Padding(
+        Container(
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
           child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal, // Permet le défilement horizontal
+          scrollDirection: Axis.horizontal, 
             child: Row(
               children: [
                 CustomItem(
