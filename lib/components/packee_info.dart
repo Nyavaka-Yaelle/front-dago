@@ -24,50 +24,62 @@ class PackeeInfo extends StatelessWidget {
         ),
         const SizedBox(height: 12.0),
         // Titre principal
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            'Packee',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 22,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().secondary,
+          height: 32,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Packee',
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 22,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().secondary,
+              ),
             ),
-          ),
+          )
         ),
         // Slogan
         SizedBox(height: 12),
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            '“Besoin de récupérer un colis ?\nc’est un clic et c’est réglé.”',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().onSurfaceVariant,
+          height: 48,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              '“Besoin de récupérer un colis ?\nc’est un clic et c’est réglé.”',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().onSurfaceVariant,
+              ),
             ),
-          ),
+          )
         ),
         SizedBox(height: 12),
         // Description
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            'Avec Packee, vos colis sont entre de bonnes mains : \nrécupération rapide et suivi simplifié.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().tertiary,
+          height: 48,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Avec Packee, vos colis sont entre de bonnes mains : \nrécupération rapide et suivi simplifié.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().tertiary,
+              ),
             ),
-          ),
+          )
         ),
       ], // color: MaterialTheme.lightScheme().surfaceContainerLow,
     );

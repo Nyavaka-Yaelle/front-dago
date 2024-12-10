@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: bodyColor,
+      backgroundColor: bodyColor,      
       body: Stack(
         children: [
           // Scrollable content

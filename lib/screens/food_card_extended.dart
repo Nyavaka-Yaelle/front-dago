@@ -35,6 +35,7 @@ class FoodCardExtended extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
+                        alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.vertical(
                             bottom: Radius.circular(4), // Coins inférieurs arrondis
@@ -54,7 +55,7 @@ class FoodCardExtended extends StatelessWidget {
                           child: Image.asset(
                             imagePlat,
                             width: double.infinity,
-                            height: 320,
+                            height: 280,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -97,17 +98,23 @@ class FoodCardExtended extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          nomPlat,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w500,
-                            color: MaterialTheme.lightScheme().onSurface,
-                            decoration: TextDecoration.none,
+                        Container(
+                          height: 26,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                            child: Text(
+                              nomPlat,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w500,
+                                color: MaterialTheme.lightScheme().onSurface,
+                                decoration: TextDecoration.none,
+                              ),
+                              overflow: TextOverflow.ellipsis, // S'assurer que le texte ne déborde pas
+                              maxLines: 1,                            
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis, // S'assurer que le texte ne déborde pas
-                          maxLines: 1, // Limiter à une ligne
                         ),
                         SizedBox(height: 8),
                         Row(
@@ -129,42 +136,66 @@ class FoodCardExtended extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // Nom du restaurant en haut
-                                  Row(
-                                    children: [
-                                      Text(
-                                        nomResto,
+                                Container(
+                                  height: 18,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                                    child: 
+                                      Row(
+                                        children: [
+                                          Container(
+                                            // height: 18,
+                                            child: FittedBox(
+                                              fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                                              child: Text(
+                                                nomResto,
+                                                style: TextStyle(
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: MaterialTheme.lightScheme().onSurface,
+                                                  decoration: TextDecoration.none,
+                                                ),
+                                                overflow: TextOverflow.ellipsis, // Si le texte est trop long
+                                                maxLines: 1, // Limiter à une ligne
+                                              )
+                                            )
+                                          ),
+                                          SizedBox(width: 4),
+                                          Container(
+                                            // height: 18,
+                                            child: FittedBox(
+                                              fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                                              child:Icon(
+                                                size: 16,
+                                                Icons.check_circle,
+                                                color: MaterialTheme.lightScheme().primary,
+                                              )
+                                            )
+                                          )
+                                        ],
+                                      ),
+                                  )),
+                                      const SizedBox(height: 4.0), // Espacement entre le nom et la description
+                                  // Description en bas
+                                  Container(
+                                    height: 14,
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                                      child: Text(
+                                        descriptionResto,
                                         style: TextStyle(
                                           fontFamily: 'Roboto',
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w600,
-                                          color: MaterialTheme.lightScheme().onSurface,
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w400,
+                                          color: MaterialTheme.lightScheme().secondary,
                                           decoration: TextDecoration.none,
                                         ),
-                                        overflow: TextOverflow.ellipsis, // Si le texte est trop long
-                                        maxLines: 1, // Limiter à une ligne
-                                      ),
-                                      SizedBox(width: 4),
-                                      Icon(
-                                        size: 16,
-                                        Icons.check_circle,
-                                        color: MaterialTheme.lightScheme().primary,
+                                        maxLines: 2, // Limiter la description à deux lignes
+                                        overflow: TextOverflow.ellipsis, // Gestion du texte trop long
                                       )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 4.0), // Espacement entre le nom et la description
-                                  // Description en bas
-                                  Text(
-                                    descriptionResto,
-                                    style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w400,
-                                      color: MaterialTheme.lightScheme().secondary,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                    maxLines: 2, // Limiter la description à deux lignes
-                                    overflow: TextOverflow.ellipsis, // Gestion du texte trop long
-                                  ),
+                                    )
+                                  )
                                 ],
                               ),
                             ),

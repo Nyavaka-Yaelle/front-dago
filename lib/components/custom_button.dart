@@ -20,12 +20,15 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = 40;
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 200) height = 20;
     if (outline) {
       // Utilisation d'OutlinedButton pour un fond transparent et un contour
       return OutlinedButton(
         onPressed: isDisabled ? null : onPressed,
         style: OutlinedButton.styleFrom(
-          fixedSize: Size(double.infinity, 40),
+          fixedSize: Size(double.infinity, height),
           side: BorderSide(
             color: isDisabled
                 ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
@@ -38,15 +41,31 @@ class CustomButton extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: 20), // Espacement du contenu
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isDisabled
-                ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
-                : MaterialTheme.lightScheme().primary, // Couleur du texte
-            fontSize: 16,
+        child: Container(
+          alignment: Alignment.center,
+          height: 20,
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isDisabled
+                    ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
+                    : MaterialTheme.lightScheme().primary, // Couleur du texte
+                fontSize: 16,
+              ),
+            ),
           ),
         ),
+        // child: Text(
+        //   label,
+        //   style: TextStyle(
+        //     color: isDisabled
+        //         ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
+        //         : MaterialTheme.lightScheme().primary, // Couleur du texte
+        //     fontSize: 16,
+        //   ),
+        // ),
       );
     } else {
       // Utilisation d'ElevatedButton pour un fond rempli
@@ -56,21 +75,29 @@ class CustomButton extends StatelessWidget {
           backgroundColor: isDisabled
               ? MaterialTheme.lightScheme().onSurface.withOpacity(0.12)
               : color, // Couleur du fond
-          fixedSize: Size(double.infinity, 40),
+          fixedSize: Size(double.infinity, height),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
           padding: EdgeInsets.symmetric(horizontal: 20),
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isDisabled
-                ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
-                : Colors.white, // Couleur du texte
-            fontSize: 16,
+        child: Container(
+          alignment: Alignment.center,
+          height: 20,
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isDisabled
+                    ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
+                    : Colors.white, // Couleur du texte
+                fontSize: 16,
+              ),
+            ),
           ),
         ),
+        
       );
     }
   }

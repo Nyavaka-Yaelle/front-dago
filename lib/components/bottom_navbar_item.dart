@@ -70,15 +70,31 @@ class BottomNavbarItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8),
-          Text(
-            label,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 14,
-              fontWeight: isActive? FontWeight.w600: FontWeight.w400,
-              color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant,
+          Container(
+            height: 18,
+            child: FittedBox(
+              fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 14,
+                  fontWeight: isActive? FontWeight.w600: FontWeight.w400,
+                  color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant,
+                ),
+              ),
             ),
           ),
+   
+          // Text(
+          //   label,
+          //   style: TextStyle(
+          //     fontFamily: 'Roboto',
+          //     fontSize: 14,
+          //     fontWeight: isActive? FontWeight.w600: FontWeight.w400,
+          //     color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant,
+          //   ),
+          // ),
         ],
       )
     );

@@ -18,56 +18,68 @@ class FoodeeInfo extends StatelessWidget {
           alignment: Alignment.center,
           child: Image.asset(
             'assets/images/foodee.png',
-            height: 136.0,
+            height: 132.0,
             fit: BoxFit.contain,
           ),
         ),
         const SizedBox(height: 12.0),
         // Titre principal
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            'Foodee',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 22,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().secondary,
+          height: 32,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Foodee',
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 22,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().secondary,
+              ),
             ),
-          ),
+          )
         ),
         // Slogan
         SizedBox(height: 12),
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            '“Choisissez, commandez, et savourez \nen quelques clics.”',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().onSurfaceVariant,
+          height: 48,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              '“Choisissez, commandez, et savourez \nen quelques clics.”',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().onSurfaceVariant,
+              ),
             ),
-          ),
+          )
         ),
         SizedBox(height: 12),
         // Description
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            'Avec Foodee, commandez vos plats préférés et faites-les livrer en toute simplicité, où que vous soyez.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().tertiary,
+          height: 48,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Avec Foodee, commandez vos plats préférés et\nfaites-les livrer en toute simplicité, où que vous soyez.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().tertiary,
+              ),
             ),
-          ),
+          )
         ),
       ], // color: MaterialTheme.lightScheme().surfaceContainerLow,
     );

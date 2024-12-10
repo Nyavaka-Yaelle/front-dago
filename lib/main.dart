@@ -39,21 +39,23 @@ class MyApp extends StatelessWidget {
       // home: PageInfo(),
       // home: AwaitFooder(nomResto: "Pakopako",),
       // home: AwaitAddingFund(),
-      /*home: FoodCardExtended(
+      /*
+      home: FoodCardExtended(
         nomPlat: "Biriani akoho machiaka",
         nomResto: "Pakopako",
         descriptionPlat: "Ity zengy akoho karana tafa teo aminy fiainana miaraka Vary, Akoho, Epices, Sauce, Lasary",
         descriptionResto: "Cuisine traditionnelle de Majunga",
-        ),*/
-      home: FoodeeHomeScreen(),
+        ), //soratras
+        */
+      // home: FoodeeHomeScreen(),
       // home: YourCardSreen(),
       // home: AddFundScreen(),
-      // home: WalletConfiguration(),
-      // home: FundAddedScreen(), 
+      // home: WalletConfiguration(), 
+      // home: FundAddedScreen(), //soratra
       // home: HomeScreen(),
       // home: SplashScreen(),
-      // home: NotifScreen(),
-      // home: LoginScreen(),
+      // home: NotifScreen(), //soratra
+      home: LoginScreen(), // login ko,mdp, profile ambany 3 io
       // home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: AccountProfile(),

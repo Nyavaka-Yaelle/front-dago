@@ -86,18 +86,34 @@ class FoodCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8.0),
-          // Nom du plat
-          Text(
-            nomPlat,/// + screenWidth.toString(),
-            style: TextStyle(
-              color: MaterialTheme.lightScheme().onSurface,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Roboto',
+          Container(
+            alignment: Alignment.topLeft,
+            height: 20,
+            child: FittedBox(
+              fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+              child: Text(
+                nomPlat,/// + screenWidth.toString(),
+                style: TextStyle(
+                  color: MaterialTheme.lightScheme().onSurface,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Roboto',
+                )
+              ),
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
           ),
+          // Nom du plat
+          // Text(
+          //   nomPlat,/// + screenWidth.toString(),
+          //   style: TextStyle(
+          //     color: MaterialTheme.lightScheme().onSurface,
+          //     fontSize: 16,
+          //     fontWeight: FontWeight.w600,
+          //     fontFamily: 'Roboto',
+          //   ),
+          //   maxLines: 1,
+          //   overflow: TextOverflow.ellipsis,
+          // ),
           const SizedBox(height: 4.0),
           // Nom du restaurant + étoiles
           Row(
@@ -115,19 +131,39 @@ class FoodCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    nomResto,
-                    style: TextStyle(
-                      color: MaterialTheme.lightScheme().onSurfaceVariant,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Roboto',
+                 Expanded(
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    height: 16,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                      child: Text(
+                        nomPlat,/// + screenWidth.toString(),
+                        style: TextStyle(
+                          color: MaterialTheme.lightScheme().onSurfaceVariant,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Roboto',
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  )
                 ),
+                // Expanded(
+                //   child: Text(
+                //     nomResto,
+                //     style: TextStyle(
+                //       color: MaterialTheme.lightScheme().onSurfaceVariant,
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.w400,
+                //       fontFamily: 'Roboto',
+                //     ),
+                //     maxLines: 1,
+                //     overflow: TextOverflow.ellipsis,
+                //   ),
+                // ),
               ])),
               Row(
                 children: [

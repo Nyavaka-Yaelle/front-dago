@@ -15,7 +15,8 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
   final List<TransactionHistoryItem> transactions = [
     TransactionHistoryItem(
         amount: 20000, label: "Ajout de fonds", transactionIn: true),
-    TransactionHistoryItem( amount: 20000, label: "Rider Services", transactionIn: false),
+    TransactionHistoryItem(
+        amount: 20000, label: "Rider Services", transactionIn: false),
     // TransactionHistoryItem( amount: 20000, label: "Rider Services", transactionIn: false),
     // TransactionHistoryItem( amount: 20000, label: "Rider Services", transactionIn: false),
   ];
@@ -30,6 +31,10 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double paddingRight = screenwidth >= 350 ? screenwidth / 2 - 154 : 24;
+    double paddingTop = screenwidth < 300 ? 46 : 36;
+    double heightMtn = screenwidth < 300 ? 24 : 28;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: MaterialTheme.lightScheme().surface,
@@ -97,20 +102,26 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 36, 0, 0),
+                        padding: EdgeInsets.fromLTRB(paddingRight, paddingTop, 0, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "0.00 Ar",
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.w400,
-                                color: MaterialTheme.lightScheme().onPrimary,
-                              ),
-                            ),
-                            SizedBox(height: 60),
+                            Container(
+                              height: heightMtn,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                                child: Text(
+                                  "0.00 Ar",
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.w400,
+                                    color:
+                                        MaterialTheme.lightScheme().onPrimary,
+                                  ),
+                                ),
+                              )),
+                            SizedBox(height: 60-paddingTop+36),
                             Text(
                               "Nom de l'utilisateur",
                               style: TextStyle(
@@ -187,26 +198,25 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left:2),
-                        child:Text(
-                          "Historique des transactions",
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 15.5,
-                            fontWeight: FontWeight.w500,
-                            color: showPaymentOption
-                                ? MaterialTheme.lightScheme()
-                                    .onSecondaryFixed
-                                    .withOpacity(0.48)
-                                : MaterialTheme.lightScheme().onSecondaryFixed,
-                          ),
-                          textAlign: TextAlign.left,
-                          )
-                        ),
+                          padding: EdgeInsets.only(left: 2),
+                          child: Text(
+                            "Historique des transactions",
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 15.5,
+                              fontWeight: FontWeight.w500,
+                              color: showPaymentOption
+                                  ? MaterialTheme.lightScheme()
+                                      .onSecondaryFixed
+                                      .withOpacity(0.48)
+                                  : MaterialTheme.lightScheme()
+                                      .onSecondaryFixed,
+                            ),
+                            textAlign: TextAlign.left,
+                          )),
                       SizedBox(height: 8),
                       Center(
-                        child: 
-                        Container(
+                        child: Container(
                           width: double.infinity,
                           // height: transactions.length == 0? 136 : 0.0,
                           decoration: BoxDecoration(
@@ -217,62 +227,75 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                                   ? MaterialTheme.lightScheme()
                                       .outlineVariant
                                       .withOpacity(0.24)
-                                  : MaterialTheme.lightScheme()
-                                      .outlineVariant,
+                                  : MaterialTheme.lightScheme().outlineVariant,
                             ),
                           ),
-                          child: transactions.length == 0 ? 
-                          Container(
-                            height: 136,
-                            child:Center(
-                              child: Text(
-                                'Aucune historique',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 13.5,
-                                  letterSpacing: 0.24,
-                                  color: showPaymentOption
-                                      ? MaterialTheme.lightScheme().onSecondaryFixedVariant.withOpacity(0.48)
-                                      : MaterialTheme.lightScheme().onSecondaryFixedVariant,
-                                ),
-                              )
-                            ),
-                          )
-                          : 
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(4, 6, 4, 10),
-                            child: Opacity(
-                              opacity: showPaymentOption ? 0.5 : 1, // Opacité de 50%, tu peux ajuster cette valeur
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(minHeight: 118), // Hauteur minimale de 136
-                                child: Column(
-                                  children: transactions.asMap().entries.map((entry) {
-                                    final index = entry.key;
-                                    final transaction = entry.value;
+                          child: transactions.length == 0
+                              ? Container(
+                                  height: 136,
+                                  child: Center(
+                                      child: Text(
+                                    'Aucune historique',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 13.5,
+                                      letterSpacing: 0.24,
+                                      color: showPaymentOption
+                                          ? MaterialTheme.lightScheme()
+                                              .onSecondaryFixedVariant
+                                              .withOpacity(0.48)
+                                          : MaterialTheme.lightScheme()
+                                              .onSecondaryFixedVariant,
+                                    ),
+                                  )),
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.fromLTRB(4, 6, 4, 10),
+                                  child: Opacity(
+                                    opacity: showPaymentOption
+                                        ? 0.5
+                                        : 1, // Opacité de 50%, tu peux ajuster cette valeur
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                          minHeight:
+                                              118), // Hauteur minimale de 136
+                                      child: Column(
+                                        children: transactions
+                                            .asMap()
+                                            .entries
+                                            .map((entry) {
+                                          final index = entry.key;
+                                          final transaction = entry.value;
 
-                                    return Column(
-                                      children: [
-                                        TransactionHistoryItem(
-                                          amount: transaction.amount,
-                                          label: transaction.label,
-                                          transactionIn: transaction.transactionIn,
-                                        ),
-                                        if (index < transactions.length - 1)
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 24, right: 24, top: 4),
-                                            child: HorizontalLine(
-                                              color: MaterialTheme.lightScheme().outlineVariant,
-                                              thickness: 0.5,
-                                            ), // Ajout d'un Divider sauf pour le dernier élément
-                                          ),
-                                      ],
-                                    );
-                                  }).toList(),
+                                          return Column(
+                                            children: [
+                                              TransactionHistoryItem(
+                                                amount: transaction.amount,
+                                                label: transaction.label,
+                                                transactionIn:
+                                                    transaction.transactionIn,
+                                              ),
+                                              if (index <
+                                                  transactions.length - 1)
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 24,
+                                                      right: 24,
+                                                      top: 4),
+                                                  child: HorizontalLine(
+                                                    color: MaterialTheme
+                                                            .lightScheme()
+                                                        .outlineVariant,
+                                                    thickness: 0.5,
+                                                  ), // Ajout d'un Divider sauf pour le dernier élément
+                                                ),
+                                            ],
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-
                         ),
                       ),
                     ],

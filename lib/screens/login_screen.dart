@@ -104,17 +104,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 12.0),
-              Padding(
+              Container(
+                height: 48,
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                child: Text(
-                  'Accéder à dagô pour des services faites sur mesure pour vous.',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    height: 1.5,
-                    decoration: TextDecoration.none,
-                  ),
+                alignment: Alignment.topLeft,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                  child: Text(
+                    'Accéder à dagô pour des services faites\n sur mesure pour vous.',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      height: 1.5,
+                      decoration: TextDecoration.none,
+                    ),
+                  )
                 ),
               ),
               SizedBox(height: 24.0),

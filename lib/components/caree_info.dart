@@ -23,49 +23,59 @@ class CareeInfo extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12.0),
-        // Titre principal
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
+          height: 32,
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+            child: Text(
             'Caree',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 22,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().secondary,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 22,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().secondary,
+              ),
             ),
           ),
         ),
         // Slogan
         SizedBox(height: 12),
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            '“Des trajets sûrs, simples et un paiement \nqui s\'adapte à votre quotidien.”',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().onSurfaceVariant,
+          height: 48,
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+            child: Text(
+              '“Des trajets sûrs, simples et un paiement \nqui s\'adapte à votre quotidien.”',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().onSurfaceVariant,
+              ),
             ),
           ),
         ),
-        SizedBox(height: 12),
-        // Description
-        Align(
+      SizedBox(height: 12),
+      Container(
           alignment: Alignment.topCenter,
-          child: Text(
-            'Vos itinéraires, votre rythme : avec Ridee, gérez des trajets\n multipoints et réservez un taxi-moto en un clin d’œil.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              height: 1.5,
-              color: MaterialTheme.lightScheme().tertiary,
+          height: 48,
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+            child: Text(
+              'Vos itinéraires, votre rythme : avec Ridee, gérez des trajets\n multipoints et réservez un taxi-moto en un clin d’œil.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: MaterialTheme.lightScheme().tertiary,
+              ),
             ),
           ),
         ),
