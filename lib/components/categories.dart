@@ -4,6 +4,11 @@ import './custom_icon_button.dart';
 import '../theme.dart'; // Importez le fichier TabItem si nécessaire
 
 class Categories extends StatefulWidget {
+  final bool titled;
+const Categories({
+    Key? key,
+    this.titled = true, // Défaut à `true` si non spécifié
+  }) : super(key: key);
   @override
   _CategoriesState createState() => _CategoriesState();
 }
@@ -21,7 +26,6 @@ class _CategoriesState extends State<Categories> {
     print("button pressed");
   }
 
-
   bool isActive(id) {
     return id == _selectedIndex;
   }
@@ -30,10 +34,9 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(12),
-      child: Column(
-        children: [
-        Row(
+      padding: widget.titled? EdgeInsets.all(12): EdgeInsets.fromLTRB(12, 0, 12, 0),
+      child: Column(children: [
+        if(widget.titled) Row(
           children: [
             Text(
               'Catégories',
@@ -55,73 +58,71 @@ class _CategoriesState extends State<Categories> {
           ],
         ),
         Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-          child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal, 
-            child: Row(
-              children: [
-                CustomItem(
-                  label: "Tout",
-                  onPressed: () => {_onTabSelected(0)},
-                  active: isActive(0),
-                  icon: Icons.all_inclusive_outlined,
-                  activeIcon: Icons.all_inclusive_rounded,
-                ),
-                CustomItem(
-                  label: "Pizza",
-                  onPressed: () => {_onTabSelected(1)},
-                  active: isActive(1),
-                  icon: Icons.local_pizza_outlined,
-                  activeIcon: Icons.local_pizza_rounded,
-                ),
-                CustomItem(
-                  label: "Burger",
-                  onPressed: () => {_onTabSelected(2)},
-                  active: isActive(2),
-                  icon: Icons.lunch_dining_outlined,
-                  activeIcon: Icons.lunch_dining_rounded,
-                ),
-                CustomItem(
-                  label: "Glaces",
-                  onPressed: () => {_onTabSelected(3)},
-                  active: isActive(3),
-                  icon: Icons.icecream_outlined,
-                  activeIcon: Icons.icecream_rounded,
-                )
-              ],
-            )
-          )
-        ),
+            width: MediaQuery.of(context).size.width,
+            padding: widget.titled? EdgeInsets.fromLTRB(0, 4, 0, 4): EdgeInsets.all(0),
+            child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    CustomItem(
+                      label: "Tout",
+                      onPressed: () => {_onTabSelected(0)},
+                      active: isActive(0),
+                      icon: Icons.all_inclusive_outlined,
+                      activeIcon: Icons.all_inclusive_rounded,
+                    ),
+                    CustomItem(
+                      label: "Pizza",
+                      onPressed: () => {_onTabSelected(1)},
+                      active: isActive(1),
+                      icon: Icons.local_pizza_outlined,
+                      activeIcon: Icons.local_pizza_rounded,
+                    ),
+                    CustomItem(
+                      label: "Burger",
+                      onPressed: () => {_onTabSelected(2)},
+                      active: isActive(2),
+                      icon: Icons.lunch_dining_outlined,
+                      activeIcon: Icons.lunch_dining_rounded,
+                    ),
+                    CustomItem(
+                      label: "Glaces",
+                      onPressed: () => {_onTabSelected(3)},
+                      active: isActive(3),
+                      icon: Icons.icecream_outlined,
+                      activeIcon: Icons.icecream_rounded,
+                    )
+                  ],
+                ))),
 
-      //   Container(
-      //     padding: EdgeInsets.symmetric(vertical:12),
-      //     width: MediaQuery.of(context).size.width,
-      //    child: SingleChildScrollView(
-      //       scrollDirection: Axis.vertical,
-      //       child: Wrap(
-      //         spacing: 6.0, // Espace horizontal entre les éléments
-      //         runSpacing: 16.0, // Espace vertical entre les lignes d'éléments
-      //         children: [
-      //           if(_selectedIndex==0) 
-      //           // Column(
-      //           //   children: [
-      //               FoodCard(nomPlat: "Atin'ny coucou", nomResto: "Pakopako", prix: 15000.0, star: 4.6),
-      //               FoodCard(nomPlat: "Poulet Roti", nomResto: "Chez Mama", prix: 20000.0, star: 4.8),
-      //               FoodCard(nomPlat: "Burger Deluxe", nomResto: "FastFood Pro", prix: 12000.0, star: 4.2),
-      //               FoodCard(nomPlat: "Pizza Royale", nomResto: "Pizzaland", prix: 18000.0, star: 4.7),
-      //             // ],
-      //           // ),
-      //           if (_selectedIndex==1) Column(
-      //             children: [
-      //               RestoCard(nomResto: "Extra Pizza", ouvert: true, description: "Créateur de la pizza feuilletée et Leader du French tacos à Madagascar",star: 4.6)
-      //             ],
-      //           )
-      //         ],
-      //       ),
-      //     )
+        //   Container(
+        //     padding: EdgeInsets.symmetric(vertical:12),
+        //     width: MediaQuery.of(context).size.width,
+        //    child: SingleChildScrollView(
+        //       scrollDirection: Axis.vertical,
+        //       child: Wrap(
+        //         spacing: 6.0, // Espace horizontal entre les éléments
+        //         runSpacing: 16.0, // Espace vertical entre les lignes d'éléments
+        //         children: [
+        //           if(_selectedIndex==0)
+        //           // Column(
+        //           //   children: [
+        //               FoodCard(nomPlat: "Atin'ny coucou", nomResto: "Pakopako", prix: 15000.0, star: 4.6),
+        //               FoodCard(nomPlat: "Poulet Roti", nomResto: "Chez Mama", prix: 20000.0, star: 4.8),
+        //               FoodCard(nomPlat: "Burger Deluxe", nomResto: "FastFood Pro", prix: 12000.0, star: 4.2),
+        //               FoodCard(nomPlat: "Pizza Royale", nomResto: "Pizzaland", prix: 18000.0, star: 4.7),
+        //             // ],
+        //           // ),
+        //           if (_selectedIndex==1) Column(
+        //             children: [
+        //               RestoCard(nomResto: "Extra Pizza", ouvert: true, description: "Créateur de la pizza feuilletée et Leader du French tacos à Madagascar",star: 4.6)
+        //             ],
+        //           )
+        //         ],
+        //       ),
+        //     )
 
-      //   )
+        //   )
       ]),
     );
   }
