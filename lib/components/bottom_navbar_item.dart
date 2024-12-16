@@ -41,7 +41,7 @@ class BottomNavbarItem extends StatelessWidget {
                 child: Icon(
                   isActive? activeIcon: icon, 
                   size: 24, 
-                  color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant.withOpacity(0.8),
+                  color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant.withOpacity(1),
                 ),
               ),
               // Badge rouge

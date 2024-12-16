@@ -243,34 +243,34 @@ class FoodCardExtended extends StatelessWidget {
           right: 0,
           child: Container(
             height: 160,
-            decoration: BoxDecoration(
-              color: MaterialTheme.lightScheme().surfaceContainerLow,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(36, 0, 0, 0),
-                  blurRadius: 4,
-                  offset: Offset(0, -1),
-                ),
-              ],
-            ),
+            // decoration: BoxDecoration(
+            //   color: MaterialTheme.lightScheme().surfaceContainerLow,
+            //   borderRadius: BorderRadius.only(
+            //     topLeft: Radius.circular(12),
+            //     topRight: Radius.circular(12),
+            //   ),
+            //   boxShadow: [
+            //     BoxShadow(
+            //       color: Color.fromARGB(36, 0, 0, 0),
+            //       blurRadius: 4,
+            //       offset: Offset(0, -1),
+            //     ),
+            //   ],
+            // ),
             child: Column(
               children: [
                 // Drag Handle en haut
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(
-                    width: 32,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: MaterialTheme.lightScheme().outlineVariant,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 8.0),
+                //   child: Container(
+                //     width: 32,
+                //     height: 4,
+                //     decoration: BoxDecoration(
+                //       color: MaterialTheme.lightScheme().outlineVariant,
+                //       borderRadius: BorderRadius.circular(3),
+                //     ),
+                //   ),
+                // ),
                 Spacer(),
                 // Bouton personnalisé en bas
                 Expanded(

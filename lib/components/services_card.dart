@@ -15,7 +15,7 @@ class ServicesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return 
     Padding(
-      padding: EdgeInsets.fromLTRB(12, 64, 12, 12),
+      padding: EdgeInsets.fromLTRB(12, 48, 12, 8),
       child: Container(
       // color: MaterialTheme.lightScheme().surfaceContainerLow,
         width: MediaQuery.of(context).size.width, // Largeur du container
@@ -29,10 +29,11 @@ class ServicesCard extends StatelessWidget {
           ),
           borderRadius: const BorderRadius.all(Radius.circular(12)), // Bordure arrondie
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 16, 0, 12),
+        child: Container(
+          // padding: const EdgeInsets.fromLTRB(12, 16, 0, 12),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: ServiceCard(label: "Ridee", image: "ridee_service", idService: 0),

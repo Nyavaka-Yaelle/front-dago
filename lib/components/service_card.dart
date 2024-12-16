@@ -27,11 +27,10 @@ class ServiceCard extends StatelessWidget {
             ),
           );
         },
-        child: Row(
-        children: [
-          // SizedBox(width: MediaQuery.of(context).size.width *0.018), 
-          // SizedBox(width: 12), 
-          Column(
+        child: 
+        Container(
+          height: 86,
+          child: Column(
             children: [
               Container(
                 width: (MediaQuery.of(context).size.width / 4) -20, // Largeur du container
@@ -71,7 +70,6 @@ class ServiceCard extends StatelessWidget {
               ),
             ],
           ),
-        ],
       )
     );
   }
