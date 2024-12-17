@@ -9,6 +9,7 @@ const Categories({
     Key? key,
     this.titled = true, // Défaut à `true` si non spécifié
   }) : super(key: key);
+  
   @override
   _CategoriesState createState() => _CategoriesState();
 }

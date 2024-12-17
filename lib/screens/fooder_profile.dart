@@ -125,7 +125,7 @@ class FooderProfile extends StatelessWidget {
             child:
           SingleChildScrollView(
             // controller: _scrollController, 
-              child:FoodCards()
+              child:FoodCards(simple: true)
           )),
         // Box collé au bottom avec bordures arrondies et ombre
         Positioned(

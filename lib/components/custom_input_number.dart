@@ -91,7 +91,9 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w400,
                   color: MaterialTheme.lightScheme().onSurface,
+                  decoration: TextDecoration.none,
                 )
               ),
             ),

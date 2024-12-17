@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project1/components/custom_item.dart';
+import './custom_item.dart';
+import './food_card_simple.dart';
 import './custom_icon_button.dart';
 import './food_card.dart';
 import './resto_card.dart';
 import '../theme.dart'; // Importez le fichier TabItem si nécessaire
 
 class FoodCards extends StatefulWidget {
+    final bool simple;
+const FoodCards({
+    Key? key,
+    this.simple = false, // Défaut à `true` si non spécifié
+  }) : super(key: key);
   @override
   _FoodCardsState createState() => _FoodCardsState();
 }
@@ -25,7 +31,26 @@ class _FoodCardsState extends State<FoodCards> {
             child: Wrap(
               spacing: 6.0, // Espace horizontal entre les éléments
               runSpacing: 16.0, // Espace vertical entre les lignes d'éléments
-              children: [
+              children: widget.simple?[
+                FoodCardSimple(
+                  nomPlat: "Atin'ny coucou",
+                  prix: 15000.0,
+                ),
+                FoodCardSimple(
+                  nomPlat: "Poulet Roti",
+                  prix: 20000.0,
+                ),
+                FoodCardSimple(
+                  nomPlat: "Poulet Roti",
+                  prix: 20000.0,
+                ),
+                FoodCardSimple(
+                  nomPlat: "Poulet Roti",
+                  prix: 20000.0,
+                ),
+                SizedBox(height: 86),
+              ]
+              : [
                 FoodCard(
                   nomPlat: "Atin'ny coucou",
                   nomResto: "Pakopako",
