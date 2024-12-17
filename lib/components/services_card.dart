@@ -4,52 +4,81 @@ import './service_card.dart';
 import '../screens/page_info.dart';
 
 class ServicesCard extends StatelessWidget {
-  final VoidCallback? onActionTap; // Callback pour l'action
+  final VoidCallback? onActionTap;
+  final int state; // Callback pour l'action
 
   const ServicesCard({
     Key? key,
+    this.state = 0,
     this.onActionTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding(
+    double height = 120;
+    if (state == 0 && MediaQuery.of(context).size.width < 500) height = 120;
+    if (state != 0 && MediaQuery.of(context).size.width < 500) height = 100;
+    if (state == 0 && MediaQuery.of(context).size.width >= 500) height = 100;
+    if (state != 0 && MediaQuery.of(context).size.width >= 500) height = 80;
+    return Padding(
       padding: EdgeInsets.fromLTRB(12, 48, 12, 8),
       child: Container(
-      // color: MaterialTheme.lightScheme().surfaceContainerLow,
+        // color: MaterialTheme.lightScheme().surfaceContainerLow,
         width: MediaQuery.of(context).size.width, // Largeur du container
-        height: 120,
+        height: height,
+        // state == 0
+        //     ? 120
+        //     : (MediaQuery.of(context).size.width >= 500)
+        //         ? 80
+        //         : 100,
         clipBehavior: Clip.none,
         decoration: BoxDecoration(
           // color: Theme.of(context).colorScheme.surfaceVariant,
           border: Border.all(
             width: 0.5,
-            color: MaterialTheme.lightScheme().outlineVariant, // Définit la couleur de la bordure
+            color: MaterialTheme.lightScheme()
+                .outlineVariant, // Définit la couleur de la bordure
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)), // Bordure arrondie
+          borderRadius:
+              const BorderRadius.all(Radius.circular(12)), // Bordure arrondie
         ),
         child: Container(
-          // padding: const EdgeInsets.fromLTRB(12, 16, 0, 12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            // padding: const EdgeInsets.fromLTRB(12, 16, 0, 12),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
               Expanded(
-                child: ServiceCard(label: "Ridee", image: "ridee_service", idService: 0),
+                child: ServiceCard(
+                    label: "Ridee",
+                    image: "ridee_service",
+                    idService: 0,
+                    state: state),
               ),
               // const SizedBox(width: 8), // Espace de 8px
               Expanded(
-                child: ServiceCard(label: "Caree", image: "caree_service", idService: 1),
+                child: ServiceCard(
+                    label: "Caree",
+                    image: "caree_service",
+                    idService: 1,
+                    state: state),
               ),
               // const SizedBox(width: 8), // Espace de 8px
               Expanded(
-                child: ServiceCard(label: "Foodee", image: "foodee_service", idService: 2),
+                child: ServiceCard(
+                    label: "Foodee",
+                    image: "foodee_service",
+                    idService: 2,
+                    state: state),
               ),
               // const SizedBox(width: 8), // Espace de 8px
               Expanded(
-                child: ServiceCard(label: "Packee", image: "packee_service", idService: 3),
-              ),              // Texte "Vous n'êtes pas encore connecté"
+                child: ServiceCard(
+                    label: "Packee",
+                    image: "packee_service",
+                    idService: 3,
+                    state: state),
+              ), // Texte "Vous n'êtes pas encore connecté"
               // Column(
               //   children: [
               //     Container(
@@ -88,9 +117,7 @@ class ServicesCard extends StatelessWidget {
               //     ),
               //   ],
               // ),
-            ]
-          )
-        ),
+            ])),
       ),
     );
   }

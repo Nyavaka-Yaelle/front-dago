@@ -50,12 +50,12 @@ class MyApp extends StatelessWidget {
         ), //soratras
         */
       // home: FoodeeHomeScreen(),
-      home: FooderProfile(),
+      // home: FooderProfile(),
       // home: YourCardSreen(),
       // home: AddFundScreen(),
       // home: WalletConfiguration(), 
       // home: FundAddedScreen(), //soratra
-      // home: HomeScreen(),
+      home: HomeScreen(),
       // home: SplashScreen(),
       // home: NotifScreen(), //soratra
       // home: LoginScreen(), // login ko,mdp, profile ambany 3 io
