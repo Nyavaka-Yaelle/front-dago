@@ -14,8 +14,10 @@ import 'screens/notif_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/change_profile_picture.dart';
 import 'screens/account_profile.dart';
+import 'screens/fooder_profile.dart';
 import 'components/await_fooder.dart';
 import 'components/await_adding_fund.dart';
+import 'components/restaurant_resume.dart';
 import 'theme.dart';
 
 void main() {
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
         ), //soratras
         */
       // home: FoodeeHomeScreen(),
+      home: FooderProfile(),
       // home: YourCardSreen(),
       // home: AddFundScreen(),
       // home: WalletConfiguration(), 
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
       // home: HomeScreen(),
       // home: SplashScreen(),
       // home: NotifScreen(), //soratra
-      home: LoginScreen(), // login ko,mdp, profile ambany 3 io
+      // home: LoginScreen(), // login ko,mdp, profile ambany 3 io
       // home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: AccountProfile(),

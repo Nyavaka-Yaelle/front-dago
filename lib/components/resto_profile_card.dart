@@ -55,28 +55,35 @@ class RestoProfileCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text(
-                                  nomResto,
-                                  style: TextStyle(
-                                    color: MaterialTheme.lightScheme().onSurface,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Roboto',
-                                    decoration: TextDecoration.none,
+                        Expanded( 
+                          child:Container(
+                            alignment: Alignment.centerLeft,
+                            height: 26,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                              child: Row(
+                                children: [
+                                  Text(
+                                    nomResto,
+                                    style: TextStyle(
+                                      color: MaterialTheme.lightScheme().onSurface,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Roboto',
+                                      decoration: TextDecoration.none,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              SizedBox(width: 4),
-                              Icon(
-                                Icons.check_circle, // Icône de vérification
-                                color: MaterialTheme.lightScheme().primaryFixedDim, // Couleur de l'icône
-                                size: 20, // Taille de l'icône
-                              ),
-                            ]
+                                  SizedBox(width: 4),
+                                  Icon(
+                                    Icons.check_circle, // Icône de vérification
+                                    color: MaterialTheme.lightScheme().primaryFixedDim, // Couleur de l'icône
+                                    size: 20, // Taille de l'icône
+                                  ),
+                                ]
+                              )
+                            )
                           )
                         ),
                         // Row(

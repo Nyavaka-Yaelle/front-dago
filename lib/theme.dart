@@ -10,9 +10,9 @@ class DagoTheme {
   static const Color error = Color(0xFFBA1A1A); // Couleur #6F7976
 }
 class MaterialTheme {
-  final TextTheme textTheme;
-
-  const MaterialTheme(this.textTheme);
+  final TextTheme textTheme = TextTheme();
+ 
+  MaterialTheme(textTheme);
 
   static MaterialScheme lightScheme() {
     return const MaterialScheme(
@@ -370,10 +370,26 @@ class MaterialTheme {
 
 
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
-     useMaterial3: true,
-     brightness: colorScheme.brightness,
-     colorScheme: colorScheme,
-     textTheme: textTheme.apply(
+    useMaterial3: true,
+    brightness: colorScheme.brightness,
+    colorScheme: colorScheme,
+    textTheme: TextTheme(
+      displayLarge: TextStyle(fontSize: 57, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      displayMedium: TextStyle(fontSize: 45, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      displaySmall: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      bodySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+      labelSmall: TextStyle(fontSize: 11, fontWeight: FontWeight.w400, fontFamily: 'Roboto', height: 1.33, decoration: TextDecoration.none),
+    ).apply(
        bodyColor: colorScheme.onSurface,
        displayColor: colorScheme.onSurface,
      ),
