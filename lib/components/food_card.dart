@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../screens/food_card_extended.dart';
+import '../screens/fooder_profile.dart';
 import '../theme.dart';
+
 
 class FoodCard extends StatelessWidget {
   final String nomPlat;
@@ -76,32 +79,64 @@ class FoodCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.asset(
-              imagePlat,
-              height: 116.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+          GestureDetector(  
+            onTap: (){
+              print('Redirect to plat description cliqué');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  
+                  FoodCardExtended(
+                    nomPlat: "Biriani akoho machiaka",
+                    nomResto: "Pakopako",
+                    descriptionPlat: "Ity zengy akoho karana tafa teo aminy fiainana miaraka Vary, Akoho, Epices, Sauce, Lasary",
+                    descriptionResto: "Cuisine traditionnelle de Majunga",
+                  )
+                ),
+              );
+            },  // Appel du callback sur le tap
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: Image.asset(
+                imagePlat,
+                height: 116.0,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            )
           ),
           const SizedBox(height: 8.0),
-          Container(
-            alignment: Alignment.topLeft,
-            height: 20,
-            child: FittedBox(
-              fit: BoxFit.scaleDown, // Shrinks text to fit within the container
-              child: Text(
-                nomPlat,/// + screenWidth.toString(),
-                style: TextStyle(
-                  color: MaterialTheme.lightScheme().onSurface,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Roboto',
-                  decoration: TextDecoration.none,
-                )
+           GestureDetector(  
+            onTap: (){
+              print('Redirect to plat description cliqué');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  
+                  FoodCardExtended(
+                    nomPlat: "Biriani akoho machiaka",
+                    nomResto: "Pakopako",
+                    descriptionPlat: "Ity zengy akoho karana tafa teo aminy fiainana miaraka Vary, Akoho, Epices, Sauce, Lasary",
+                    descriptionResto: "Cuisine traditionnelle de Majunga",
+                  )
+                ),
+              );
+            },  // Appel du callback sur le tap
+            child: Container(
+              alignment: Alignment.topLeft,
+              height: 20,
+              child: FittedBox(
+                fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                child: Text(
+                  nomPlat,/// + screenWidth.toString(),
+                  style: TextStyle(
+                    color: MaterialTheme.lightScheme().onSurface,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Roboto',
+                    decoration: TextDecoration.none,
+                  )
+                ),
               ),
-            ),
+            )
           ),
           // Nom du plat
           // Text(
@@ -121,39 +156,51 @@ class FoodCard extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                  child: Row(children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100.0),
-                  child: Image.asset(
-                    imageResto,
-                    height: 20.0,
-                    width: 20.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(width: 8),
-                 Expanded(
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    height: 16,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown, // Shrinks text to fit within the container
-                      child: Text(
-                        nomPlat,/// + screenWidth.toString(),
-                        style: TextStyle(
-                          color: MaterialTheme.lightScheme().onSurfaceVariant,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Roboto',
-                          decoration: TextDecoration.none,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                child: 
+                GestureDetector(  
+                  onTap: (){
+                  print('Redirect to resto cliqué');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FooderProfile()
                     ),
-                  )
-                ),
-                // Expanded(
+                  );
+                },  // Appel du callback sur le tap
+                child:
+
+                Row(children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100.0),
+                    child: Image.asset(
+                      imageResto,
+                      height: 20.0,
+                      width: 20.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      height: 16,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown, // Shrinks text to fit within the container
+                        child: Text(
+                          nomResto,/// + screenWidth.toString(),
+                          style: TextStyle(
+                            color: MaterialTheme.lightScheme().onSurfaceVariant,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Roboto',
+                            decoration: TextDecoration.none,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    )
+                  ),
+                  // Expanded(
                 //   child: Text(
                 //     nomResto,
                 //     style: TextStyle(
@@ -166,7 +213,7 @@ class FoodCard extends StatelessWidget {
                 //     overflow: TextOverflow.ellipsis,
                 //   ),
                 // ),
-              ])),
+              ]))),
               Row(
                 children: [
                   Icon(Icons.star_rate_rounded,
