@@ -29,7 +29,7 @@ class CustomIconButton extends StatelessWidget {
       return OutlinedButton(
           onPressed: isDisabled ? null : onPressed,
           style: OutlinedButton.styleFrom(
-            fixedSize: Size(double.infinity, 24),
+            fixedSize: Size(double.infinity, 40),
             side: BorderSide(
               color: isDisabled
                   ? MaterialTheme.lightScheme()
@@ -42,25 +42,33 @@ class CustomIconButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(100), // Arrondi du bouton
             ),
             padding:
-                EdgeInsets.symmetric(horizontal: 12), // Espacement du contenu
+                EdgeInsets.symmetric(horizontal: 20), // Espacement du contenu
           ),
           child: Row(children: [
-            Text(
-              label,
-              style: TextStyle(
-                color: isDisabled
-                    ? MaterialTheme.lightScheme()
-                        .onPrimaryContainer
-                        .withOpacity(0.5)
-                    : MaterialTheme.lightScheme()
-                        .onPrimaryContainer, // Couleur du texte
-                fontSize: 14,
-              ),
-            ),
-            Icon(
+            if(beforeIcon) Icon(
               // Icons.arrow_right_alt_rounded,
               icon,
-              color: MaterialTheme.lightScheme().onPrimaryContainer,
+              color: color,
+              size: 20.0,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: isDisabled
+                      ? MaterialTheme.lightScheme()
+                          .onPrimaryContainer
+                          .withOpacity(0.5)
+                      : color, // Couleur du texte
+                  fontSize: 14,
+                )
+                ),
+            ),
+            if(!beforeIcon) Icon(
+              // Icons.arrow_right_alt_rounded,
+              icon,
+              color: color,
               size: 20.0,
             ),
           ]));

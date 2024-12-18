@@ -44,13 +44,7 @@ class ProfileDetailsItem extends StatelessWidget {
                       children: [
                         Text(
                           title1.toUpperCase(),
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: MaterialTheme.lightScheme().tertiary,
-                            letterSpacing: 0.1,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith( color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
                           overflow: TextOverflow.ellipsis, // Coupe le texte avec "..." si nécessaire.
                           maxLines: 1, // Limite le texte à une seule ligne.
                         ),
@@ -73,13 +67,8 @@ class ProfileDetailsItem extends StatelessWidget {
                       children: [
                         Text(
                           title2.toUpperCase(),
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: MaterialTheme.lightScheme().tertiary,
-                            letterSpacing: 0.1,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith( color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
+
                           overflow: TextOverflow.ellipsis, // Coupe le texte avec "..." si nécessaire.
                           maxLines: 1, // Limite le texte à une seule ligne.11
                         ),

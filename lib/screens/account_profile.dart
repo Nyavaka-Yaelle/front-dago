@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project1/components/custom_icon_button.dart';
+import 'package:project1/components/text_icon_button.dart';
 import '../components/delivery_item.dart';
 import '../components/profile_detail_item.dart';
 import '../components/profile_details_item.dart';
@@ -95,32 +97,64 @@ Widget build(BuildContext context) {
           children: [
             SizedBox(height: 4.0),
             ProfilePictureWidget(),
-            SizedBox(height: 32.0),
+            SizedBox(height: 24.0),
             ProfileDetailsItem(
               icon: Icons.person_outline_rounded,
               title1: "Nom", title2:"Prenom",
               detail1: widget.nom, detail2: widget.prenom,
             ),
-            SizedBox(height: 24.0),
+            SizedBox(height: 8.0),
             ProfileDetailItem(
               icon: Icons.call_outlined,
               title: "Telephone",
               detail: widget.tel,
             ),
-            SizedBox(height: 24.0),
+            SizedBox(height: 8.0),
             ProfileDetailItem(
               icon: Icons.email_outlined,
               title: "E-mail",
               detail: widget.email,
             ),
-            SizedBox(height: 24.0),
+            SizedBox(height: 8.0),
             ProfileDetailItem(
               icon: Icons.lock_outline_rounded,
               title: "Mot de passe",
               detail: formatIt(widget.motDePasse),
             ),
-            SizedBox(height: 24.0),
+            SizedBox(height: 4.0),
             Divider(),
+            SizedBox(height: 4.0),
+            Text(
+              "Adresses", // Exemple : "2 menus"
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: MaterialTheme.lightScheme().onTertiaryContainer, fontWeight: FontWeight.normal),
+            ),
+            SizedBox(height: 4.0),
+            Text(
+              "Ajouter des adresses ou des lieux pour faciliter vos déplacements et vos livraisons.", // Exemple : "2 menus"
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.normal),
+            ),
+            SizedBox(height: 16.0),
+            Container(
+              height: 40,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomIconButton(outline: true, label: "Ajouter des adresses", onPressed: (){}, color: MaterialTheme.lightScheme().primary, icon: Icons.bookmark_rounded, beforeIcon: true)
+                ]
+              )
+            ),
+            SizedBox(height: 8.0),
+            Divider(),
+            SizedBox(height: 4.0),     
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextIconButton(label: "Déconnexion", color: MaterialTheme.lightScheme().error, icon: Icons.logout_outlined)
+              ]
+            ),
+            SizedBox(height: 24.0),     
           ],
         ),
       ),

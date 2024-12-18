@@ -70,8 +70,10 @@ class CustomButton extends StatelessWidget {
     } else {
       // Utilisation d'ElevatedButton pour un fond rempli
       return ElevatedButton(
+        
         onPressed: isDisabled ? null : onPressed,
         style: ElevatedButton.styleFrom(
+          elevation: 0,
           backgroundColor: isDisabled
               ? MaterialTheme.lightScheme().onSurface.withOpacity(0.12)
               : color, // Couleur du fond
