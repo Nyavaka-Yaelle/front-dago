@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../components/delivery_item.dart';
-import '../components/custom_icon_button.dart';
 import '../components/profile_detail_item.dart';
 import '../components/profile_details_item.dart';
 import '../components/profile_picture_widget.dart';
@@ -34,12 +32,6 @@ class _AccountProfileState extends State<AccountProfile> {
   final ScrollController _scrollController = ScrollController();
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  // int _selectedIndex = 0;
-  String? _photoUrl;
-
-  final List<DeliveryItem> notifications = [
-    DeliveryItem(restoName: "Pakopako", items: "2 Menus"),
-  ];
 
   @override
   void initState() {
@@ -61,22 +53,6 @@ class _AccountProfileState extends State<AccountProfile> {
     });
   }
 
-  void _deletePdp() {
-    setState(() {
-      _photoUrl = null;
-    });
-  }
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      setState(() {
-        _photoUrl =
-            image.path; // Met à jour directement le chemin de l'image choisie
-      });
-    }
-  }
 String formatIt(String input) {
   return List.generate(input.length, (_) => '• ').join();
 }

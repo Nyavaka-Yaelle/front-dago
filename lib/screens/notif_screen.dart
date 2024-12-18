@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import '../components/horizontal_line.dart';
-import '../components/services_card.dart';
 import '../theme.dart';
-import '../components/bottom_navbar.dart';  // Ajoutez le chemin vers le BottomNavbar
-import '../components/min_tab_items.dart';  // Ajoutez le chemin vers le BottomNavbar
-import '../components/delivery_item.dart';  // Ajoutez le chemin vers le BottomNavbar
+import '../components/bottom_navbar.dart';
+import '../components/min_tab_items.dart';
+import '../components/delivery_item.dart';
 
 class NotifScreen extends StatefulWidget {
   final int idService;
@@ -24,7 +23,7 @@ class _NotifScreenState extends State<NotifScreen> {
   Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   int _selectedIndex = 0; 
 final List<DeliveryItem> notifications = [
-    DeliveryItem(restoName: "Pakopako", items: "2 Menus"),
+    DeliveryItem(motif:"Foodee", title: "Pakopako", items: "2 Menus"),
   ];
   @override
   void initState() {
@@ -129,7 +128,8 @@ void _handleTabChange(int index) {
                         return Column(
                           children: [
                             DeliveryItem(
-                              restoName: transaction.restoName,
+                              motif: transaction.motif,
+                              title: transaction.title,
                               items: transaction.items,
                             ),
                           ],

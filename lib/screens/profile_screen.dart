@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components/horizontal_line.dart';
 import '../components/profile_item.dart';
 import '../theme.dart';
 import '../components/bottom_navbar.dart';  // Ajoutez le chemin vers le BottomNavbar
@@ -28,10 +27,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
   // int _selectedIndex = 0; 
-
-  final List<DeliveryItem> notifications = [
-    DeliveryItem(restoName: "Pakopako", items: "2 Menus"),
-  ];
 
   @override
   void initState() {

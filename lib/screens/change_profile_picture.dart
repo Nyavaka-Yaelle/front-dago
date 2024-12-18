@@ -28,10 +28,6 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   // int _selectedIndex = 0;
   String? _photoUrl;
 
-  final List<DeliveryItem> notifications = [
-    DeliveryItem(restoName: "Pakopako", items: "2 Menus"),
-  ];
-
   @override
   void initState() {
     super.initState();

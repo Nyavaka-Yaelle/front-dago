@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import '../components/parameter_items.dart';
+import '../components/delivery_item.dart';
 import '../theme.dart';
 
-class ParameterScreen extends StatefulWidget {
+class HistoryScreen extends StatefulWidget {
   @override
-  _ParameterScreenState createState() => _ParameterScreenState();
+  _HistoryScreenState createState() => _HistoryScreenState();
 }
 
-class _ParameterScreenState extends State<ParameterScreen> {
+class _HistoryScreenState extends State<HistoryScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  bool isButtonEnabled = false;
-  
+ 
+  Color appBarColor = MaterialTheme.lightScheme().surface; // Couleur par défaut
+  Color bodyColor = MaterialTheme.lightScheme().surface; // Couleur par défaut
+final List<DeliveryItem> historiques = [
+    DeliveryItem(motif:"Ridee" ,title: "7112 TBL", items: "Apeas Lance"),
+    DeliveryItem(motif:"Foodee" ,title: "Pakopako", items: "Byriani Akoho"),
+    DeliveryItem(motif:"Monee" ,title: "Ajout de fond", items: "20 000Ar"),
+    DeliveryItem(motif:"Foodee" ,title: "Pakopako", items: "2 Menus"),
+  ];  
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);    
+    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -30,11 +35,11 @@ class _ParameterScreenState extends State<ParameterScreen> {
     setState(() {
       // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? MaterialTheme.lightScheme().surfaceContainerHighest.withOpacity(0.24)
+          : MaterialTheme.lightScheme().surface;
     });
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +57,7 @@ class _ParameterScreenState extends State<ParameterScreen> {
         backgroundColor: appBarColor, 
         elevation: 0, 
         title: Text(
-          'Paramètres',
+          'Historique',
           style: TextStyle(
             fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
             fontSize: 21.0, // Exemple de taille de police (fontSize)
@@ -63,17 +68,27 @@ class _ParameterScreenState extends State<ParameterScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
-        child: Padding(
-          // padding: const EdgeInsets.all(24.0),
-          padding: const EdgeInsets.fromLTRB(24.0, 0, 24, 24),
+        child: Container(
+          margin: EdgeInsets.only(top:8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ParameterItems(),
-            ],
+            children: historiques.asMap().entries.map((entry) {
+                final index = entry.key;
+                final historique = entry.value;
+
+                return Column(
+                  children: [
+                    DeliveryItem(
+                      motif: historique.motif,
+                      title: historique.title,
+                      items: historique.items,
+                    ),
+                  ],
+                );
+              }).toList(),
+            ) 
           ),
         ),
-      ),
     );
   }
 }
