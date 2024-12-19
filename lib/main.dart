@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/maison_screen.dart';
 import 'package:project1/screens/wallet_configuration.dart';
 import 'screens/login_screen.dart';
 import 'screens/page_info.dart';
@@ -15,6 +16,10 @@ import 'screens/profile_screen.dart';
 import 'screens/change_profile_picture.dart';
 import 'screens/account_profile.dart';
 import 'screens/fooder_profile.dart';
+import 'screens/parameter_screen.dart';
+import 'screens/adresses_screen.dart';
+import 'screens/history_screen.dart';
+import 'screens/edit_password_screen.dart';
 import 'components/await_fooder.dart';
 import 'components/await_adding_fund.dart';
 import 'components/restaurant_resume.dart';
@@ -31,6 +36,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Désactive la bande "DEBUG"
+      // darkTheme: MaterialTheme.dark(),
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         primaryColor: Colors.white,
         colorScheme: const ColorScheme.light(
@@ -38,6 +45,7 @@ class MyApp extends StatelessWidget {
               DagoTheme.outline, // Utiliser la couleur définie dans DagoTheme
         ),
       ),
+      
       // home: PageInfo(),
       // home: AwaitFooder(nomResto: "Pakopako",),
       // home: AwaitAddingFund(),
@@ -55,13 +63,18 @@ class MyApp extends StatelessWidget {
       // home: AddFundScreen(),
       // home: WalletConfiguration(), 
       // home: FundAddedScreen(), //soratra
-      home: HomeScreen(),
+      // home: HomeScreen(),
       // home: SplashScreen(),
       // home: NotifScreen(), //soratra
       // home: LoginScreen(), // login ko,mdp, profile ambany 3 io
       // home: ProfileScreen(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
       // home: AccountProfile(),
+      home: ParameterScreen(),
+      // home: HistoryScreen(),
+      // home: AdressesScreen(),
+      // home: MaisonScreen(),
+      // home: EditPasswordScreen(),
     );
   }
 }

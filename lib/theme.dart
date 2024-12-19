@@ -69,7 +69,7 @@ class MaterialTheme {
     );
   }
 
-  ThemeData light() {
+  static ThemeData light() {
     return theme(lightScheme().toColorScheme());
   }
 
@@ -246,7 +246,7 @@ class MaterialTheme {
     );
   }
 
-  ThemeData dark() {
+  static ThemeData dark() {
     return theme(darkScheme().toColorScheme());
   }
 
@@ -369,7 +369,7 @@ class MaterialTheme {
   }
 
 
-  ThemeData theme(ColorScheme colorScheme) => ThemeData(
+  static ThemeData theme(ColorScheme colorScheme) => ThemeData(
     useMaterial3: true,
     brightness: colorScheme.brightness,
     colorScheme: colorScheme,

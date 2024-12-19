@@ -31,15 +31,17 @@ class _ParameterScreenState extends State<ParameterScreen> {
       // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
       appBarColor = _scrollController.offset > 10
           ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          : MaterialTheme.darkScheme().surfaceContainerLowest;
     });
   }
  
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: bodyColor, 
+      backgroundColor:  bodyColor, 
       appBar: AppBar(
         // centerTitle: true,
         leading: IconButton(
