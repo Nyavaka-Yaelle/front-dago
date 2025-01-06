@@ -71,7 +71,7 @@ class RestoCard extends StatelessWidget {
               ),
               // Texte sous la bannière
               Padding(
-                padding: const EdgeInsets.only(top: 4.0, left: 96.0),
+                padding: const EdgeInsets.only(top: 4.0, left: 104.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [ 
@@ -165,7 +165,7 @@ class RestoCard extends StatelessWidget {
           ),
           // Description sous le texte principal
           Padding(
-            padding: const EdgeInsets.only(top:2, left: 96.0, right: 12),
+            padding: const EdgeInsets.only(top:2, left: 104.0, right: 12),
             child: Text(
               description,
               style: TextStyle(

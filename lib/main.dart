@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
           // home: FooderProfile(),
           // home: YourCardScreen(),
           // home: AddFundScreen(),
-          // home: WalletConfiguration(),
+          home: WalletConfiguration(),
           // home: FundAddedScreen(), //soratra
           // home: HomeScreen(),
           // home: SplashScreen(),
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
           // home: ChangeProfilePicture(username: "Bema Van Astrea", email: "bema.astrea@theworld.com"),
           // home: AccountProfile(),
 
-          home: ParameterScreen(),
+          // home: ParameterScreen(),
           // home: HistoryScreen(),
           // home: AdressesScreen(),
           // home: MaisonScreen(),
