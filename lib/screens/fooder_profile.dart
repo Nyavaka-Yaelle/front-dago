@@ -25,11 +25,14 @@ class FooderProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Stack(
       children: [
         // Contenu de la carte
             Container(
-              color: MaterialTheme.lightScheme().surfaceContainerLowest,
+              color: customColor.getColor("surfaceContainerLowest"),
               margin: EdgeInsets.all(0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +86,7 @@ class FooderProfile extends StatelessWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.white.withOpacity(0.65),
                               borderRadius: BorderRadius.circular(100), // Rond
                               boxShadow: [
                                 BoxShadow(

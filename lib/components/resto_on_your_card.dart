@@ -13,6 +13,9 @@ class RestoOnYourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Row(
       children: [
         // Image à gauche
@@ -38,7 +41,7 @@ class RestoOnYourCard extends StatelessWidget {
                   fontFamily: 'Roboto',
                   fontSize: 14.0,
                   fontWeight: FontWeight.w600,
-                  color: MaterialTheme.lightScheme().onSurface,
+                  color: colorScheme.onSurface,
                 ),
                 overflow: TextOverflow.ellipsis, // Si le texte est trop long
                 maxLines: 1, // Limiter à une ligne
@@ -51,7 +54,7 @@ class RestoOnYourCard extends StatelessWidget {
                   fontFamily: 'Roboto',
                   fontSize: 12.0,
                   fontWeight: FontWeight.w400,
-                  color: MaterialTheme.lightScheme().secondary,
+                  color: colorScheme.secondary,
                 ),
                 maxLines: 2, // Limiter la description à deux lignes
                 overflow: TextOverflow.ellipsis, // Gestion du texte trop long

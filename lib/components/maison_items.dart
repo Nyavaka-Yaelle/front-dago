@@ -9,6 +9,9 @@ class MaisonItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       child:Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -17,19 +20,19 @@ class MaisonItems extends StatelessWidget {
         Text(
           "Maison", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-          color: MaterialTheme.lightScheme().onSurface),
+          color: colorScheme.onSurface),
         ),
         SizedBox(height: 24),
         Text(
           "Votre adresse de maison facilite des livraisons précises et rapides.",
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: MaterialTheme.lightScheme().onPrimaryContainer, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+          color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.w500, letterSpacing: 0.1),
         ),
         SizedBox(height: 4),
         Text(
           "Vos informations personnelles restent confidentielles et sécurisées.", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.normal),
+          color: colorScheme.tertiary, fontWeight: FontWeight.normal),
         ),
         SizedBox(height: 20),
         ProfileDetailItem(
@@ -41,7 +44,7 @@ class MaisonItems extends StatelessWidget {
         SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [TextIconButton(label: "Ajouter une adresse de maison", icon: Icons.add, color: MaterialTheme.lightScheme().primary)]
+          children: [TextIconButton(label: "Ajouter une adresse de maison", icon: Icons.add, color: colorScheme.primary)]
         )
       ]));
   }

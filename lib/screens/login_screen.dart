@@ -7,6 +7,7 @@ import '../components/toast_util.dart';
 import './signup_screen.dart';
 import './splash_screen.dart';
 import './forgot_password.dart';
+import '../components/custom_toggle_switch.dart';
 import '../theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,8 +21,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController telController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+
   bool isButtonEnabled = false;
   String loginError = '';
 
@@ -39,14 +42,20 @@ class _LoginScreenState extends State<LoginScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+ @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     // Modifier la couleur selon la position de défilement
     setState(() {
-      // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+      // appBarColor = colorScheme.surfaceContainerLowest;
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 
@@ -59,12 +68,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor, 
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             // Navigator.pop(context); // Retour à l'écran précédent
@@ -84,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // CustomToggleSwitch(),
               Align(
                 alignment: Alignment.centerLeft,
                 child: SvgPicture.asset(
@@ -138,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.call_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -169,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.lock_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -208,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w400,
                       height: 1,
                       // decoration: TextDecoration.underline,
-                      color: MaterialTheme.lightScheme().secondary,
+                      color: colorScheme.secondary,
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -227,10 +239,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         }
                       : null,
-                  color: MaterialTheme.lightScheme().primary),
+                  color: colorScheme.primary),
               SizedBox(height: 32.0),
               HorizontalLine(
-                color: MaterialTheme.lightScheme().outlineVariant,
+                color: colorScheme.outlineVariant,
                 thickness: 1.0,
               ),
               SizedBox(height: 32.0),
@@ -239,8 +251,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: AccountText(
                   message: "Vous n'avez pas encore de compte ?",
                   actionText: "Inscrivez-vous",
-                  messageColor: MaterialTheme.lightScheme().onSurface,
-                  actionTextColor: MaterialTheme.lightScheme().primary,
+                  messageColor: colorScheme.onSurface,
+                  actionTextColor: colorScheme.primary,
                   onActionTap: () {
                     print("Naviguer vers l'inscription");
                     Navigator.push(

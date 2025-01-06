@@ -33,6 +33,8 @@ class _CategoriesState extends State<Categories> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: widget.titled? EdgeInsets.all(12): EdgeInsets.fromLTRB(12, 0, 12, 0),
@@ -47,7 +49,7 @@ class _CategoriesState extends State<Categories> {
                 fontWeight: FontWeight.w600,
                 height: 1.33,
                 decoration: TextDecoration.none,
-                color: MaterialTheme.lightScheme().primary,
+                color: colorScheme.primary,
               ),
             ),
             Spacer(),
@@ -55,7 +57,7 @@ class _CategoriesState extends State<Categories> {
                 label: "Voir tout",
                 onPressed: onPressed,
                 icon: Icons.arrow_right_alt_rounded,
-                color: MaterialTheme.lightScheme().primaryContainer)
+                color: colorScheme.primaryContainer)
           ],
         ),
         Container(

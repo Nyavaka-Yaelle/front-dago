@@ -19,8 +19,9 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
   bool isButtonEnabled = false; // Pour activer/désactiver le bouton
 
   @override
@@ -34,12 +35,18 @@ class _OtpScreenState extends State<OtpScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+ @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 
@@ -67,13 +74,14 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor, 
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             Navigator.pop(context);
           },
@@ -84,7 +92,7 @@ class _OtpScreenState extends State<OtpScreen> {
           style: TextStyle(
               fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
               fontSize: 21.0, // Exemple de taille de police (fontSize)
-              color: MaterialTheme.lightScheme().onSurface
+              color: colorScheme.onSurface
           )),
       ),
       body: SingleChildScrollView(
@@ -114,7 +122,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
-                      color: MaterialTheme.lightScheme().secondary,
+                      color: colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -128,7 +136,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
-                      color: MaterialTheme.lightScheme().onSurface,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -143,7 +151,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
-                      color: MaterialTheme.lightScheme().secondary,
+                      color: colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -157,7 +165,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontSize: 28,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
-                      color: MaterialTheme.lightScheme().onSurface,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -188,7 +196,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             });
                           }
                         : null, // Si isButtonEnabled est false, on désactive le bouton (null)
-                    color: MaterialTheme.lightScheme().primary,
+                    color: colorScheme.primary,
                   )
                 ),
                 const SizedBox(height: 12.0),
@@ -206,7 +214,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       height: 1.5,
-                      color: MaterialTheme.lightScheme().primary,
+                      color: colorScheme.primary,
                     ),
                   ),
                   ),

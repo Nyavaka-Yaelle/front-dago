@@ -15,9 +15,11 @@ class AwaitFooder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
 
     return Scaffold(
-      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+      backgroundColor: customColor.getColor("surfaceContainerLowest"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -41,7 +43,7 @@ class AwaitFooder extends StatelessWidget {
                 fontFamily: 'Roboto',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: MaterialTheme.lightScheme().onSurface,
+                color: colorScheme.onSurface,
               ),
             ),
           ),
@@ -55,7 +57,7 @@ class AwaitFooder extends StatelessWidget {
                 fontFamily: 'Roboto',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                color: MaterialTheme.lightScheme().secondary,
+                color: colorScheme.secondary,
               ),
               textAlign: TextAlign.center,
             ),

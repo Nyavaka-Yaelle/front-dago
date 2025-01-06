@@ -17,6 +17,9 @@ class ProfileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -24,7 +27,7 @@ class ProfileItem extends StatelessWidget {
           Icon(
             icon,
             size: 24,
-            color: MaterialTheme.lightScheme().onTertiaryContainer,
+            color: colorScheme.onTertiaryContainer,
           ),
           const SizedBox(width: 24), // Espacement entre l'icône et la colonne.
           Column(
@@ -36,7 +39,7 @@ class ProfileItem extends StatelessWidget {
                   fontFamily: 'Roboto',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: MaterialTheme.lightScheme().onTertiaryContainer,
+                  color: colorScheme.onTertiaryContainer,
                 ),
               ),
               const SizedBox(height: 2.4),
@@ -46,7 +49,7 @@ class ProfileItem extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: MaterialTheme.lightScheme().tertiary,
+                    color: colorScheme.tertiary,
                     letterSpacing: 0.1),
               ),
             ],

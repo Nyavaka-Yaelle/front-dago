@@ -8,6 +8,7 @@ import './login_screen.dart';
 import './otp_screen.dart';
 import '../theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../components/custom_toggle_switch.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -23,8 +24,10 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+
   bool isButtonEnabled = false;
   
   @override
@@ -44,14 +47,20 @@ class _SignupScreenState extends State<SignupScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     // Modifier la couleur selon la position de défilement
     setState(() {
-      // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+      // appBarColor = colorScheme.surfaceContainerLowest;
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 
@@ -65,13 +74,15 @@ class _SignupScreenState extends State<SignupScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor, 
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
@@ -84,10 +95,10 @@ class _SignupScreenState extends State<SignupScreen> {
           style: TextStyle(
             fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
             fontSize: 21.0, // Exemple de taille de police (fontSize)
-            color: MaterialTheme.lightScheme().onSurface
+            color: colorScheme.onSurface
           ), // Couleur du texte (foregroundColor)
         ),
-        foregroundColor: MaterialTheme.lightScheme().onSurface,        
+        foregroundColor: colorScheme.onSurface,        
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
@@ -97,6 +108,7 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // CustomToggleSwitch(),
               Align(
                 alignment: Alignment.centerLeft,
                 child: SvgPicture.asset(
@@ -121,7 +133,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.person_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -162,7 +174,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.call_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -188,7 +200,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.email_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -215,7 +227,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.lock_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -268,11 +280,11 @@ class _SignupScreenState extends State<SignupScreen> {
                         );
                       }
                     : null,
-                color: MaterialTheme.lightScheme().primary
+                color: colorScheme.primary
               ),
               SizedBox(height: 32.0),
               HorizontalLine(
-                color: MaterialTheme.lightScheme().outlineVariant,
+                color: colorScheme.outlineVariant,
                 thickness: 1.0,
               ),
               SizedBox(height: 32.0),
@@ -281,8 +293,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 child:AccountText(
                   message: "Vous avez déjà un compte ?",
                   actionText: "Connectez-vous",
-                  messageColor: MaterialTheme.lightScheme().onSurface,
-                  actionTextColor: MaterialTheme.lightScheme().primary,
+                  messageColor: colorScheme.onSurface,
+                  actionTextColor: colorScheme.primary,
                   onActionTap: () {
                     print("Naviguer vers login");
                     Navigator.push(

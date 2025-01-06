@@ -17,6 +17,8 @@ class AddressPosition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
     return Container(
       padding: EdgeInsets.fromLTRB(12, 64, 12, 0),
       decoration: BoxDecoration(
@@ -48,7 +50,7 @@ class AddressPosition extends StatelessWidget {
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                   height: 1.5,
-                  color: MaterialTheme.lightScheme().onSurfaceVariant,
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
               Text(
@@ -58,7 +60,7 @@ class AddressPosition extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   height: 1.5,
-                  color: MaterialTheme.lightScheme().onSurface,
+                  color: colorScheme.onSurface,
                 ),
                 // Theme.of(context).textTheme.bodySmall,
               ),

@@ -22,6 +22,9 @@ class BottomNavbarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return GestureDetector(  
       onTap: onTap,  // Appel du callback sur le tap
       child:Column(
@@ -35,13 +38,13 @@ class BottomNavbarItem extends StatelessWidget {
                 width: 50,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: isActive? MaterialTheme.lightScheme().secondaryContainer: Colors.transparent,
+                  color: isActive? colorScheme.secondaryContainer: Colors.transparent,
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Icon(
                   isActive? activeIcon: icon, 
                   size: 24, 
-                  color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant.withOpacity(1),
+                  color: isActive? colorScheme.onSurface: colorScheme.onSurfaceVariant.withOpacity(1),
                 ),
               ),
               // Badge rouge
@@ -80,7 +83,7 @@ class BottomNavbarItem extends StatelessWidget {
                   fontFamily: 'Roboto',
                   fontSize: 14,
                   fontWeight: isActive? FontWeight.w600: FontWeight.w400,
-                  color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant,
+                  color: isActive? colorScheme.onSurface: colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -92,7 +95,7 @@ class BottomNavbarItem extends StatelessWidget {
           //     fontFamily: 'Roboto',
           //     fontSize: 14,
           //     fontWeight: isActive? FontWeight.w600: FontWeight.w400,
-          //     color: isActive? MaterialTheme.lightScheme().onSurface: MaterialTheme.lightScheme().onSurfaceVariant,
+          //     color: isActive? colorScheme.onSurface: colorScheme.onSurfaceVariant,
           //   ),
           // ),
         ],

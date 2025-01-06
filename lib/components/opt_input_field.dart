@@ -49,6 +49,9 @@ class _OtpInputFieldState extends State<OtpInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(widget.length, (index) {
@@ -57,9 +60,9 @@ class _OtpInputFieldState extends State<OtpInputField> {
           width: MediaQuery.of(context).size.width * 0.14, // width 48px
           height: 52, // height 48px
           decoration: BoxDecoration(
-            color: MaterialTheme.lightScheme().surface, // Background color
+            color: colorScheme.surface, // Background color
             borderRadius: BorderRadius.circular(12), // radius 12px
-            border: Border.all(width: 0.5, color: MaterialTheme.lightScheme().outlineVariant), // Optional border
+            border: Border.all(width: 0.5, color: colorScheme.outlineVariant), // Optional border
           ),
           child: TextField(
             controller: controllers[index],
@@ -67,7 +70,7 @@ class _OtpInputFieldState extends State<OtpInputField> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 28,
-              color: MaterialTheme.lightScheme().onSurface,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w400,
             ),
             cursorColor: const Color.fromARGB(0, 255, 255, 255),

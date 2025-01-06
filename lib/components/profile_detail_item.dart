@@ -30,6 +30,9 @@ class ProfileDetailItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     double iconSize = (isAdding || isLiking || isEditing) ? 24 : 16;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -39,7 +42,7 @@ class ProfileDetailItem extends StatelessWidget {
           Icon(
             icon,
             size: 22,
-            color: MaterialTheme.lightScheme().onTertiaryContainer,
+            color: colorScheme.onTertiaryContainer,
           ),
           const SizedBox(width: 12), // Espacement entre l'icône et la colonne.
           Expanded(
@@ -49,7 +52,7 @@ class ProfileDetailItem extends StatelessWidget {
               children: [
                 Text(
                   title.toUpperCase(),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith( color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith( color: colorScheme.tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
                 ),
                 const SizedBox(height: 2.4),
                 Text(
@@ -58,7 +61,7 @@ class ProfileDetailItem extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().onTertiaryContainer,
+                    color: colorScheme.onTertiaryContainer,
                   ),
                   overflow: TextOverflow
                       .ellipsis, // Coupe le texte avec "..." si nécessaire.
@@ -70,7 +73,7 @@ class ProfileDetailItem extends StatelessWidget {
           Icon(
             getIconData(), // Flèche à droite.
             size: iconSize,
-            color: MaterialTheme.lightScheme().onTertiaryContainer,
+            color: colorScheme.onTertiaryContainer,
           ),
         ],
       ),

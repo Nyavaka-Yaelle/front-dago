@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import './phone_number_formatter.dart';
-import 'package:flutter/services.dart';
 
 // import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -169,19 +168,21 @@ String _formatNumber(String value) {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
     Color mainColor;
     double borderWidth = 1.0;
     if (_hasError) {
       // mainColor = DagoTheme.error; // Bordure rouge en cas d'erreur
-      mainColor = MaterialTheme.lightScheme().error;
+      mainColor = colorScheme.error;
     } else if (_focusNode.hasFocus) {
-      mainColor = MaterialTheme.lightScheme().primary;
+      mainColor = colorScheme.primary;
 
       borderWidth = 3.0;
     } else if (widget.controller.text.isNotEmpty) {
-      mainColor = MaterialTheme.lightScheme().onSurface;
+      mainColor = colorScheme.onSurface;
     } else {
-      mainColor = MaterialTheme.lightScheme().outline;
+      mainColor = colorScheme.outline;
     }
 
     return Column(
@@ -215,7 +216,7 @@ String _formatNumber(String value) {
                   errorText: null, // On gère l'erreur séparément
                   border: InputBorder.none,
                   filled: true,
-                  fillColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+                  fillColor: customColor.getColor("surfaceContainerLowest"),
                   // suffixIcon: widget.suffixIcon != null
                   //     ? Icon(widget.suffixIcon, color: mainColor)
                   //     // Icon( 'visibility_off_rounded' as IconData?, color: mainColor )
@@ -285,7 +286,7 @@ String _formatNumber(String value) {
                     ? Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 4.0, vertical: 2.0),
-                        color: Colors.white,
+                        color: customColor.getColor("surfaceContainerLowest"),
                         child: Text(
                           widget.labelText,
                           style: TextStyle(
@@ -311,7 +312,7 @@ String _formatNumber(String value) {
             widget.errorText ??
                 '', // Affiche le texte d'erreur uniquement s'il existe
             style: TextStyle(
-              color: MaterialTheme.lightScheme().error,
+              color: colorScheme.error,
               fontSize: 12.0,
               fontFamily: 'Roboto',
             ),

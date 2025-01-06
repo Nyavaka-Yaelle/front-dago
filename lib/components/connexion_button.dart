@@ -15,13 +15,16 @@ class ConnexionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
-      // color: MaterialTheme.lightScheme().surfaceContainerLow,
+      // color: colorScheme.surfaceContainerLow,
       width: MediaQuery.of(context).size.width, // Largeur du container
       // height: 235,
       clipBehavior: Clip.none,
       decoration: BoxDecoration(
-        color: MaterialTheme.lightScheme().surfaceContainerLow,
+        color: customColor.getColor("surfaceContainerLow"),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20), // Rayon en haut à gauche
           topRight: Radius.circular(20),  // Pas de rayon en haut à droite
@@ -50,7 +53,7 @@ class ConnexionButton extends StatelessWidget {
                   fontFamily: 'Roboto',
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: MaterialTheme.lightScheme().onSurface,
+                  color: colorScheme.onSurface,
                 ),
               ),
             ),
@@ -59,7 +62,7 @@ class ConnexionButton extends StatelessWidget {
             // Bouton "Créer un compte"
             CustomButton(
               label: "Créer un compte", 
-              color: MaterialTheme.lightScheme().primary,
+              color: colorScheme.primary,
               onPressed: () {
                 print("Naviguer vers l'inscription");
                 Navigator.push(
@@ -75,19 +78,19 @@ class ConnexionButton extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: HorizontalLine(color: MaterialTheme.lightScheme().outlineVariant),
+                  child: HorizontalLine(color: colorScheme.outlineVariant),
                 ),
                 SizedBox(width: 20),
                 Text(
                   'OU',
                   style: TextStyle(
                     fontSize: 14,
-                    color: MaterialTheme.lightScheme().secondary,
+                    color: colorScheme.secondary,
                   ),
                 ),
                 SizedBox(width: 20),
                 Expanded(
-                  child: HorizontalLine(color: MaterialTheme.lightScheme().outlineVariant),
+                  child: HorizontalLine(color: colorScheme.outlineVariant),
                 ),
               ],
             ),

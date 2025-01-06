@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import '../theme.dart';
-import '../components/logo_button.dart';
-import '../components/horizontal_line.dart';
-import '../components/transaction_history_item.dart';
 import '../components/fund_added_success.dart';
 
 class FundAddedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: MaterialTheme.lightScheme().surface,
+      backgroundColor: colorScheme.surface,
      
       body: Stack(
         children: [

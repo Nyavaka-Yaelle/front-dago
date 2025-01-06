@@ -1,14 +1,14 @@
 // theme.dart
 import 'package:flutter/material.dart';
 
-class DagoTheme {
-  // Définir les couleurs globales de l'application
-  static const Color outline = Color(0xFF6F7976); // Couleur #6F7976
-  static const Color primary = Color(0xFF006B5F); // Couleur #6F7976
-  static const Color secondary = Color(4283065182); // Couleur #6F7976
-  static const Color onSurface = Color(0xFF171D1B); // Couleur #6F7976
-  static const Color error = Color(0xFFBA1A1A); // Couleur #6F7976
-}
+// class DagoTheme {
+//   // Définir les couleurs globales de l'application
+//   static const Color outline = Color(0xFF6F7976); // Couleur #6F7976
+//   static const Color primary = Color(0xFF006B5F); // Couleur #6F7976
+//   static const Color secondary = Color(4283065182); // Couleur #6F7976
+//   static const Color onSurface = Color(0xFF171D1B); // Couleur #6F7976
+//   static const Color error = Color(0xFFBA1A1A); // Couleur #6F7976
+// }
 class MaterialTheme {
   final TextTheme textTheme = TextTheme();
  
@@ -541,6 +541,8 @@ extension MaterialSchemeUtils on MaterialScheme {
       inverseSurface: inverseSurface,
       onInverseSurface: inverseOnSurface,
       inversePrimary: inversePrimary,
+
+      surfaceTint: surfaceTint, 
     );
   }
 }
@@ -578,4 +580,110 @@ class ColorFamily {
   final Color onColor;
   final Color colorContainer;
   final Color onColorContainer;
+}
+
+class CustomColors {
+  static const Map<String, Map<String, Color>> colors = {
+    'inverseOnSurface': {
+      'light': Color(4293718767),
+      'dark': Color(4281020976),
+    },
+    'inversePrimary': {
+      'light': Color(4286830022),
+      'dark': Color(4278217567),
+    },
+    'primaryFixed': {
+      'light': Color(4288672482),
+      'dark': Color(4288672482),
+    },
+    'onPrimaryFixed': {
+      'light': Color(4278198300),
+      'dark': Color(4278198300),
+    },
+    'primaryFixedDim': {
+      'light': Color(4286830022),
+      'dark': Color(4286830022),
+    },
+    'onPrimaryFixedVariant': {
+      'light': Color(4278210631),
+      'dark': Color(4278210631),
+    },
+    'secondaryFixed': {
+      'light': Color(4291684577),
+      'dark': Color(4291684577),
+    },
+    'onSecondaryFixed': {
+      'light': Color(4278591516),
+      'dark': Color(4278591516),
+    },
+    'secondaryFixedDim': {
+      'light': Color(4289842374),
+      'dark': Color(4281551687),
+    },
+    'onSecondaryFixedVariant': {
+      'light': Color(4291553023),
+      'dark': Color(4281551687),
+    },
+    'tertiaryFixed': {
+      'light': Color(4281551687),
+      'dark': Color(4291553023),
+    },
+    'onTertiaryFixed': {
+      'light': Color(4289514213),
+      'dark': Color(4278197808),
+    },
+    'tertiaryFixedDim': {
+      'light': Color(4278197808),
+      'dark': Color(4289514213),
+    },
+    'onTertiaryFixedVariant': {
+      'light': Color(4281092704),
+      'dark': Color(4281092704),
+    },
+    'surfaceDim': {
+      'light': Color(4292205529),
+      'dark': Color(4279112979),
+    },
+    'surfaceBright': {
+      'light': Color(4294245368),
+      'dark': Color(4281613113),
+    },
+    'surfaceContainerLowest': {
+      'light': Color(4294967295),
+      'dark': Color(4278783758),
+    },
+    'surfaceContainerLow': {
+      'light': Color(4293916146),
+      'dark': Color(4279704859),
+    },
+    'surfaceContainer': {
+      'light': Color(4293521388),
+      'dark': Color(4279902495),
+    },
+    'surfaceContainerHigh': {
+      'light': Color(4293126887),
+      'dark': Color(4280625962),
+    },
+    'surfaceContainerHighest': {
+      'light': Color(4292732129),
+      'dark': Color(4281349684),
+    },
+  };
+}
+class ColorManager {
+  final BuildContext context;
+
+  ColorManager(this.context);
+
+  Color getColor(String colorName) {
+    // Vérifier si le mode actuel est sombre ou clair
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    // Retourner la couleur appropriée en fonction du mode
+    if (isDarkMode) {
+      return CustomColors.colors[colorName]?['dark'] ?? Colors.transparent;
+    } else {
+      return CustomColors.colors[colorName]?['light'] ?? Colors.transparent;
+    }
+  }
 }

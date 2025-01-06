@@ -19,9 +19,12 @@ class NotifScreen extends StatefulWidget {
 
 class _NotifScreenState extends State<NotifScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  int _selectedIndex = 0; 
+  
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+
+int _selectedIndex = 0; 
 final List<DeliveryItem> notifications = [
     DeliveryItem(motif:"Foodee", title: "Pakopako", items: "2 Menus"),
   ];
@@ -36,12 +39,18 @@ final List<DeliveryItem> notifications = [
     _scrollController.dispose();
     super.dispose();
   }
-
+ @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 void _handleTabChange(int index) {
@@ -51,12 +60,13 @@ void _handleTabChange(int index) {
   }
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
@@ -89,7 +99,7 @@ void _handleTabChange(int index) {
               SizedBox(height: 24.0),
               MinTabItems(onTabChanged: _handleTabChange),
                 HorizontalLine(
-                  color: MaterialTheme.lightScheme().outlineVariant,
+                  color: colorScheme.outlineVariant,
                   thickness: 1.0,
                 ),
                 if(notifications.length == 0) Column(
@@ -108,7 +118,7 @@ void _handleTabChange(int index) {
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 16,
-                          color: MaterialTheme.lightScheme().tertiary,
+                          color: colorScheme.tertiary,
                           fontWeight: FontWeight.w500,
                         )
                       ),

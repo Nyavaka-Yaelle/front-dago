@@ -8,6 +8,9 @@ class AdressesItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       child:Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -16,24 +19,24 @@ class AdressesItems extends StatelessWidget {
         Text(
           "Adresses", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-          color: MaterialTheme.lightScheme().onSurface),
+          color: colorScheme.onSurface),
         ),
         SizedBox(height: 24),
         Text(
           "Vos adresses dans l’application permet de simplifier et d’optimiser vos déplacements et livraisons.", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: MaterialTheme.lightScheme().onPrimaryContainer, fontWeight: FontWeight.w500),
+          color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.w500),
         ),
         Text(
           "Vos informations personnelles restent confidentielles et sécurisées.", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.normal),
+          color: colorScheme.tertiary, fontWeight: FontWeight.normal),
         ),
         SizedBox(height: 24),
         Text(
           "Adresses personnelles", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.normal),
+          color: colorScheme.tertiary, fontWeight: FontWeight.normal),
         ),
         SizedBox(height: 4),
         ProfileDetailItem(
@@ -53,7 +56,7 @@ class AdressesItems extends StatelessWidget {
         Text(
           "Restaurants favoris", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.normal),
+          color: colorScheme.tertiary, fontWeight: FontWeight.normal),
         ),
         SizedBox(height: 4),
         ProfileDetailItem(

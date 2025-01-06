@@ -15,11 +15,14 @@ class CheckoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     // if (MediaQuery.of(context).size.width > 300) {
       return Container(
         height: 56, // Hauteur du rectangle
         decoration: BoxDecoration(
-          color: MaterialTheme.lightScheme().inverseSurface, // Couleur de fond
+          color: colorScheme.inverseSurface, // Couleur de fond
           borderRadius: BorderRadius.circular(100), // Bord arrondi
         ),
         padding: EdgeInsets.symmetric(horizontal: 12), // Padding interne
@@ -33,7 +36,7 @@ class CheckoutCard extends StatelessWidget {
               children: [
                 Icon(
                   Icons.approval_outlined, // Icône de repas
-                  color: MaterialTheme.lightScheme().inverseOnSurface,
+                  color: customColor.getColor("inverseOnSurface"),
                   size: 24,
                 ),
                 SizedBox(width: 8), // Espacement entre l'icône et le texte
@@ -44,13 +47,13 @@ class CheckoutCard extends StatelessWidget {
                     Text(
                       title, // Exemple : "2 menus"
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: MaterialTheme.lightScheme().inverseOnSurface,
+                          color: customColor.getColor("inverseOnSurface"),
                           height: 1.1),
                     ),
                     Text(
                       price, // Exemple : "30 000 Ar"
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: MaterialTheme.lightScheme().inverseOnSurface,
+                            color: customColor.getColor("inverseOnSurface"),
                           ),
                     ),
                   ],
@@ -61,7 +64,7 @@ class CheckoutCard extends StatelessWidget {
               onPressed: onPressed, // Action lors du clic
               style: ElevatedButton.styleFrom(
                 backgroundColor:
-                    MaterialTheme.lightScheme().primary, // Couleur du bouton
+                    colorScheme.primary, // Couleur du bouton
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100), // Bord arrondi
                 ),
@@ -73,7 +76,7 @@ class CheckoutCard extends StatelessWidget {
                   children: [ 
                     Icon(
                       Icons.shopping_cart_checkout_outlined, // Icône de repas
-                      color: MaterialTheme.lightScheme().onPrimary,
+                      color: colorScheme.onPrimary,
                       size: 18,
                     ),
                     SizedBox(width: 4),
@@ -81,7 +84,7 @@ class CheckoutCard extends StatelessWidget {
                       "Voir le panier",
                       style: TextStyle(
                         fontSize: 14,
-                        color: MaterialTheme.lightScheme().onPrimary,
+                        color: colorScheme.onPrimary,
                         fontFamily: 'Roboto',
                         decoration: TextDecoration.none,
                       ),

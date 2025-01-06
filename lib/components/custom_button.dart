@@ -20,6 +20,8 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
     double height = 40;
     double screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth <= 200) height = 20;
@@ -31,8 +33,8 @@ class CustomButton extends StatelessWidget {
           fixedSize: Size(double.infinity, height),
           side: BorderSide(
             color: isDisabled
-                ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
-                : MaterialTheme.lightScheme().outline, // Couleur du contour
+                ? colorScheme.onSurface.withOpacity(0.5)
+                : colorScheme.outline, // Couleur du contour
             width: 1.0, // Épaisseur du contour
           ),
           shape: RoundedRectangleBorder(
@@ -50,8 +52,8 @@ class CustomButton extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isDisabled
-                    ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
-                    : MaterialTheme.lightScheme().primary, // Couleur du texte
+                    ? colorScheme.onSurface.withOpacity(0.5)
+                    : colorScheme.primary, // Couleur du texte
                 fontSize: 16,
               ),
             ),
@@ -61,8 +63,8 @@ class CustomButton extends StatelessWidget {
         //   label,
         //   style: TextStyle(
         //     color: isDisabled
-        //         ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
-        //         : MaterialTheme.lightScheme().primary, // Couleur du texte
+        //         ? colorScheme.onSurface.withOpacity(0.5)
+        //         : colorScheme.primary, // Couleur du texte
         //     fontSize: 16,
         //   ),
         // ),
@@ -75,7 +77,7 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: isDisabled
-              ? MaterialTheme.lightScheme().onSurface.withOpacity(0.12)
+              ? colorScheme.onSurface.withOpacity(0.12)
               : color, // Couleur du fond
           fixedSize: Size(double.infinity, height),
           shape: RoundedRectangleBorder(
@@ -92,8 +94,8 @@ class CustomButton extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isDisabled
-                    ? MaterialTheme.lightScheme().onSurface.withOpacity(0.5)
-                    : Colors.white, // Couleur du texte
+                    ? colorScheme.onSurface.withOpacity(0.5)
+                    : customColor.getColor("surfaceContainerLowest"), // Couleur du texte
                 fontSize: 16,
               ),
             ),

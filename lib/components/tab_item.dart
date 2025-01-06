@@ -22,6 +22,9 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -34,14 +37,13 @@ class TabItem extends StatelessWidget {
               ? Border(
                   bottom: BorderSide(
                     width: 2.0,
-                    color: MaterialTheme.lightScheme()
-                        .primary, // Définit la couleur de la bordure
+                    color: colorScheme.primary, // Définit la couleur de la bordure
                   ),
                 )
               : Border(
                   bottom: BorderSide(
                   width: 0.5,
-                  color: MaterialTheme.lightScheme()
+                  color: colorScheme
                       .outlineVariant, // Définit la couleur de la bordure
                 )),
         ),
@@ -55,8 +57,8 @@ class TabItem extends StatelessWidget {
                 getIcon(),
                 size: 20,
                 color: isSelected
-                    ? MaterialTheme.lightScheme().onSurface
-                    : MaterialTheme.lightScheme().onSurfaceVariant,
+                    ? colorScheme.onSurface
+                    : colorScheme.onSurfaceVariant,
               ),
               SizedBox(width: 8.0),
               // Expanded(
@@ -66,8 +68,8 @@ class TabItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     color: isSelected
-                        ? MaterialTheme.lightScheme().onSurface
-                        : MaterialTheme.lightScheme().onSurfaceVariant,
+                        ? colorScheme.onSurface
+                        : colorScheme.onSurfaceVariant,
                     fontWeight: FontWeight.w400,
                   ),
                   maxLines: 1,

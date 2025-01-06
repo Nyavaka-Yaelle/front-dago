@@ -33,34 +33,37 @@ class _AddFundScreenState extends State<AddFundScreen> {
   void _updateButtonState() {
     setState(() {
       double? parsedValue =
-          double.tryParse(montantController.text.replaceAll(' ',''));
+          double.tryParse(montantController.text.replaceAll(' ', ''));
 
-      isButtonEnabled = numeroController.text.length>=13 &&
+      isButtonEnabled = numeroController.text.length >= 13 &&
           montantController.text.isNotEmpty &&
           parsedValue != null &&
           parsedValue >= 1000;
-      selectedAmount = parsedValue!=null? parsedValue: -1;
+      selectedAmount = parsedValue != null ? parsedValue : -1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Scaffold(
-      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+      backgroundColor: customColor.getColor("surfaceContainerLowest"),
       appBar: AppBar(
         centerTitle: false,
         leading: IconButton(
           icon: Icon(Icons.arrow_back,
-              size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant),
+              size: 24.0, color: colorScheme.onSurfaceVariant),
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+        backgroundColor: customColor.getColor("surfaceContainerLowest"),
         elevation: 0,
         title: Text(
           'Ajout de fonds',
           style: TextStyle(
             fontSize: 21.0,
-            color: MaterialTheme.lightScheme().onSurface,
+            color: colorScheme.onSurface,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -80,7 +83,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                     fontFamily: 'Roboto',
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: MaterialTheme.lightScheme().onSurface,
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 SizedBox(height: 8),
@@ -119,15 +122,15 @@ class _AddFundScreenState extends State<AddFundScreen> {
                       },
                       side: BorderSide(
                         color: memorizeNumber
-                            ? MaterialTheme.lightScheme().primary
-                            : MaterialTheme.lightScheme().secondary,
+                            ? colorScheme.primary
+                            : colorScheme.secondary,
                         width: 2.0,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      checkColor: MaterialTheme.lightScheme().onPrimary,
-                      activeColor: MaterialTheme.lightScheme().primary,
+                      checkColor: colorScheme.onPrimary,
+                      activeColor: colorScheme.primary,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       visualDensity: VisualDensity.compact,
                     ),
@@ -137,7 +140,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                         fontFamily: 'Roboto',
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: MaterialTheme.lightScheme().secondary,
+                        color: colorScheme.secondary,
                         letterSpacing: 0.5,
                       ),
                     ),
@@ -145,7 +148,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                 ),
                 const SizedBox(height: 16),
                 HorizontalLine(
-                  color: MaterialTheme.lightScheme().outlineVariant,
+                  color: colorScheme.outlineVariant,
                   thickness: 1.0,
                 ),
                 const SizedBox(height: 16),
@@ -155,7 +158,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                     fontFamily: 'Roboto',
                     fontSize: 22,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().onSecondaryContainer,
+                    color: colorScheme.onSecondaryContainer,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -173,8 +176,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.error_rounded,
-                          size: 16,
-                          color: MaterialTheme.lightScheme().tertiary),
+                          size: 16, color: colorScheme.tertiary),
                       const SizedBox(width: 4),
                       Text(
                         "Ajout de fond minimum pour 1 000 coins",
@@ -182,7 +184,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                           fontFamily: 'Roboto',
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
-                          color: MaterialTheme.lightScheme().tertiary,
+                          color: colorScheme.tertiary,
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -199,7 +201,11 @@ class _AddFundScreenState extends State<AddFundScreen> {
                         onPressed: () {
                           setState(() {
                             selectedAmount = amount;
-                            montantController.text = amount.toString();
+                            montantController.text = amount
+                                .toInt()
+                                .toString()
+                                .replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'),
+                                    (match) => "${match[1]} ");
                             _updateButtonState();
                           });
                         },
@@ -212,18 +218,16 @@ class _AddFundScreenState extends State<AddFundScreen> {
                             fontWeight: FontWeight.w400,
                           ),
                           foregroundColor: selectedAmount == amount
-                              ? MaterialTheme.lightScheme().onSecondaryContainer
-                              : MaterialTheme.lightScheme().onSurfaceVariant,
+                              ? colorScheme.onSecondaryContainer
+                              : colorScheme.onSurfaceVariant,
                           side: BorderSide(
                             width: 0.5,
                             color: selectedAmount == amount
-                                ? MaterialTheme.lightScheme().secondaryContainer
-                                : MaterialTheme.lightScheme()
-                                    .onSurfaceVariant
-                                    .withOpacity(0.8),
+                                ? colorScheme.secondaryContainer
+                                : colorScheme.onSurfaceVariant.withOpacity(0.8),
                           ),
                           backgroundColor: selectedAmount == amount
-                              ? MaterialTheme.lightScheme().secondaryContainer
+                              ? colorScheme.secondaryContainer
                               : Colors.transparent,
                         ),
                         child: Row(
@@ -233,8 +237,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                               Icon(
                                 Icons.check,
                                 size: 14,
-                                color: MaterialTheme.lightScheme()
-                                    .onSecondaryContainer,
+                                color: colorScheme.onSecondaryContainer,
                               ),
                             if (selectedAmount == amount)
                               SizedBox(
@@ -265,7 +268,7 @@ class _AddFundScreenState extends State<AddFundScreen> {
                   print("Fonds ajoutés");
                 }
               : null,
-          color: MaterialTheme.lightScheme().primary,
+          color: colorScheme.primary,
         ),
       ),
     );

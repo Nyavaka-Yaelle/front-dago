@@ -23,6 +23,9 @@ class FoodCardSimple extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     // Si la largeur de l'écran est inférieure à 375, on applique une largeur de 160
@@ -89,7 +92,7 @@ class FoodCardSimple extends StatelessWidget {
                 child: Text(
                   nomPlat,/// + screenWidth.toString(),
                   style: TextStyle(
-                    color: MaterialTheme.lightScheme().onSurfaceVariant,
+                    color: colorScheme.onSurfaceVariant,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Roboto',
@@ -109,7 +112,7 @@ class FoodCardSimple extends StatelessWidget {
                 child: Text(
                   "${prix.toInt().toString().replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (match) => "${match[1]} ")} Ar",
                   style: TextStyle(
-                    color: MaterialTheme.lightScheme().onSurface,
+                    color: colorScheme.onSurface,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Roboto',

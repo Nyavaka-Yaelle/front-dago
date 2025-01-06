@@ -9,8 +9,9 @@ class MaisonScreen extends StatefulWidget {
 
 class _MaisonScreenState extends State<MaisonScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
   bool isButtonEnabled = false;
   
   @override
@@ -24,26 +25,34 @@ class _MaisonScreenState extends State<MaisonScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     // Modifier la couleur selon la position de défilement
     setState(() {
-      // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+      // appBarColor = colorScheme.surfaceContainerLowest;
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
  
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor, 
       appBar: AppBar(
         // centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
@@ -51,7 +60,7 @@ class _MaisonScreenState extends State<MaisonScreen> {
         ),
         backgroundColor: appBarColor, 
         elevation: 0, 
-        foregroundColor: MaterialTheme.lightScheme().onSurface,        
+        foregroundColor: colorScheme.onSurface,        
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController

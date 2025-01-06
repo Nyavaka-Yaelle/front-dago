@@ -17,16 +17,19 @@ class LogoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        backgroundColor: MaterialTheme.lightScheme().surface,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
         side: BorderSide(
-          color: MaterialTheme.lightScheme().onSurface.withOpacity(0.2), // Couleur de la bordure
+          color: colorScheme.onSurface.withOpacity(0.2), // Couleur de la bordure
           width: 1, // Épaisseur de la bordure
         ),
       ),
@@ -43,14 +46,14 @@ class LogoButton extends StatelessWidget {
                 fontFamily: 'Roboto',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: MaterialTheme.lightScheme().onSurface,
+                color: colorScheme.onSurface,
               ),
             ), // Texte au centre
           ),
           Icon(
             Icons.arrow_forward_ios,
             size: 20,
-            color: MaterialTheme.lightScheme().onSurface,
+            color: colorScheme.onSurface,
           ), // Flèche à droite
         ],
       ),

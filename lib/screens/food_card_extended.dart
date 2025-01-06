@@ -22,11 +22,14 @@ class FoodCardExtended extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Stack(
       children: [
         // Contenu de la carte
             Container(
-              color: MaterialTheme.lightScheme().surfaceContainerLowest,
+              color: customColor.getColor("surfaceContainerLowest"),
               margin: EdgeInsets.all(0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +75,7 @@ class FoodCardExtended extends StatelessWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.white.withOpacity(0.65),
                               borderRadius: BorderRadius.circular(100), // Rond
                               boxShadow: [
                                 BoxShadow(
@@ -108,7 +111,7 @@ class FoodCardExtended extends StatelessWidget {
                                 fontSize: 24,
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w500,
-                                color: MaterialTheme.lightScheme().onSurface,
+                                color: colorScheme.onSurface,
                                 decoration: TextDecoration.none,
                               ),
                               overflow: TextOverflow.ellipsis, // S'assurer que le texte ne déborde pas
@@ -153,7 +156,7 @@ class FoodCardExtended extends StatelessWidget {
                                                   fontFamily: 'Roboto',
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w600,
-                                                  color: MaterialTheme.lightScheme().onSurface,
+                                                  color: colorScheme.onSurface,
                                                   decoration: TextDecoration.none,
                                                 ),
                                                 overflow: TextOverflow.ellipsis, // Si le texte est trop long
@@ -169,7 +172,7 @@ class FoodCardExtended extends StatelessWidget {
                                               child:Icon(
                                                 size: 16,
                                                 Icons.check_circle,
-                                                color: MaterialTheme.lightScheme().primary,
+                                                color: colorScheme.primary,
                                               )
                                             )
                                           )
@@ -188,7 +191,7 @@ class FoodCardExtended extends StatelessWidget {
                                           fontFamily: 'Roboto',
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: MaterialTheme.lightScheme().secondary,
+                                          color: colorScheme.secondary,
                                           decoration: TextDecoration.none,
                                         ),
                                         maxLines: 2, // Limiter la description à deux lignes
@@ -202,7 +205,7 @@ class FoodCardExtended extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 12),
-                        HorizontalLine(color: MaterialTheme.lightScheme().outlineVariant),
+                        HorizontalLine(color: colorScheme.outlineVariant),
                         SizedBox(height: 12),
                         Text(
                           'Description :',
@@ -210,7 +213,7 @@ class FoodCardExtended extends StatelessWidget {
                             fontSize: 14,
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w500,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             decoration: TextDecoration.none,
                           ),
                           textAlign: TextAlign.left,
@@ -222,7 +225,7 @@ class FoodCardExtended extends StatelessWidget {
                             fontSize: 12,
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w400,
-                            color: MaterialTheme.lightScheme().onSurfaceVariant,
+                            color: colorScheme.onSurfaceVariant,
                             letterSpacing: 0.5,
                             height: 1.33, 
                             decoration: TextDecoration.none,
@@ -244,7 +247,7 @@ class FoodCardExtended extends StatelessWidget {
           child: Container(
             height: 160,
             // decoration: BoxDecoration(
-            //   color: MaterialTheme.lightScheme().surfaceContainerLow,
+            //   color: colorScheme.surfaceContainerLow,
             //   borderRadius: BorderRadius.only(
             //     topLeft: Radius.circular(12),
             //     topRight: Radius.circular(12),
@@ -266,7 +269,7 @@ class FoodCardExtended extends StatelessWidget {
                 //     width: 32,
                 //     height: 4,
                 //     decoration: BoxDecoration(
-                //       color: MaterialTheme.lightScheme().outlineVariant,
+                //       color: colorScheme.outlineVariant,
                 //       borderRadius: BorderRadius.circular(3),
                 //     ),
                 //   ),
@@ -285,7 +288,7 @@ class FoodCardExtended extends StatelessWidget {
 
                       CustomButton(
                         label: "Visiter le resto", 
-                        color: MaterialTheme.lightScheme().primary,
+                        color: colorScheme.primary,
                         onPressed: () {
                           print("Naviguer vers l'inscription");
                           // Navigator.push(

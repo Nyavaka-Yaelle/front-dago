@@ -11,12 +11,15 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Padding(
       padding: EdgeInsets.all(12),
       child: Container(
         height: 48, // Hauteur de la barre de recherche
         decoration: BoxDecoration(
-          color: MaterialTheme.lightScheme().surfaceContainerHigh, // Couleur gris clair
+          color: customColor.getColor("surfaceContainerHigh"), // Couleur gris clair
           borderRadius: BorderRadius.circular(100), // Bordure arrondie avec un rayon de 100
         ),
         child: Padding(
@@ -25,7 +28,7 @@ class _SearchBarState extends State<SearchBar> {
             children: [
               Icon(
                 Icons.search, // Icône de loupe
-                color: MaterialTheme.lightScheme().onSurfaceVariant, // Couleur de l'icône
+                color: colorScheme.onSurfaceVariant, // Couleur de l'icône
               ),
               SizedBox(width: 12),
               Expanded(
@@ -33,7 +36,7 @@ class _SearchBarState extends State<SearchBar> {
                   padding: EdgeInsets.only(bottom: 3),
                   child: TextField(
                     controller: _controller,
-                    cursorColor: MaterialTheme.lightScheme().onSurfaceVariant, // Couleur du curseur
+                    cursorColor: colorScheme.onSurfaceVariant, // Couleur du curseur
                     decoration: InputDecoration(
                       hintText: 'Un plat en tête ?',
                       border: InputBorder.none, // Aucun bord autour du champ de texte
@@ -57,7 +60,7 @@ class _SearchBarState extends State<SearchBar> {
                             child: Icon(
                             Icons.close_rounded, // Icône de fermeture
                             size: 18,
-                            color: MaterialTheme.lightScheme().onSurfaceVariant, // Couleur de l'icône
+                            color: colorScheme.onSurfaceVariant, // Couleur de l'icône
                           )),
                         )
                       : SizedBox.shrink(); // Si le champ est vide, ne rien afficher

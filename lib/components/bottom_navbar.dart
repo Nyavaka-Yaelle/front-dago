@@ -27,9 +27,12 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      color: MaterialTheme.lightScheme().surfaceContainer.withOpacity(1),
+      color: customColor.getColor("surfaceContainer").withOpacity(1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

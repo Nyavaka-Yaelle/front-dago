@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './custom_button.dart';
 import '../theme.dart';
 
 class AwaitAddingFund extends StatelessWidget {
@@ -13,9 +12,10 @@ class AwaitAddingFund extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
-
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
     return Scaffold(
-      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+      backgroundColor: customColor.getColor("surfaceContainerLowest"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -39,7 +39,7 @@ class AwaitAddingFund extends StatelessWidget {
                 fontFamily: 'Roboto',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: MaterialTheme.lightScheme().onSurface,
+                color: colorScheme.onSurface,
               ),
             ),
           ),

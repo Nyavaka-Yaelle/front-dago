@@ -21,8 +21,9 @@ class PageInfo extends StatefulWidget {
 
 class _PageInfoState extends State<PageInfo> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
 
   @override
   void initState() {
@@ -35,23 +36,31 @@ class _PageInfoState extends State<PageInfo> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+        ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+        : customColor.getColor("surfaceContainerLowest");
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             Navigator.pop(context);
           },

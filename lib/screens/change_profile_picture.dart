@@ -2,8 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../theme.dart';
-import '../components/delivery_item.dart';
 import '../components/custom_icon_button.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:path_provider/path_provider.dart'; // Pour obtenir un répertoire temporaire
+
 
 class ChangeProfilePicture extends StatefulWidget {
   // final int idService;
@@ -23,10 +26,14 @@ class ChangeProfilePicture extends StatefulWidget {
 
 class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+  late ColorScheme colorScheme;
   // int _selectedIndex = 0;
   String? _photoUrl;
+    File? _image;
+
 
   @override
   void initState() {
@@ -39,12 +46,19 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    colorScheme = Theme.of(context).colorScheme;
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 
@@ -53,20 +67,83 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
       _photoUrl = null;
     });
   }
-  Future<void> _pickImage() async {
+    Future<void> _pickImage() async {
+    // Vérifiez les permissions
+    // if (await Permission.photos.request().isGranted) {
+    // final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
+    try {
+      if (pickedFile != null) {
+        File? croppedFile = await ImageCropper().cropImage(
+          sourcePath: pickedFile.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+            // CropAspectRatioPreset.ratio3x2,
+            // CropAspectRatioPreset.original,
+            // CropAspectRatioPreset.ratio4x3,
+            // CropAspectRatioPreset.ratio16x9,
+          ],
+          androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Rogner l\'image',
+            toolbarColor: customColor.getColor("surfaceContainerLow").withOpacity(0.24),
+            toolbarWidgetColor: colorScheme.onSurface,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true,
+            activeControlsWidgetColor:Color.fromARGB(255, 109, 227, 184),
+            // cropFrameColor: Colors.green, // Couleur de la bordure du cadre de recadrage
+            // cropGridColor: Colors.green.withOpacity(0.5), // Couleur de la grille de recadrage
+          ),
+          iosUiSettings: IOSUiSettings(
+            minimumAspectRatio: 1.0,
+            // activeControlsWidgetColor:colorScheme.primary,
+          ),
+        );
 
-    if (image != null) {
-      setState(() {
-        _photoUrl =
-            image.path; // Met à jour directement le chemin de l'image choisie
-      });
+        if (croppedFile != null) {
+          File? compressedFile = await compressImage(croppedFile);
+          if(compressedFile!=null) setState(() {
+            // _image = File(croppedFile.path);
+            // _photoUrl = croppedFile.path;
+            _image = File(compressedFile.path);
+            _photoUrl = compressedFile.path;
+          });
+        }
+      }
+    } catch (error) {
+      print(error);
+      if (pickedFile != null) {
+        setState(() {
+          _photoUrl = pickedFile.path; // Met à jour directement le chemin de l'image choisie
+        });
+      }
     }
+    // } else {
+    //   // Demander les permissions
+    //   await Permission.photos.request();
+    // }
   }
+  // Fonction pour compresser l'image
+    Future<File?> compressImage(File imageFile) async {
+      final dir = await getTemporaryDirectory();
+      final targetPath = dir.absolute.path + "/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg";
+
+      // Compression de l'image
+      var result = await FlutterImageCompress.compressAndGetFile(
+        imageFile.absolute.path,
+        targetPath,
+        quality: 72, // La qualité de l'image compressée
+        minWidth: 600, // Largeur minimale
+        minHeight: 600, // Hauteur minimale
+      );
+
+      return result;
+    }
 
  @override
 Widget build(BuildContext context) {
+
   return Scaffold(
     resizeToAvoidBottomInset: true,
     backgroundColor: bodyColor,
@@ -76,7 +153,7 @@ Widget build(BuildContext context) {
         icon: Icon(
           Icons.arrow_back,
           size: 24.0,
-          color: MaterialTheme.lightScheme().onSurfaceVariant,
+          color: colorScheme.onSurfaceVariant,
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -84,7 +161,7 @@ Widget build(BuildContext context) {
       ),
       backgroundColor: appBarColor,
       elevation: 0,
-      foregroundColor: MaterialTheme.lightScheme().onSurface,
+      foregroundColor: colorScheme.onSurface,
     ),
     body: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -114,7 +191,7 @@ Widget build(BuildContext context) {
                   fontWeight: FontWeight.w400,
                   height: 1.33,
                   decoration: TextDecoration.none,
-                  color: MaterialTheme.lightScheme().onPrimaryContainer,
+                  color: colorScheme.onPrimaryContainer,
                 ),
               ),
               SizedBox(height: 4.0),
@@ -126,7 +203,7 @@ Widget build(BuildContext context) {
                   fontWeight: FontWeight.w400,
                   height: 1.33,
                   decoration: TextDecoration.none,
-                  color: MaterialTheme.lightScheme().tertiary,
+                  color: colorScheme.tertiary,
                   letterSpacing: 0.1,
                 ),
               ),
@@ -139,6 +216,7 @@ Widget build(BuildContext context) {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
+              color: colorScheme.onSecondaryContainer,
               width: _photoUrl == null ? 10 : 0,
             ),
           ),
@@ -148,7 +226,7 @@ Widget build(BuildContext context) {
             child: _photoUrl == null
                 ? Icon(
                     Icons.person_rounded,
-                    color: MaterialTheme.lightScheme().onSecondaryContainer,
+                    color: colorScheme.onSecondaryContainer,
                     size: 136,
                   )
                 : ClipOval(
@@ -169,7 +247,7 @@ Widget build(BuildContext context) {
               fontFamily: 'Roboto',
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: MaterialTheme.lightScheme().onSurface,
+              color: colorScheme.onSurface,
             ),
           ),
         ),
@@ -185,7 +263,7 @@ Widget build(BuildContext context) {
                 icon: Icons.add,
                 label: "Ajouter une photo",
                 onPressed: _pickImage,
-                color: MaterialTheme.lightScheme().primaryContainer,
+                color: colorScheme.primaryContainer,
               ),
             ),
           ):
@@ -201,7 +279,7 @@ Widget build(BuildContext context) {
                       icon: Icons.delete_outlined,
                       label: "Supprimer",
                       onPressed: _deletePdp,
-                      color: MaterialTheme.lightScheme().primaryContainer,
+                      color: colorScheme.primaryContainer,
                     ),
                   ),
                 ),
@@ -213,7 +291,7 @@ Widget build(BuildContext context) {
                       icon: Icons.edit_outlined,
                       label: "Modifier",
                       onPressed: _pickImage,
-                      color: MaterialTheme.lightScheme().primaryContainer,
+                      color: colorScheme.primaryContainer,
                     ),
                   ),
                 ),

@@ -8,6 +8,7 @@ class ParameterItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: EdgeInsets.only(top:16),
       child:Column(
@@ -17,18 +18,18 @@ class ParameterItems extends StatelessWidget {
         Text(
           "Langue d'affichage", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: MaterialTheme.lightScheme().tertiary),
+          color: colorScheme.tertiary),
         ),
         SizedBox(height: 8),
         Text(
           "Langues", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-          color: MaterialTheme.lightScheme().onTertiaryContainer, fontWeight: FontWeight.w500),
+          color: colorScheme.onTertiaryContainer, fontWeight: FontWeight.w500),
         ),
         Text(
           "Français (France)", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: MaterialTheme.lightScheme().secondary, fontWeight: FontWeight.normal),
+          color: colorScheme.secondary, fontWeight: FontWeight.normal),
         ),
         SizedBox(height: 8),
         Divider(),
@@ -36,7 +37,7 @@ class ParameterItems extends StatelessWidget {
         Text(
           "Apparence", // Exemple : "2 menus"
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: MaterialTheme.lightScheme().tertiary),
+          color: colorScheme.tertiary),
         ),
         SizedBox(height: 4),
         Row(children: [
@@ -44,14 +45,14 @@ class ParameterItems extends StatelessWidget {
             Text(
               "Mode sombre", // Exemple : "2 menus"
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: MaterialTheme.lightScheme().onTertiaryContainer, fontWeight: FontWeight.normal),
+              color: colorScheme.onTertiaryContainer, fontWeight: FontWeight.normal),
             )
           ),
           Container(
               height: 28, // Spécifiez une hauteur suffisante pour le divider
               width: 24, // Spécifiez une hauteur suffisante pour le divider
               child: VerticalDivider(
-                color: MaterialTheme.lightScheme().outlineVariant,
+                color: colorScheme.outlineVariant,
                 thickness: 1, // Épaisseur du divider
                 width: 16, // Espace entre les éléments
               ),

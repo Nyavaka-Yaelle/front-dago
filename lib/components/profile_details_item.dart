@@ -21,6 +21,9 @@ class ProfileDetailsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -29,7 +32,7 @@ class ProfileDetailsItem extends StatelessWidget {
           Icon(
             icon,
             size: 22,
-            color: MaterialTheme.lightScheme().onTertiaryContainer,
+            color: colorScheme.onTertiaryContainer,
           ),
           const SizedBox(width: 12), // Espacement entre l'icône et la colonne.
           Expanded( // Utilisation de Expanded pour occuper l'espace restant.
@@ -44,7 +47,7 @@ class ProfileDetailsItem extends StatelessWidget {
                       children: [
                         Text(
                           title1.toUpperCase(),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith( color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith( color: colorScheme.tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
                           overflow: TextOverflow.ellipsis, // Coupe le texte avec "..." si nécessaire.
                           maxLines: 1, // Limite le texte à une seule ligne.
                         ),
@@ -55,7 +58,7 @@ class ProfileDetailsItem extends StatelessWidget {
                             fontFamily: 'Roboto',
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
-                            color: MaterialTheme.lightScheme().onTertiaryContainer,
+                            color: colorScheme.onTertiaryContainer,
                           ),
                           overflow: TextOverflow.ellipsis, // Coupe le texte avec "..." si nécessaire.
                           maxLines: 1, // Limite le texte à une seule ligne.
@@ -67,7 +70,7 @@ class ProfileDetailsItem extends StatelessWidget {
                       children: [
                         Text(
                           title2.toUpperCase(),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith( color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith( color: colorScheme.tertiary, fontWeight: FontWeight.w400, letterSpacing: 0.1),
 
                           overflow: TextOverflow.ellipsis, // Coupe le texte avec "..." si nécessaire.
                           maxLines: 1, // Limite le texte à une seule ligne.11
@@ -79,7 +82,7 @@ class ProfileDetailsItem extends StatelessWidget {
                             fontFamily: 'Roboto',
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
-                            color: MaterialTheme.lightScheme().onTertiaryContainer,
+                            color: colorScheme.onTertiaryContainer,
                           ),
                           overflow: TextOverflow.ellipsis, // Coupe le texte avec "..." si nécessaire.
                           maxLines: 1, // Limite le texte à une seule ligne.
@@ -93,7 +96,7 @@ class ProfileDetailsItem extends StatelessWidget {
           Icon(
             Icons.arrow_forward_ios, // Flèche à droite.
             size: 16,
-            color: MaterialTheme.lightScheme().onTertiaryContainer,
+            color: colorScheme.onTertiaryContainer,
           ),
         ],
       ),

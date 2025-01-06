@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:project1/components/custom_icon_button.dart';
 import 'package:project1/components/text_icon_button.dart';
-import '../components/delivery_item.dart';
 import '../components/profile_detail_item.dart';
 import '../components/profile_details_item.dart';
 import '../components/profile_picture_widget.dart';
@@ -32,9 +30,9 @@ class AccountProfile extends StatefulWidget {
 
 class _AccountProfileState extends State<AccountProfile> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-
+ late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
   @override
   void initState() {
     super.initState();
@@ -46,12 +44,18 @@ class _AccountProfileState extends State<AccountProfile> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 
@@ -61,6 +65,8 @@ String formatIt(String input) {
 
  @override
 Widget build(BuildContext context) {
+  final colorScheme = Theme.of(context).colorScheme;
+
   return Scaffold(
     resizeToAvoidBottomInset: true,
     backgroundColor: bodyColor,
@@ -70,7 +76,7 @@ Widget build(BuildContext context) {
         icon: Icon(
           Icons.arrow_back,
           size: 24.0,
-          color: MaterialTheme.lightScheme().onSurfaceVariant,
+          color: colorScheme.onSurfaceVariant,
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -78,13 +84,13 @@ Widget build(BuildContext context) {
       ),
       backgroundColor: appBarColor,
       elevation: 0,
-      foregroundColor: MaterialTheme.lightScheme().onSurface,
+      foregroundColor: colorScheme.onSurface,
       title: Text(
         'Compte',
         style: TextStyle(
           fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
           fontSize: 21.0, // Exemple de taille de police (fontSize)
-          color: MaterialTheme.lightScheme().onSurface
+          color: colorScheme.onSurface
         ),
       )
     ),
@@ -127,13 +133,13 @@ Widget build(BuildContext context) {
             Text(
               "Adresses", // Exemple : "2 menus"
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: MaterialTheme.lightScheme().onTertiaryContainer, fontWeight: FontWeight.normal),
+              color: colorScheme.onTertiaryContainer, fontWeight: FontWeight.normal),
             ),
             SizedBox(height: 4.0),
             Text(
               "Ajouter des adresses ou des lieux pour faciliter vos déplacements et vos livraisons.", // Exemple : "2 menus"
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: MaterialTheme.lightScheme().tertiary, fontWeight: FontWeight.normal),
+              color: colorScheme.tertiary, fontWeight: FontWeight.normal),
             ),
             SizedBox(height: 16.0),
             Container(
@@ -141,7 +147,7 @@ Widget build(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomIconButton(outline: true, label: "Ajouter des adresses", onPressed: (){}, color: MaterialTheme.lightScheme().primary, icon: Icons.bookmark_rounded, beforeIcon: true)
+                  CustomIconButton(outline: true, label: "Ajouter des adresses", onPressed: (){}, color: colorScheme.primary, icon: Icons.bookmark_rounded, beforeIcon: true)
                 ]
               )
             ),
@@ -151,7 +157,7 @@ Widget build(BuildContext context) {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextIconButton(label: "Déconnexion", color: MaterialTheme.lightScheme().error, icon: Icons.logout_outlined)
+                TextIconButton(label: "Déconnexion", color: colorScheme.error, icon: Icons.logout_outlined)
               ]
             ),
             SizedBox(height: 24.0),     

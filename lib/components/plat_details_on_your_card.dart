@@ -16,6 +16,9 @@ class PlatDetailOnYourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       padding: EdgeInsets.all(0),
@@ -49,7 +52,7 @@ class PlatDetailOnYourCard extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: MaterialTheme.lightScheme().onSurfaceVariant,
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ),
                 SizedBox(height: 8),
@@ -59,7 +62,7 @@ class PlatDetailOnYourCard extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: MaterialTheme.lightScheme().onSurface,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -74,7 +77,7 @@ class PlatDetailOnYourCard extends StatelessWidget {
                 child:
                 Icon(
                   Icons.close_outlined,
-                  color: MaterialTheme.lightScheme().onSurfaceVariant,
+                  color: colorScheme.onSurfaceVariant,
                   size: 20,
                 )
               ),

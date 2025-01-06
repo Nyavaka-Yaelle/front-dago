@@ -13,6 +13,9 @@ class AddressOnYourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal:12.0, vertical: 0),
       decoration: BoxDecoration(
@@ -38,7 +41,7 @@ class AddressOnYourCard extends StatelessWidget {
                   Icon(
                     Icons.location_on,
                     size: 24,
-                    color: MaterialTheme.lightScheme().error,
+                    color: colorScheme.error,
                   ),
                   const SizedBox(width: 8.0),
                   Column(
@@ -49,7 +52,7 @@ class AddressOnYourCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12.0,
                           fontFamily: 'Roboto',
-                          color: MaterialTheme.lightScheme().onSurfaceVariant,
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                       Text(
@@ -58,7 +61,7 @@ class AddressOnYourCard extends StatelessWidget {
                           fontSize: 16.0,
                           fontFamily: 'Roboto',
                           height: 1.33,
-                          color: MaterialTheme.lightScheme().onSurface,
+                          color: colorScheme.onSurface,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -70,7 +73,7 @@ class AddressOnYourCard extends StatelessWidget {
               Icon(
                 Icons.edit_location_alt_outlined,
                 size: 20,
-                color: MaterialTheme.lightScheme().onSurfaceVariant,
+                color: colorScheme.onSurfaceVariant,
               ),
             ],
           ),
@@ -83,7 +86,7 @@ class AddressOnYourCard extends StatelessWidget {
               children: [
                 Icon(
                   Icons.description_outlined,
-                  color: MaterialTheme.lightScheme().secondary,
+                  color: colorScheme.secondary,
                   size: 16
                 ),
                 const SizedBox(width: 4.0),
@@ -92,7 +95,7 @@ class AddressOnYourCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 11.0,
                     fontFamily: 'Roboto',
-                    color: MaterialTheme.lightScheme().secondary,
+                    color: colorScheme.secondary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../theme.dart';
+import '../theme_notifier.dart';
 
 class CustomToggleSwitch extends StatefulWidget {
   @override
@@ -7,29 +9,47 @@ class CustomToggleSwitch extends StatefulWidget {
 }
 
 class _CustomToggleSwitchState extends State<CustomToggleSwitch> {
-  bool isToggled = false;
-  double _size = 16;
-  Color _color = MaterialTheme.lightScheme().onSurface.withOpacity(0.48);
+  late bool isToggled;
+  late double _size;
+  late Color _color; // = MaterialTheme.lightScheme().onSurface.withOpacity(0.48);
 
-  void _animateCircle() {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Initialiser isToggled en fonction du thème actuel
+    // _color = Color(4290693573); // Initialisation temporaire
+    isToggled = Theme.of(context).brightness == Brightness.dark;
     _size = isToggled ? 20 : 16; // Taille dynamique
     _color = isToggled
-        ? MaterialTheme.lightScheme().surfaceContainerLowest
-        : MaterialTheme.lightScheme().onSurface.withOpacity(0.48);
+        ? ColorManager(context).getColor("surfaceContainerLowest")
+        : Theme.of(context).colorScheme.onSurface.withOpacity(0.48);
+    // _color = Theme.of(context).colorScheme.onSurface.withOpacity(0.48);
+  }
+
+  void _animateCircle(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final customColor = ColorManager(context);
+    // final customColorScheme = Theme.of(context).colorScheme;
+    _size = isToggled ? 20 : 16; // Taille dynamique
 
     setState(() {
       _size = isToggled ? 28 : 32; // Taille dynamique
       _color = isToggled
-          ? MaterialTheme.lightScheme().primaryContainer
-          : MaterialTheme.lightScheme().onSurfaceVariant.withOpacity(0.8);
+          ? colorScheme.primaryContainer
+          : colorScheme.onSurfaceVariant.withOpacity(0.8);
     });
 
     Future.delayed(const Duration(milliseconds: 150), () {
       setState(() {
         _size = isToggled ? 21 : 16; // Taille dynamique
         _color = isToggled
-            ? MaterialTheme.lightScheme().surfaceContainerLowest
-            : MaterialTheme.lightScheme().onSurface.withOpacity(0.48);
+            ? customColor.getColor("surfaceContainerLowest")
+            : colorScheme.onSurface; //.withOpacity(0.64);
       });
     });
   }
@@ -42,7 +62,8 @@ class _CustomToggleSwitchState extends State<CustomToggleSwitch> {
         setState(() {
           isToggled = !isToggled;
         });
-        _animateCircle();
+        _animateCircle(context);
+        Provider.of<ThemeNotifier>(context, listen: false).toggleTheme();
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 100),
@@ -53,12 +74,19 @@ class _CustomToggleSwitchState extends State<CustomToggleSwitch> {
           borderRadius: BorderRadius.circular(100),
           border: Border.all(
             color: isToggled
-                ? MaterialTheme.lightScheme().primary
-                : MaterialTheme.lightScheme().onSurface.withOpacity(0.48),
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context)
+                    .colorScheme
+                    .surfaceVariant
+                    .withOpacity(0.48),
+            // ? MaterialTheme.lightScheme().primary
+            // : MaterialTheme.lightScheme().onSurface.withOpacity(0.48),
           ),
           color: isToggled
-              ? MaterialTheme.lightScheme().primary
-              : MaterialTheme.lightScheme().surfaceVariant.withOpacity(0.48),
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.48),
+          // ? MaterialTheme.lightScheme().primary
+          // : MaterialTheme.lightScheme().surfaceVariant.withOpacity(0.48),
         ),
         child: Stack(children: [
           AnimatedAlign(

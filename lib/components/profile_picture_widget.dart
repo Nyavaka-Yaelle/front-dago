@@ -18,7 +18,15 @@ class ProfilePictureWidget extends StatefulWidget {
 class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
   String? _photoUrl;
   File? _image;
+  late ColorManager customColor;
+  late ColorScheme colorScheme;
 
+ @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    colorScheme = Theme.of(context).colorScheme;
+    customColor = ColorManager(context);
+  }
   // Demander la permission à l'exécution
   Future<void> requestPermissions() async {
     // Demander la permission de la caméra
@@ -65,8 +73,8 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
           ],
           androidUiSettings: AndroidUiSettings(
             toolbarTitle: 'Rogner l\'image',
-            toolbarColor: MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24),
-            toolbarWidgetColor: MaterialTheme.lightScheme().onSurface,
+            toolbarColor: customColor.getColor("surfaceContainerLow").withOpacity(0.24),
+            toolbarWidgetColor: colorScheme.onSurface,
             initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: true,
             activeControlsWidgetColor:Color.fromARGB(255, 109, 227, 184),
@@ -75,7 +83,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
           ),
           iosUiSettings: IOSUiSettings(
             minimumAspectRatio: 1.0,
-            // activeControlsWidgetColor:MaterialTheme.lightScheme().primary,
+            // activeControlsWidgetColor:colorScheme.primary,
           ),
         );
 
@@ -91,6 +99,11 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
       }
     } catch (error) {
       print(error);
+      if (pickedFile != null) {
+        setState(() {
+          _photoUrl = pickedFile.path; // Met à jour directement le chemin de l'image choisie
+        });
+      }
     }
     // } else {
     //   // Demander les permissions
@@ -116,6 +129,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       alignment: Alignment.center,
       child: Stack(
@@ -127,7 +141,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
               border: Border.all(
                 width: _photoUrl == null ? 10 : 0,
                 color: _photoUrl == null
-                    ? MaterialTheme.lightScheme().onSecondaryContainer
+                    ? colorScheme.onSecondaryContainer
                     : Colors.transparent,
               ),
             ),
@@ -142,7 +156,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
                         child: Icon(
                           Icons.person_rounded,
                           color:
-                              MaterialTheme.lightScheme().onSecondaryContainer,
+                              colorScheme.onSecondaryContainer,
                           size: 136,
                         ),
                       )
@@ -180,8 +194,8 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
                 child: CircleAvatar(
                   radius: 15,
                   backgroundColor: _photoUrl == null
-                      // ? MaterialTheme.lightScheme().secondaryContainer
-                      ? MaterialTheme.lightScheme()
+                      // ? colorScheme.secondaryContainer
+                      ? colorScheme
                           .secondaryContainer
                           .withOpacity(0)
                       : Colors.transparent,
@@ -189,9 +203,9 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
                     Icons.camera_alt,
                     size: 20,
                     color: _photoUrl == null
-                        // ? MaterialTheme.lightScheme().onSecondaryContainer
-                        ? MaterialTheme.lightScheme().surfaceContainerLowest
-                        : MaterialTheme.lightScheme().surfaceContainerLowest,
+                        // ? colorScheme.onSecondaryContainer
+                        ? customColor.getColor("surfaceContainerLowest")
+                        : customColor.getColor("surfaceContainerLowest"),
                   ),
                 ),
               ),

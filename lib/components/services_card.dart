@@ -15,6 +15,9 @@ class ServicesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     double height = 120;
     if (state == 0 && MediaQuery.of(context).size.width < 500) height = 120;
     if (state != 0 && MediaQuery.of(context).size.width < 500) height = 100;
@@ -23,7 +26,7 @@ class ServicesCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(12, 48, 12, 8),
       child: Container(
-        // color: MaterialTheme.lightScheme().surfaceContainerLow,
+        // color: colorScheme.surfaceContainerLow,
         width: MediaQuery.of(context).size.width, // Largeur du container
         height: height,
         // state == 0
@@ -36,7 +39,7 @@ class ServicesCard extends StatelessWidget {
           // color: Theme.of(context).colorScheme.surfaceVariant,
           border: Border.all(
             width: 0.5,
-            color: MaterialTheme.lightScheme()
+            color: colorScheme
                 .outlineVariant, // Définit la couleur de la bordure
           ),
           borderRadius:
@@ -89,7 +92,7 @@ class ServicesCard extends StatelessWidget {
               //         // color: Theme.of(context).colorScheme.surfaceVariant,
               //         border: Border.all(
               //           width: 1.0,
-              //           color: MaterialTheme.lightScheme().onSurfaceVariant, // Définit la couleur de la bordure
+              //           color: colorScheme.onSurfaceVariant, // Définit la couleur de la bordure
               //         ),
               //         borderRadius: const BorderRadius.all(Radius.circular(16)), // Bordure arrondie
               //       ),
@@ -111,7 +114,7 @@ class ServicesCard extends StatelessWidget {
               //           fontFamily: 'Roboto',
               //           fontSize: 12,
               //           fontWeight: FontWeight.w500,
-              //           color: MaterialTheme.lightScheme().onSurface,
+              //           color: colorScheme.onSurface,
               //         ),
               //       ),
               //     ),

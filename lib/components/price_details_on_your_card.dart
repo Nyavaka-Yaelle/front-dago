@@ -19,6 +19,9 @@ class PriceDetailsOnYourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
@@ -36,24 +39,24 @@ class PriceDetailsOnYourCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Sous-total
-          _buildPriceRow('Sous-total', sousTotal),
+          _buildPriceRow(context, 'Sous-total', sousTotal),
           // const Divider(),
 
           // Emballage
-          _buildPriceRow('Emballage', emballage),
+          _buildPriceRow(context, 'Emballage', emballage),
           // const Divider(),
 
           // Frais de livraison
-          _buildPriceRow('Frais de livraison', fraisLivraison),
+          _buildPriceRow(context, 'Frais de livraison', fraisLivraison),
           const Divider(),
 
           // Total
-          _buildPriceRow('TOTAL', total, isTotal: true),
+          _buildPriceRow(context, 'TOTAL', total, isTotal: true),
 
           SizedBox(height: 16),
           CustomButton(
               label: "Passer la commande", 
-              color: MaterialTheme.lightScheme().primary,
+              color: colorScheme.primary,
               onPressed: () {
                 print("Atendre validation");
                 Navigator.push(
@@ -68,7 +71,10 @@ class PriceDetailsOnYourCard extends StatelessWidget {
   }
 
   // Widget pour construire une ligne de prix
-  Widget _buildPriceRow(String label, double value, {bool isTotal = false}) {
+  Widget _buildPriceRow(BuildContext context, String label, double value, {bool isTotal = false}) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -80,7 +86,7 @@ class PriceDetailsOnYourCard extends StatelessWidget {
               fontFamily: 'Roboto',
               fontSize: isTotal ? 16: 12.0,
               fontWeight: isTotal ? FontWeight.w600 : FontWeight.w400,
-              color: isTotal ?Colors.black: MaterialTheme.lightScheme().secondary.withOpacity(0.9) ,
+              color: isTotal ?Colors.black: colorScheme.secondary.withOpacity(0.9) ,
 
             ),
           ),
@@ -91,7 +97,7 @@ class PriceDetailsOnYourCard extends StatelessWidget {
               fontFamily: 'Roboto',
               fontSize: 14.0,
               fontWeight: isTotal ? FontWeight.w600 : FontWeight.w400,
-              color: isTotal ?Colors.black: MaterialTheme.lightScheme().onSurface,
+              color: isTotal ?Colors.black: colorScheme.onSurface,
             ),
           ),
         ],

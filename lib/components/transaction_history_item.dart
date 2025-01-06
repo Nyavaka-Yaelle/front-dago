@@ -17,6 +17,9 @@ class TransactionHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     double screenwidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       // onTap: onTap,
@@ -51,8 +54,8 @@ class TransactionHistoryItem extends StatelessWidget {
                           Icons.account_balance_wallet_outlined, // Exemple d'icône
                           size: 32.0,
                           color: transactionIn? 
-                            MaterialTheme.lightScheme().secondary:
-                            MaterialTheme.lightScheme().error,
+                            colorScheme.secondary:
+                            colorScheme.error,
                         ),
                       ),
                       SizedBox(width: 4),
@@ -66,8 +69,8 @@ class TransactionHistoryItem extends StatelessWidget {
                               fontSize: 16.0,
                               fontWeight: FontWeight.w400,
                               color: transactionIn? 
-                                MaterialTheme.lightScheme().onSurface:
-                                MaterialTheme.lightScheme().onErrorContainer,
+                                colorScheme.onSurface:
+                                colorScheme.onErrorContainer,
                               height: 1.5
                             )
                           ),
@@ -78,8 +81,8 @@ class TransactionHistoryItem extends StatelessWidget {
                               fontSize: 12.0,
                               fontWeight: FontWeight.w400,
                               color: transactionIn? 
-                                MaterialTheme.lightScheme().tertiary:
-                                MaterialTheme.lightScheme().onErrorContainer,
+                                colorScheme.tertiary:
+                                colorScheme.onErrorContainer,
                               letterSpacing: 0.4,
                             ),
                           ),
@@ -97,7 +100,7 @@ class TransactionHistoryItem extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_outward_rounded, // Icône flèche sortante
                       size: 24.0,
-                      color: transactionIn? MaterialTheme.lightScheme().primary: MaterialTheme.lightScheme().error,
+                      color: transactionIn? colorScheme.primary: colorScheme.error,
                     ),
                   )
                 )

@@ -24,6 +24,9 @@ class CustomIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     if (outline) {
       // Utilisation d'OutlinedButton pour un fond transparent et un contour
       return OutlinedButton(
@@ -32,10 +35,9 @@ class CustomIconButton extends StatelessWidget {
             fixedSize: Size(double.infinity, 40),
             side: BorderSide(
               color: isDisabled
-                  ? MaterialTheme.lightScheme()
-                      .onPrimaryContainer
+                  ? colorScheme.onPrimaryContainer
                       .withOpacity(0.5)
-                  : MaterialTheme.lightScheme().outline, // Couleur du contour
+                  : colorScheme.outline, // Couleur du contour
               width: 1.0, // Épaisseur du contour
             ),
             shape: RoundedRectangleBorder(
@@ -57,7 +59,7 @@ class CustomIconButton extends StatelessWidget {
                 label,
                 style: TextStyle(
                   color: isDisabled
-                      ? MaterialTheme.lightScheme()
+                      ? colorScheme
                           .onPrimaryContainer
                           .withOpacity(0.5)
                       : color, // Couleur du texte
@@ -78,7 +80,7 @@ class CustomIconButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: isDisabled
-                ? MaterialTheme.lightScheme()
+                ? colorScheme
                     .onPrimaryContainer
                     .withOpacity(0.12)
                 : color.withOpacity(0.75), // Couleur du fond
@@ -95,17 +97,17 @@ class CustomIconButton extends StatelessWidget {
             if(beforeIcon) Icon(
               // Icons.arrow_right_alt_rounded,
               icon,
-              color: MaterialTheme.lightScheme().onPrimaryContainer,
+              color: colorScheme.onPrimaryContainer,
               size: 20.0,
             ),
             Text(
               label,
               style: TextStyle(
                 color: isDisabled
-                    ? MaterialTheme.lightScheme()
+                    ? colorScheme
                         .onPrimaryContainer
                         .withOpacity(0.5)
-                    : MaterialTheme.lightScheme()
+                    : colorScheme
                         .onPrimaryContainer, // Couleur du texte
                 fontSize: 14,
               ),
@@ -113,7 +115,7 @@ class CustomIconButton extends StatelessWidget {
             if(!beforeIcon) Icon(
               // Icons.arrow_right_alt_rounded,
               icon,
-              color: MaterialTheme.lightScheme().onPrimaryContainer,
+              color: colorScheme.onPrimaryContainer,
               size: 20.0,
             ),
           ])

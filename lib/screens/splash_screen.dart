@@ -44,8 +44,11 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Scaffold(
-      backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest, 
+      backgroundColor: customColor.getColor("surfaceContainerLowest"), 
       body: 
       Column(
         mainAxisAlignment: MainAxisAlignment.center,

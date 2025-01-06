@@ -3,7 +3,6 @@ import '../components/profile_item.dart';
 import '../theme.dart';
 import '../components/bottom_navbar.dart';  // Ajoutez le chemin vers le BottomNavbar
 import '../components/profile_picture_widget.dart';  // Ajoutez le chemin vers le BottomNavbar
-import '../components/delivery_item.dart';  // Ajoutez le chemin vers le BottomNavbar
 
 class ProfileScreen extends StatefulWidget {
   // final int idService;
@@ -24,9 +23,9 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  // int _selectedIndex = 0; 
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;  // int _selectedIndex = 0; 
 
   @override
   void initState() {
@@ -39,15 +38,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
-
+  
   // void _handleTabChange(int index) {
   //   setState(() {
   //     _selectedIndex = index;
@@ -56,13 +61,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor,
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
@@ -75,10 +82,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(
             fontFamily: 'Roboto', // Exemple de font family, vous pouvez mettre celui que vous préférez
             fontSize: 21.0, // Exemple de taille de police (fontSize)
-            color: MaterialTheme.lightScheme().onSurface
+            color: colorScheme.onSurface
           ), // Couleur du texte (foregroundColor)
         ),
-        foregroundColor: MaterialTheme.lightScheme().onSurface,        
+        foregroundColor: colorScheme.onSurface,        
       ),
       body: Stack(
         children: [
@@ -100,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontFamily: 'Roboto',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: MaterialTheme.lightScheme().onSurface,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                       SizedBox(height: 2.0), 
@@ -110,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontFamily: 'Roboto',
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
-                          color: MaterialTheme.lightScheme().secondary,
+                          color: colorScheme.secondary,
                           letterSpacing: 0.1
                         ),
                       ),

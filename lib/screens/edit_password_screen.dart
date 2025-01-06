@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project1/components/custom_button.dart';
-import 'package:project1/components/text_icon_button.dart';
+import '../components/custom_button.dart';
+import '../components/text_icon_button.dart';
 import '../components/profile_detail_item.dart';
 import '../components/custom_input.dart';
 import '../theme.dart';
@@ -16,8 +16,10 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+  
   bool isButtonEnabled = false;
   int state = 0;
   String formatIt(String input) {
@@ -61,19 +63,26 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     // Modifier la couleur selon la position de défilement
     setState(() {
-      // appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+      // appBarColor = colorScheme.surfaceContainerLowest;
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+        ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+        : customColor.getColor("surfaceContainerLowest");
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor,
@@ -83,7 +92,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
           icon: Icon(
             Icons.arrow_back,
             size: 24.0,
-            color: MaterialTheme.lightScheme().onSurfaceVariant,
+            color: colorScheme.onSurfaceVariant,
           ), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
@@ -92,7 +101,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
         ),
         backgroundColor: appBarColor,
         elevation: 0,
-        foregroundColor: MaterialTheme.lightScheme().onSurface,
+        foregroundColor: colorScheme.onSurface,
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // Ajout du ScrollController
@@ -107,20 +116,20 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(color: MaterialTheme.lightScheme().onSurface),
+                    ?.copyWith(color: colorScheme.onSurface),
               ),
               SizedBox(height: 24),
               Text(
                 getTitle(),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: MaterialTheme.lightScheme().onPrimaryContainer,
+                    color: colorScheme.onPrimaryContainer,
                     fontWeight: FontWeight.w400),
               ),
               SizedBox(height: 8),
               Text(
                 getSubtitle(),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: MaterialTheme.lightScheme().tertiary,
+                    color: colorScheme.tertiary,
                     fontWeight: FontWeight.normal),
               ),
               SizedBox(height: 24),
@@ -154,7 +163,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                             alignment: Alignment.centerLeft,
                             child: Icon(
                               Icons.lock_outlined,
-                              color: MaterialTheme.lightScheme().onSurface,
+                              color: colorScheme.onSurface,
                               size: 24.0,
                             ),
                           ),
@@ -202,13 +211,13 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                   if (state < 3)
                     TextIconButton(
                         label: "Annuler",
-                        color: MaterialTheme.lightScheme().primary),
+                        color: colorScheme.primary),
                   SizedBox(width: 24),
                   CustomButton(
                       outline: state == 3,
                       label: getLabelNext(),
                       onPressed: () => incrementState(),
-                      color: MaterialTheme.lightScheme().primary)
+                      color: colorScheme.primary)
                 ],
               )
             ],

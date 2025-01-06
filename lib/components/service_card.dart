@@ -19,6 +19,9 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     if (MediaQuery.of(context).size.width <= 500) {
       return GestureDetector(
           onTap: () {
@@ -42,7 +45,7 @@ class ServiceCard extends StatelessWidget {
                     // color: Theme.of(context).colorScheme.surfaceVariant,
                     border: Border.all(
                       width: 0.5,
-                      color: MaterialTheme.lightScheme()
+                      color: colorScheme
                           .onSurfaceVariant, // Définit la couleur de la bordure
                     ),
                     borderRadius: const BorderRadius.all(
@@ -66,7 +69,7 @@ class ServiceCard extends StatelessWidget {
                       fontFamily: 'Roboto',
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: MaterialTheme.lightScheme().onSurface,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -89,7 +92,7 @@ class ServiceCard extends StatelessWidget {
                 // color: Theme.of(context).colorScheme.surfaceVariant,
                 border: Border.all(
                   width: 0.5,
-                  color: MaterialTheme.lightScheme()
+                  color: colorScheme
                       .onSurfaceVariant, // Définit la couleur de la bordure
                 ),
                 borderRadius: const BorderRadius.all(
@@ -116,7 +119,7 @@ class ServiceCard extends StatelessWidget {
                       fontFamily: 'Roboto',
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: MaterialTheme.lightScheme().onSurface,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 )]

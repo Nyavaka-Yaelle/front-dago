@@ -20,42 +20,45 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
     // TransactionHistoryItem( amount: 20000, label: "Rider Services", transactionIn: false),
     // TransactionHistoryItem( amount: 20000, label: "Rider Services", transactionIn: false),
   ];
-  // Color mainColor = MaterialTheme.lightScheme().surface;
+  // Color mainColor = colorScheme.surface;
   bool showPaymentOption = false;
 
-  Color getMainColor() {
+  Color getMainColor(ColorScheme colorScheme) {
     return showPaymentOption
-        ? MaterialTheme.lightScheme().scrim.withOpacity(0.32)
-        : MaterialTheme.lightScheme().surface;
+        ? colorScheme.scrim.withOpacity(0.32)
+        : colorScheme.surface;
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     double screenwidth = MediaQuery.of(context).size.width;
     double paddingRight = screenwidth >= 350 ? screenwidth / 2 - 154 : 24;
     double paddingTop = screenwidth < 300 ? 46 : 36;
     double heightMtn = screenwidth < 300 ? 24 : 28;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: MaterialTheme.lightScheme().surface,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             size: 24.0,
-            color: MaterialTheme.lightScheme().onSurfaceVariant,
+            color: colorScheme.onSurfaceVariant,
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: getMainColor(),
+        backgroundColor: getMainColor(colorScheme),
         elevation: 0,
         title: Text(
           'Wallet',
           style: TextStyle(
             fontFamily: 'Roboto',
             fontSize: 21.0,
-            color: MaterialTheme.lightScheme().onSurface,
+            color: colorScheme.onSurface,
           ),
         ),
         actions: [
@@ -63,7 +66,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
             icon: Icon(
               Icons.account_circle_rounded,
               size: 24.0,
-              color: MaterialTheme.lightScheme().onSurfaceVariant,
+              color: colorScheme.onSurfaceVariant,
             ),
             onPressed: () {},
           ),
@@ -73,7 +76,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
         children: [
           // Filtre semi-transparent
           Container(
-            color: getMainColor(), // Filtre noir 20% d'opacité
+            color: getMainColor(colorScheme), // Filtre noir 20% d'opacité
           ),
           SingleChildScrollView(
             controller: _scrollController,
@@ -84,7 +87,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                 SizedBox(height: 0.0),
                 // Carte Wallet
                 Card(
-                  // color: MaterialTheme.lightScheme().surface,
+                  // color: colorScheme.surface,
                   color: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -117,7 +120,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                                     fontSize: 22.0,
                                     fontWeight: FontWeight.w400,
                                     color:
-                                        MaterialTheme.lightScheme().onPrimary,
+                                        colorScheme.onPrimary,
                                   ),
                                 ),
                               )),
@@ -128,7 +131,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                                 fontFamily: 'Roboto',
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w400,
-                                color: MaterialTheme.lightScheme()
+                                color: colorScheme
                                     .onPrimary
                                     .withOpacity(0.8),
                                 letterSpacing: 0.5,
@@ -156,18 +159,16 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: showPaymentOption
-                              ? MaterialTheme.lightScheme()
-                                  .tertiaryFixed
+                              ? customColor.getColor("tertiaryFixed")
                                   .withOpacity(0.16)
-                              : MaterialTheme.lightScheme().tertiaryFixed,
+                              : customColor.getColor("tertiaryFixed"),
                         ),
                         child: Icon(
                           Icons.add,
                           color: showPaymentOption
-                              ? MaterialTheme.lightScheme()
-                                  .onTertiaryFixed
+                              ? customColor.getColor("onTertiaryFixed")
                                   .withOpacity(0.48)
-                              : MaterialTheme.lightScheme().onTertiaryFixed,
+                              : customColor.getColor("onTertiaryFixed"),
                           size: 24.0,
                         ),
                       ),
@@ -181,10 +182,10 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                         fontSize: 13.5,
                         fontWeight: FontWeight.w500,
                         color: showPaymentOption
-                            ? MaterialTheme.lightScheme()
+                            ? colorScheme
                                 .tertiary
                                 .withOpacity(0.48)
-                            : MaterialTheme.lightScheme().tertiary,
+                            : colorScheme.tertiary,
                       ),
                     ),
                   ],
@@ -206,11 +207,9 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                               fontSize: 15.5,
                               fontWeight: FontWeight.w500,
                               color: showPaymentOption
-                                  ? MaterialTheme.lightScheme()
-                                      .onSecondaryFixed
+                                  ? customColor.getColor("onSecondaryFixed")
                                       .withOpacity(0.48)
-                                  : MaterialTheme.lightScheme()
-                                      .onSecondaryFixed,
+                                  : customColor.getColor("onSecondaryFixed")
                             ),
                             textAlign: TextAlign.left,
                           )),
@@ -220,14 +219,14 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                           width: double.infinity,
                           // height: transactions.length == 0? 136 : 0.0,
                           decoration: BoxDecoration(
-                            // color: MaterialTheme.lightScheme().surface,
+                            // color: colorScheme.surface,
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: showPaymentOption
-                                  ? MaterialTheme.lightScheme()
+                                  ? colorScheme
                                       .outlineVariant
                                       .withOpacity(0.24)
-                                  : MaterialTheme.lightScheme().outlineVariant,
+                                  : colorScheme.outlineVariant,
                             ),
                           ),
                           child: transactions.length == 0
@@ -241,11 +240,9 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                                       fontSize: 13.5,
                                       letterSpacing: 0.24,
                                       color: showPaymentOption
-                                          ? MaterialTheme.lightScheme()
-                                              .onSecondaryFixedVariant
+                                          ? customColor.getColor("onSecondaryFixedVariant")
                                               .withOpacity(0.48)
-                                          : MaterialTheme.lightScheme()
-                                              .onSecondaryFixedVariant,
+                                          : customColor.getColor("onSecondaryFixedVariant")
                                     ),
                                   )),
                                 )
@@ -313,7 +310,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
               child: Container(
                 // height: ,
                 decoration: BoxDecoration(
-                  color: MaterialTheme.lightScheme().surfaceContainerLow,
+                  color: customColor.getColor("surfaceContainerLow"),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
@@ -335,7 +332,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                         width: 32,
                         height: 4,
                         decoration: BoxDecoration(
-                          color: MaterialTheme.lightScheme().outlineVariant,
+                          color: colorScheme.outlineVariant,
                           borderRadius: BorderRadius.circular(3),
                         ),
                       ),

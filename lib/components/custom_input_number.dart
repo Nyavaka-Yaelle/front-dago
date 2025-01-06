@@ -48,14 +48,17 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       // width: 120,
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
       height: 36,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        // border: Border.all(color: MaterialTheme.lightScheme().outlineVariant),
-        color: MaterialTheme.lightScheme().surfaceContainerLowest,
+        // border: Border.all(color: colorScheme.outlineVariant),
+        color: customColor.getColor("surfaceContainerLowest"),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -65,10 +68,10 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
             width: 20,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              // border: Border.all(color: MaterialTheme.lightScheme().primary),
+              // border: Border.all(color: colorScheme.primary),
               color: _currentValue > widget.min
-                  ? MaterialTheme.lightScheme().primary
-                  : MaterialTheme.lightScheme().primary.withOpacity(0.5),
+                  ? colorScheme.primary
+                  : colorScheme.primary.withOpacity(0.5),
             ),
             child: Center( // Aligner l'icône au centre
               child: GestureDetector(
@@ -76,7 +79,7 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
                 child: Icon(
                   Icons.remove,
                   size: 16,
-                  color: Colors.white,
+                  color: customColor.getColor("surfaceContainerLowest"),
                 ),
               ),
             ),
@@ -92,7 +95,7 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
                   fontSize: 16,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
-                  color: MaterialTheme.lightScheme().onSurface,
+                  color: colorScheme.onSurface,
                   decoration: TextDecoration.none,
                 )
               ),
@@ -105,8 +108,8 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
             width: 20,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              // border: Border.all(color: MaterialTheme.lightScheme().primary),
-              color: MaterialTheme.lightScheme().primary,
+              // border: Border.all(color: colorScheme.primary),
+              color: colorScheme.primary,
             ),
             child: Center( // Aligner l'icône au centre
               child: GestureDetector(
@@ -114,7 +117,7 @@ class _CustomInputNumberState extends State<CustomInputNumber> {
                 child: Icon(
                   Icons.add,
                   size: 16,
-                  color: Colors.white,
+                  color: customColor.getColor("surfaceContainerLowest"),
                 ),
               ),
             ),

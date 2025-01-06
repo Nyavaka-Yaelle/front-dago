@@ -19,8 +19,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceBright;
+  // Color appBarColor = colorScheme.surfaceContainerLowest;
+  // Color bodyColor = colorScheme.surfaceBright;
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
   double scrollOffset=0;
 
   @override
@@ -34,13 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceBright");
+  }
   void _onScroll() {
     if (_scrollController.hasClients) {
       setState(() {
         appBarColor = _scrollController.offset > 10
-            ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-            : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
 
         scrollOffset = _scrollController.offset;
       });
@@ -49,6 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     double space = 12;
     double marginTop = scrollOffset <= 10 ? 180 : 160;
     if (scrollOffset <= 10) {
@@ -74,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       HorizontalLine(
-                        color: MaterialTheme.lightScheme().outlineVariant,
+                        color: colorScheme.outlineVariant,
                         thickness: 1.0,
                       ),
                       Padding(
@@ -86,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             height: 1,
-                            color: MaterialTheme.lightScheme().onPrimaryFixed,
+                            color: colorScheme.onSurface,
                             letterSpacing: 0.5,
                           ),
                         ),

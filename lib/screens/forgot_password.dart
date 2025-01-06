@@ -13,8 +13,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController telController = TextEditingController();
 
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest; // Couleur par défaut
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+  
   bool isButtonEnabled = false;
 
   @override
@@ -29,13 +31,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
-    });
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");    });
   }
   void _updateButtonState() {
     setState(() {
@@ -44,12 +51,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor, 
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.0, color: MaterialTheme.lightScheme().onSurfaceVariant,), // Flèche "Retour"
+          icon: Icon(Icons.arrow_back, size: 24.0, color: colorScheme.onSurfaceVariant,), // Flèche "Retour"
           onPressed: () {
             print("Retour à l'écran précédent");
             Navigator.pop(context); // Retour à l'écran précédent
@@ -114,7 +123,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           alignment: Alignment.centerLeft,
                           child: Icon(
                             Icons.call_outlined,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             size: 24.0,
                           ),
                         ),
@@ -148,7 +157,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         MaterialPageRoute(builder: (context) => NewPassword()),
                       );
                     }: null,
-                    color: MaterialTheme.lightScheme().primary,
+                    color: colorScheme.primary,
                   ),
                 )
               ),

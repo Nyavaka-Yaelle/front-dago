@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:project1/components/plat_details_on_your_card.dart';
-import 'package:project1/components/price_details_on_your_card.dart';
+import '../components/plat_details_on_your_card.dart';
+import '../components/price_details_on_your_card.dart';
 import '../components/address_on_your_card.dart';
 import '../components/horizontal_line.dart';
 import '../theme.dart';
 import '../components/resto_on_your_card.dart';
 
-class YourCardSreen extends StatefulWidget {
-  const YourCardSreen({Key? key}) : super(key: key);
+class YourCardScreen extends StatefulWidget {
+  const YourCardScreen({Key? key}) : super(key: key);
 
   @override
-  _YourCardSreenState createState() => _YourCardSreenState();
+  _YourCardScreenState createState() => _YourCardScreenState();
 }
 
-class _YourCardSreenState extends State<YourCardSreen> {
+class _YourCardScreenState extends State<YourCardScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLow;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLow;
-
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
   @override
   void initState() {
     super.initState();
@@ -29,34 +29,43 @@ class _YourCardSreenState extends State<YourCardSreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLow");
+    bodyColor = customColor.getColor("surfaceContainerLow");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainer
-          : MaterialTheme.lightScheme().surfaceContainerLow;
+          ? customColor.getColor("surfaceContainer")
+          : customColor.getColor("surfaceContainerLow");
+
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: MaterialTheme.lightScheme().surface,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             size: 24.0,
-            color: MaterialTheme.lightScheme().onSurfaceVariant,
+            color: colorScheme.onSurfaceVariant,
           ), // Flèche "Retour"
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         // backgroundColor: appBarColor,
-        backgroundColor: MaterialTheme.lightScheme().surface,
+        backgroundColor: colorScheme.surface,
 
         elevation: 0,
         title: Text(
@@ -64,7 +73,7 @@ class _YourCardSreenState extends State<YourCardSreen> {
           style: TextStyle(
             fontFamily: 'Roboto',
             fontSize: 22.0,
-            color: MaterialTheme.lightScheme().onSurface,
+            color: colorScheme.onSurface,
           ),
         ),
       ),
@@ -83,13 +92,13 @@ class _YourCardSreenState extends State<YourCardSreen> {
                     Padding(
                       padding: EdgeInsets.all(12),
                       child: HorizontalLine(
-                          color: MaterialTheme.lightScheme().outlineVariant, thickness: 0.5),
+                          color: colorScheme.outlineVariant, thickness: 0.5),
                     ),
                     AddressOnYourCard(adresse: "3GMQ 8H6, Antananarivo"),
                     Padding(
                       padding: EdgeInsets.all(12),
                       child: HorizontalLine(
-                          color: MaterialTheme.lightScheme().outlineVariant, thickness: 0.5),
+                          color: colorScheme.outlineVariant, thickness: 0.5),
                     ),
                     PlatDetailOnYourCard(nomPlat: "Atin'ny coucou",prix: 15000.0)
                   ],
@@ -110,7 +119,7 @@ class _YourCardSreenState extends State<YourCardSreen> {
                 Icon(
                   Icons.add, // Icône +
                   size: 18,
-                  color: MaterialTheme.lightScheme().primary, // Couleur de l'icône
+                  color: colorScheme.primary, // Couleur de l'icône
                 ),
                 SizedBox(width: 8),
                 Text(
@@ -119,7 +128,7 @@ class _YourCardSreenState extends State<YourCardSreen> {
                     fontFamily: 'Roboto',
                     fontSize: 12.5,
                     fontWeight: FontWeight.w600,
-                    color: MaterialTheme.lightScheme().primary, // Couleur du texte
+                    color: colorScheme.primary, // Couleur du texte
                   ),
                 ),
               ],

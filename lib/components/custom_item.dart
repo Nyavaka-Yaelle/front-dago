@@ -24,12 +24,14 @@ class CustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
     if (!active) {
       // Utilisation d'OutlinedButton pour un fond transparent et un contour
       return ElevatedButton(
         onPressed: isDisabled ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: MaterialTheme.lightScheme().surfaceContainerLowest,
+          backgroundColor: customColor.getColor("surfaceContainerLowest"),
           padding: EdgeInsets.symmetric(horizontal: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
@@ -40,7 +42,7 @@ class CustomItem extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: MaterialTheme.lightScheme().onSurfaceVariant,
+              color: colorScheme.onSurfaceVariant,
               size: 20.0,
             ),
             SizedBox(width: 8),
@@ -48,8 +50,8 @@ class CustomItem extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isDisabled
-                    ? MaterialTheme.lightScheme().onSurfaceVariant.withOpacity(0.5)
-                    : MaterialTheme.lightScheme().onSurfaceVariant, // Couleur du texte
+                    ? colorScheme.onSurfaceVariant.withOpacity(0.5)
+                    : colorScheme.onSurfaceVariant, // Couleur du texte
                 fontSize: 14,
               ),
             ),
@@ -63,8 +65,8 @@ class CustomItem extends StatelessWidget {
         onPressed: isDisabled ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: isDisabled
-              ? MaterialTheme.lightScheme().secondaryContainer.withOpacity(0.12)
-              : MaterialTheme.lightScheme().secondaryContainer.withOpacity(0.75), // Couleur du fond
+              ? colorScheme.secondaryContainer.withOpacity(0.12)
+              : colorScheme.secondaryContainer.withOpacity(0.75), // Couleur du fond
           fixedSize: Size(double.infinity, 32),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
@@ -76,7 +78,7 @@ class CustomItem extends StatelessWidget {
           children: [
             Icon(
               activeIcon,
-              color: MaterialTheme.lightScheme().onSecondaryContainer,
+              color: colorScheme.onSecondaryContainer,
               size: 20.0,
             ),
             SizedBox(width: 8),
@@ -84,8 +86,8 @@ class CustomItem extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isDisabled
-                    ? MaterialTheme.lightScheme().onSecondaryContainer.withOpacity(0.5)
-                    : MaterialTheme.lightScheme().onSecondaryContainer, // Couleur du texte
+                    ? colorScheme.onSecondaryContainer.withOpacity(0.5)
+                    : colorScheme.onSecondaryContainer, // Couleur du texte
                 fontSize: 14,
               ),
             ),

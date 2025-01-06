@@ -12,11 +12,14 @@ class RestaurantResume extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       height: 40, // Hauteur du container
       padding: EdgeInsets.symmetric(horizontal: 10), // Padding horizontal
       decoration: BoxDecoration(
-        color: MaterialTheme.lightScheme().surfaceVariant, // Couleur de fond
+        color: colorScheme.surfaceVariant, // Couleur de fond
         borderRadius: BorderRadius.circular(8), // Bordure arrondie
       ),
       child: Row(
@@ -35,13 +38,13 @@ class RestaurantResume extends StatelessWidget {
                   Icon(
                     Icons.star_rate_rounded,
                     size: 20.0,
-                    color: MaterialTheme.lightScheme().primary,
+                    color: colorScheme.primary,
                   ),
                   const SizedBox(width: 4.0),
                   Text(
                     star.toString(),
                     style: TextStyle(
-                      color: MaterialTheme.lightScheme().onSurfaceVariant,
+                      color: colorScheme.onSurfaceVariant,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Roboto',
@@ -62,14 +65,14 @@ class RestaurantResume extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.location_on_rounded, // Icône localisation
-                    color: MaterialTheme.lightScheme().error,
+                    color: colorScheme.error,
                     size: 20,
                   ),
                   SizedBox(width: 5),
                   Text(
                     lieu, // Adresse
                     style: TextStyle(
-                      color: MaterialTheme.lightScheme().onSurfaceVariant,
+                      color: colorScheme.onSurfaceVariant,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Roboto',
@@ -90,14 +93,14 @@ class RestaurantResume extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.alarm, // Icône horloge
-                    color: MaterialTheme.lightScheme().primary,
+                    color: colorScheme.primary,
                     size: 20,
                   ),
                   SizedBox(width: 5),
                   Text(
                     minutes.toInt().toString()+' mn', // Temps
                     style: TextStyle(
-                      color: MaterialTheme.lightScheme().onSurfaceVariant,
+                      color: colorScheme.onSurfaceVariant,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Roboto',

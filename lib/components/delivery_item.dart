@@ -22,8 +22,11 @@ class DeliveryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
-        color: MaterialTheme.lightScheme().surface,
+        color: colorScheme.surface,
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Row(
           crossAxisAlignment:
@@ -54,7 +57,7 @@ class DeliveryItem extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: MaterialTheme.lightScheme().onSurfaceVariant,
+                    color: colorScheme.onSurfaceVariant,
                     letterSpacing: 0.5,
                     height: 1.33,
                   ),
@@ -65,7 +68,7 @@ class DeliveryItem extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().onSurface,
+                    color: colorScheme.onSurface,
                     letterSpacing: 0.1,
                     height: 1.33,
                   ),
@@ -76,7 +79,7 @@ class DeliveryItem extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().onSurfaceVariant,
+                    color: colorScheme.onSurfaceVariant,
                     letterSpacing: 0.1,
                     height: 1.33,
                   ),

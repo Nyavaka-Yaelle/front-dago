@@ -11,6 +11,9 @@ class MintabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return GestureDetector(
       onTap: () => onTap(),
       child: Container(
@@ -22,14 +25,14 @@ class MintabItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: isSelected ? FontWeight.w500: FontWeight.w500,
-                color: isSelected ? MaterialTheme.lightScheme().primary : MaterialTheme.lightScheme().onSurfaceVariant,
+                color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
               ),
             ),
             if (isSelected)
               Container(
                 margin: EdgeInsets.only(top: 12),
                 height: 2.4, // Height of the border
-                color: MaterialTheme.lightScheme().primary, // Border color
+                color: colorScheme.primary, // Border color
                 width: label.length.toDouble() *
                     6, // Dynamic width based on text length
               ),

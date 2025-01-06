@@ -19,6 +19,9 @@ class RestoProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Container(
       
       child: Column(
@@ -42,7 +45,7 @@ class RestoProfileCard extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundImage: AssetImage(photoProfil),
                     radius: 40.0, // Rayon du cercle interne
-                    backgroundColor: MaterialTheme.lightScheme().surface,
+                    backgroundColor: colorScheme.surface,
                   ),
                 ),
               ),
@@ -66,7 +69,7 @@ class RestoProfileCard extends StatelessWidget {
                                   Text(
                                     nomResto,
                                     style: TextStyle(
-                                      color: MaterialTheme.lightScheme().onSurface,
+                                      color: colorScheme.onSurface,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'Roboto',
@@ -78,7 +81,7 @@ class RestoProfileCard extends StatelessWidget {
                                   SizedBox(width: 4),
                                   Icon(
                                     Icons.check_circle, // Icône de vérification
-                                    color: MaterialTheme.lightScheme().primaryFixedDim, // Couleur de l'icône
+                                    color: customColor.getColor("primaryFixedDim"), // Couleur de l'icône
                                     size: 20, // Taille de l'icône
                                   ),
                                 ]
@@ -100,10 +103,10 @@ class RestoProfileCard extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: ouvert
-                                ? MaterialTheme.lightScheme()
+                                ? colorScheme
                                     .primaryContainer
                                     .withOpacity(0.85)
-                                : MaterialTheme.lightScheme().error.withOpacity(0.2),
+                                : colorScheme.error.withOpacity(0.2),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20), // Rayon en haut à gauche
                               topRight: Radius.circular(0),  // Pas de rayon en haut à droite
@@ -118,9 +121,9 @@ class RestoProfileCard extends StatelessWidget {
                                 ouvert ? "Ouvert" : "Fermé",
                                 style: TextStyle(
                                   color: ouvert
-                                      ? MaterialTheme.lightScheme()
+                                      ? colorScheme
                                           .onPrimaryContainer
-                                      : MaterialTheme.lightScheme().error,
+                                      : colorScheme.error,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: 'Roboto',
@@ -146,7 +149,7 @@ class RestoProfileCard extends StatelessWidget {
             child: Text(
               description,
               style: TextStyle(
-                color: MaterialTheme.lightScheme().secondary,
+                color: colorScheme.secondary,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Roboto',

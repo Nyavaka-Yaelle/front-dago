@@ -19,6 +19,9 @@ class FundAddedSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Center(
       child: Stack(
         children: [
@@ -26,8 +29,8 @@ class FundAddedSuccess extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.9, // 90% de la largeur
             padding: const EdgeInsets.fromLTRB(14, 48, 14, 20),
             decoration: BoxDecoration(
-              color: MaterialTheme.lightScheme().surface,
-              border: Border.all(color: MaterialTheme.lightScheme().outlineVariant.withOpacity(0.5)),
+              color: colorScheme.surface,
+              border: Border.all(color: colorScheme.outlineVariant.withOpacity(0.5)),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -44,7 +47,7 @@ class FundAddedSuccess extends StatelessWidget {
                 Icon(
                   Icons.check_circle_rounded,
                   size: 64,
-                  color: MaterialTheme.lightScheme().primary,
+                  color: colorScheme.primary,
                 ),
                 const SizedBox(height: 8),
                 // Message principal
@@ -54,7 +57,7 @@ class FundAddedSuccess extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().secondary,
+                    color: colorScheme.secondary,
                     letterSpacing: 0.1,
                   ),
                   textAlign: TextAlign.center,
@@ -66,7 +69,7 @@ class FundAddedSuccess extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 32,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().onSurface,
+                    color: colorScheme.onSurface,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -77,7 +80,7 @@ class FundAddedSuccess extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: MaterialTheme.lightScheme().tertiary,
+                    color: colorScheme.tertiary,
                     letterSpacing: 0.5,
                   ),
                   textAlign: TextAlign.center,
@@ -95,7 +98,7 @@ class FundAddedSuccess extends StatelessWidget {
                           fontFamily: 'Roboto',
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: MaterialTheme.lightScheme().secondary,
+                          color: colorScheme.secondary,
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -106,7 +109,7 @@ class FundAddedSuccess extends StatelessWidget {
                           fontFamily: 'Roboto',
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
-                          color: MaterialTheme.lightScheme().onPrimaryContainer,
+                          color: colorScheme.onPrimaryContainer,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -129,7 +132,7 @@ class FundAddedSuccess extends StatelessWidget {
                              fontFamily: 'Roboto',
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            color: MaterialTheme.lightScheme().onSurface,
+                            color: colorScheme.onSurface,
                             letterSpacing: 0.5,
                             ),
                           ),
@@ -155,7 +158,7 @@ class FundAddedSuccess extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: MaterialTheme.lightScheme().secondary,
+                    color: colorScheme.secondary,
                     letterSpacing: 0.5,
                   ),
                   textAlign: TextAlign.center,
@@ -167,7 +170,7 @@ class FundAddedSuccess extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
-                    color: MaterialTheme.lightScheme().primary,
+                    color: colorScheme.primary,
                   ),
                   textAlign: TextAlign.center,
                 ),

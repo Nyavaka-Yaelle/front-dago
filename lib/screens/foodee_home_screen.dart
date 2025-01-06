@@ -22,8 +22,11 @@ class FoodeeHomeScreen extends StatefulWidget {
 
 class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
   final ScrollController _scrollController = ScrollController();
-  Color appBarColor = MaterialTheme.lightScheme().surfaceContainerLowest;
-  Color bodyColor = MaterialTheme.lightScheme().surfaceContainerLowest;
+  
+  late Color appBarColor;
+  late Color bodyColor;
+  late ColorManager customColor;
+  
   int _selectedIndex = 0; 
   bool noItems = false;
   @override
@@ -37,12 +40,18 @@ class _FoodeeHomeScreenState extends State<FoodeeHomeScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    customColor = ColorManager(context);
+    appBarColor = customColor.getColor("surfaceContainerLowest");
+    bodyColor = customColor.getColor("surfaceContainerLowest");
+  }
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
-          ? MaterialTheme.lightScheme().surfaceContainerLow.withOpacity(0.24)
-          : MaterialTheme.lightScheme().surfaceContainerLowest;
+          ? customColor.getColor("surfaceContainerLow").withOpacity(0.24)
+          : customColor.getColor("surfaceContainerLowest");
     });
   }
 void _handleTabChange(int index) {
@@ -52,6 +61,8 @@ void _handleTabChange(int index) {
   }
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bodyColor,
@@ -78,6 +89,7 @@ void _handleTabChange(int index) {
                 //   imagePath: "assets/images/foodee_service.png", // Chemin vers l'image
                 // ),
               // SizedBox(height: 4),
+
               SearchBar(),
               TabItems(
                 onTabChanged: _handleTabChange, // Passe la méthode callback
@@ -95,7 +107,7 @@ void _handleTabChange(int index) {
                       fontSize: 14,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w500,
-                      color: MaterialTheme.lightScheme().onSurfaceVariant
+                      color: colorScheme.onSurfaceVariant
                     )
                   )
                 ),

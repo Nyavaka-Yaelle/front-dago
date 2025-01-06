@@ -11,6 +11,9 @@ class FoodeeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ColorManager customColor = ColorManager(context);
+
     return Column(
       children: [
         SizedBox(height: MediaQuery.of(context).size.height * 0.025),
@@ -36,7 +39,7 @@ class FoodeeInfo extends StatelessWidget {
                 fontSize: 22,
                 fontWeight: FontWeight.w400,
                 height: 1.5,
-                color: MaterialTheme.lightScheme().secondary,
+                color: colorScheme.secondary,
               ),
             ),
           )
@@ -56,7 +59,7 @@ class FoodeeInfo extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 height: 1.5,
-                color: MaterialTheme.lightScheme().onSurfaceVariant,
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
           )
@@ -76,12 +79,12 @@ class FoodeeInfo extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 height: 1.5,
-                color: MaterialTheme.lightScheme().tertiary,
+                color: colorScheme.tertiary,
               ),
             ),
           )
         ),
-      ], // color: MaterialTheme.lightScheme().surfaceContainerLow,
+      ], // color: colorScheme.surfaceContainerLow,
     );
   }
 }
