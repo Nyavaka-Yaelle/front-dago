@@ -39,8 +39,7 @@ class ServicesCard extends StatelessWidget {
           // color: Theme.of(context).colorScheme.surfaceVariant,
           border: Border.all(
             width: 0.5,
-            color: colorScheme
-                .outlineVariant, // Définit la couleur de la bordure
+            color: colorScheme.outlineVariant, // Définit la couleur de la bordure
           ),
           borderRadius:
               const BorderRadius.all(Radius.circular(12)), // Bordure arrondie

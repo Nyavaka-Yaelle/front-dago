@@ -20,7 +20,8 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    ColorManager customColor = ColorManager(context);
+    // ColorManager customColor = ColorManager(context);
+    ColorManager colorManager = ColorManager(context);
 
     if (MediaQuery.of(context).size.width <= 500) {
       return GestureDetector(

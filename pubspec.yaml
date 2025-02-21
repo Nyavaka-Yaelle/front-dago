@@ -31,6 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^1.0.0
   material_symbols: ^0.0.0 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -38,14 +39,21 @@ dependencies:
   material_symbols_icons: ^4.2799.0
   # fluttertoast: ^8.2.5
   # fluttertoast: ^8.0.0
-  flutter_svg: ^1.0.0
   image_picker: ^0.8.4+4 
   permission_handler: ^10.0.0  # Assure-toi d'avoir la dernière version
   image_cropper: ^1.4.0 
   flutter_image_compress: ^1.1.0
   path_provider: ^2.0.11
+  provider: ^6.0.4
+
+  flutter_map: ^4.0.0
+  # location: ^5.0.0
+  latlong2: ^0.8.2
+  # window_size: ^0.3.0 
   # image_editor: ^0.6.0
 
+  auto_size_text: ^3.0.0
+  blur: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +66,7 @@ flutter_icons:
   ios: true
   name: "Dago"
   # windows: true
-  image_path: "assets/images/1x/icon2.png"
+  image_path: "assets/images/1x/icon6.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

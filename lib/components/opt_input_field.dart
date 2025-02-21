@@ -3,19 +3,21 @@ import '../theme.dart';
 
 class OtpInputField extends StatefulWidget {
   final int length;
-  final Function(bool) onChanged; // Callback pour informer le parent
+  final bool error;
+  final Function(String) onChanged; // Callback pour informer le parent
 
   const OtpInputField({
     Key? key,
     this.length = 6,
+    this.error = false,
     required this.onChanged, // Ajout du callback
   }) : super(key: key);
 
   @override
-  _OtpInputFieldState createState() => _OtpInputFieldState();
+  OtpInputFieldState createState() => OtpInputFieldState();
 }
 
-class _OtpInputFieldState extends State<OtpInputField> {
+class OtpInputFieldState extends State<OtpInputField> {
   late List<TextEditingController> controllers;
   late List<FocusNode> focusNodes;
 
@@ -43,8 +45,15 @@ class _OtpInputFieldState extends State<OtpInputField> {
     super.dispose();
   }
   
-  bool _areAllFieldsFilled() {
+  bool areAllFieldsFilled() {
     return controllers.every((controller) => controller.text.isNotEmpty);
+  }
+
+  void clearFields() {
+    for (var controller in controllers) {
+      controller.clear();
+    }
+    FocusScope.of(context).requestFocus(focusNodes[0]);
   }
 
   @override
@@ -70,7 +79,7 @@ class _OtpInputFieldState extends State<OtpInputField> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 28,
-              color: colorScheme.onSurface,
+              color: widget.error ? colorScheme.error : colorScheme.onSurface,
               fontWeight: FontWeight.w400,
             ),
             cursorColor: const Color.fromARGB(0, 255, 255, 255),
@@ -82,7 +91,7 @@ class _OtpInputFieldState extends State<OtpInputField> {
             ),
             onChanged: (value) {
               // Appelle le callback uniquement quand un champ est modifié
-              widget.onChanged(_areAllFieldsFilled());
+              widget.onChanged(controllers.map((c) => c.text).join());
 
               if (value.isNotEmpty) {
                 // Si un chiffre est saisi, passe au champ suivant

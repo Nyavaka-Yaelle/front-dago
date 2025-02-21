@@ -13,7 +13,7 @@ class ThemeNotifier with ChangeNotifier {
     //     WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
 
     // Utilise le thème sombre si le système est en mode sombre ou si l'utilisateur a basculé le thème sombre manuellement
-    return (isDarkMode) ? MaterialTheme.dark() : MaterialTheme.light();
+    return (!isDarkMode) ? MaterialTheme.dark() : MaterialTheme.light();
     // if(isSystemDarkMode)
   }
 

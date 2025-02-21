@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../components/logo_button.dart';
 import '../components/horizontal_line.dart';
 import '../components/transaction_history_item.dart';
@@ -85,8 +86,113 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 0.0),
+                Center(
+              child: Container(
+                height: 169.0,
+                child: Card(
+                  color: colorScheme.tertiaryContainer,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  elevation: 4.0,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          child: SvgPicture.asset(
+                            'assets/images/picto.svg',
+                            height: 172.0,
+                            width: 169.0,
+                            color: colorScheme.onTertiary.withOpacity(0.5),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                       
+                        Positioned(
+                          top: 16,
+                          left: 26,
+                          child:Text(
+                            "Solde",
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w300,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 32,
+                          left: 26,
+                          child:Text(
+                            "0.00 Ar",
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w400,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 16,
+                          left: 26,
+                          child: Text(
+                            "Nom de l'utilisateur",
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                                color: colorScheme.onTertiaryContainer,
+                                letterSpacing: 0.5,                            
+                              ),
+                          )
+                        ),
+                        Positioned(
+                          top: 26,
+                          right: 32,
+                          child: SvgPicture.asset(
+                            'assets/images/shield.svg',
+                            height: 24.0,
+                            width: 24.0,
+                            color: colorScheme.onTertiaryContainer,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        Positioned(
+                          top: 110/2,
+                          right: 13,
+                          child: SvgPicture.asset(
+                            'assets/images/flat-color-icons_sim-card-chip.svg',
+                            height: 63.0,
+                            width: 62.0,
+                            color: colorScheme.onTertiary.withOpacity(0.5),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 16,
+                          right: 26,
+                          child: Text(
+                            "23/05",
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w100,
+                                color: colorScheme.onTertiaryContainer,
+                                letterSpacing: 0.5,                            
+                              ),
+                          )
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+                )
+              ),
                 // Carte Wallet
-                Card(
+                /*Card(
                   // color: colorScheme.surface,
                   color: Colors.transparent,
                   shape: RoundedRectangleBorder(
@@ -142,7 +248,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                       ),
                     ],
                   ),
-                ),
+                ),*/
                 SizedBox(height: 12.0),
                 Column(
                   children: [
@@ -150,7 +256,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                       onTap: () {
                         print("Ajouter des fonds cliqué !");
                         setState(() {
-                          showPaymentOption = !showPaymentOption;
+                          // showPaymentOption = !showPaymentOption;
                         });
                       },
                       child: Container(
@@ -176,7 +282,7 @@ class _WalletConfigurationState extends State<WalletConfiguration> {
                     const SizedBox(
                         height: 6.0), // Espacement entre le bouton et le label
                     Text(
-                      "Ajouter des fonds",
+                      "Ajout de fonds",
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 13.5,

@@ -48,27 +48,36 @@ class BottomNavbarItem extends StatelessWidget {
                 ),
               ),
               // Badge rouge
-              if (showBadge && badgeCount > 0)
+              if (showBadge && badgeCount == 1)
+              Positioned(
+                  top: 4,
+                  left: 12+18,
+                  child: 
+                  Badge(smallSize: 6),
+              ),
+              if (showBadge && badgeCount >1)
                 Positioned(
                   top: 2,
-                  right: 8,
-                  child: Container(
-                    height: 16,
-                    width: 16,
-                    // padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: MaterialTheme.lightScheme().error,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(child:Text(
-                      badgeCount > 99 ? "99+" : badgeCount.toString(),
-                      style: TextStyle(
-                        color:  MaterialTheme.lightScheme().onPrimary,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )),
-                  ),
+                  left: 26,
+                  child: 
+                  Badge.count(largeSize: 16, count: badgeCount>999? 999: badgeCount, textColor: colorScheme.onError),
+                  // Container(
+                  //   height: 16,
+                  //   width: 16,
+                  //   // padding: EdgeInsets.all(6),
+                  //   decoration: BoxDecoration(
+                  //     color: colorScheme.error,
+                  //     shape: BoxShape.circle,
+                  //   ),
+                  //   child: Center(child:Text(
+                  //     badgeCount>1 ? badgeCount>99? "99+" : badgeCount.toString() : "",
+                  //     style: TextStyle(
+                  //       color:  colorScheme.onError,
+                  //       fontSize: 11,
+                  //       fontWeight: FontWeight.w400,
+                  //     ),
+                  //   )),
+                  // ),
                 ),
             ],
           ),

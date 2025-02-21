@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+import 'screens/ridee_screen.dart';
 import 'screens/otp_screen.dart';
 import 'screens/forgot_password.dart';
 import 'package:provider/provider.dart';
@@ -23,19 +26,26 @@ import 'screens/parameter_screen.dart';
 import 'screens/adresses_screen.dart';
 import 'screens/history_screen.dart';
 import 'screens/edit_password_screen.dart';
+
+import 'screens/custom_components.dart';
+import 'screens/maj/create_PIN.dart';
+
 import 'components/await_fooder.dart';
 import 'components/await_adding_fund.dart';
 import 'components/restaurant_resume.dart';
+import 'components/services_card.dart';
 import 'theme.dart';
 import 'theme_notifier.dart'; // Importez le ThemeNotifier
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeNotifier(),
-      child: MyApp(),
-    ),
-  );
+  initializeDateFormatting('fr_FR', null).then((_) {
+    runApp(
+        ChangeNotifierProvider(
+          create: (context) => ThemeNotifier(),
+          child: MyApp(),
+        ),
+      );
+    });
 }
 
 class MyApp extends StatelessWidget {
@@ -64,9 +74,15 @@ class MyApp extends StatelessWidget {
           // home: FooderProfile(),
           // home: YourCardScreen(),
           // home: AddFundScreen(),
-          home: WalletConfiguration(),
+          // home: WalletConfiguration(),
           // home: FundAddedScreen(), //soratra
           // home: HomeScreen(),
+          // home: RideeScreen(),
+
+          // home: CustomComponents(),
+          home: CreatePINScreen(),
+
+          // home: ServicesCard(),
           // home: SplashScreen(),
           // home: NotifScreen(), //soratra
           
@@ -85,6 +101,7 @@ class MyApp extends StatelessWidget {
           // home: EditPasswordScreen(), 
           // home: OtpScreen(), 
           routes: {
+            '/ridee': (context) => RideeScreen(),
             '/maison': (context) => MaisonScreen(),
             '/wallet_configuration': (context) => WalletConfiguration(),
             '/login': (context) => LoginScreen(),

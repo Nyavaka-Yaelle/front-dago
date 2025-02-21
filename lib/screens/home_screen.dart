@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.didChangeDependencies();
     customColor = ColorManager(context);
     appBarColor = customColor.getColor("surfaceContainerLowest");
+    // bodyColor = customColor.getColor("surfaceContainerLowest");
     bodyColor = customColor.getColor("surfaceBright");
   }
   void _onScroll() {

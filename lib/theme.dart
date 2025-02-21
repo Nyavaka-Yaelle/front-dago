@@ -585,88 +585,96 @@ class ColorFamily {
 class CustomColors {
   static const Map<String, Map<String, Color>> colors = {
     'inverseOnSurface': {
-      'light': Color(4293718767),
-      'dark': Color(4281020976),
+      'light': Color(0xFFECF2EF),
+      'dark': Color(0xFF2B3230),
     },
     'inversePrimary': {
-      'light': Color(4286830022),
-      'dark': Color(4278217567),
+      'light': Color(0xFF83D5C6),
+      'dark': Color(0xFF006B5F),
     },
     'primaryFixed': {
-      'light': Color(4288672482),
-      'dark': Color(4288672482),
+      'light': Color(0xFF9FF2E2),
+      'dark': Color(0xFF9FF2E2),
     },
     'onPrimaryFixed': {
-      'light': Color(4278198300),
-      'dark': Color(4278198300),
+      'light': Color(0xFF00201C),
+      'dark': Color(0xFF00201C),
     },
     'primaryFixedDim': {
-      'light': Color(4286830022),
-      'dark': Color(4286830022),
+      'light': Color(0xFF83D5C6),
+      'dark': Color(0xFF83D5C6),
     },
     'onPrimaryFixedVariant': {
-      'light': Color(4278210631),
-      'dark': Color(4278210631),
+      'light': Color(0xFF005047),
+      'dark': Color(0xFF005047),
     },
     'secondaryFixed': {
-      'light': Color(4291684577),
-      'dark': Color(4291684577),
+      'light': Color(0xFFCDE8E1),
+      'dark': Color(0xFFCDE8E1),
     },
     'onSecondaryFixed': {
-      'light': Color(4278591516),
-      'dark': Color(4278591516),
+      'light': Color(0xFF06201C),
+      'dark': Color(0xFF06201C),
     },
     'secondaryFixedDim': {
-      'light': Color(4289842374),
-      'dark': Color(4281551687),
+      'light': Color(0xFFB1CCC6),
+      'dark': Color(0xFFB1CCC6),
     },
     'onSecondaryFixedVariant': {
-      'light': Color(4291553023),
-      'dark': Color(4281551687),
+      'light': Color(0xFF334B47),
+      'dark': Color(0xFF334B47),
     },
     'tertiaryFixed': {
-      'light': Color(4281551687),
-      'dark': Color(4291553023),
+      'light': Color(0xFFCBE6FF),
+      'dark': Color(0xFFCBE6FF),
     },
     'onTertiaryFixed': {
-      'light': Color(4289514213),
-      'dark': Color(4278197808),
+      'light': Color(0xFF001E30),
+      'dark': Color(0xFF001E30),
     },
     'tertiaryFixedDim': {
-      'light': Color(4278197808),
-      'dark': Color(4289514213),
+      'light': Color(0xFFACCAE5),
+      'dark': Color(0xFFACCAE5),
     },
     'onTertiaryFixedVariant': {
       'light': Color(4281092704),
       'dark': Color(4281092704),
     },
     'surfaceDim': {
-      'light': Color(4292205529),
-      'dark': Color(4279112979),
+      'light': Color(0xFF2C4A60),
+      'dark': Color(0xFF2C4A60),
     },
     'surfaceBright': {
-      'light': Color(4294245368),
-      'dark': Color(4281613113),
+      'light': Color(0xFFF4FBF8),
+      'dark': Color(0xFF343B39),
     },
     'surfaceContainerLowest': {
-      'light': Color(4294967295),
-      'dark': Color(4278783758),
+      'light': Color(0xFFFFFFFF),
+      'dark': Color(0xFF090F0E),
     },
     'surfaceContainerLow': {
-      'light': Color(4293916146),
-      'dark': Color(4279704859),
+      'light': Color(0xFFEFF5F2),
+      'dark': Color(0xFF171D1B),
     },
     'surfaceContainer': {
-      'light': Color(4293521388),
-      'dark': Color(4279902495),
+      'light': Color(0xFFE9EFEC),
+      'dark': Color(0xFF1A211F),
     },
     'surfaceContainerHigh': {
-      'light': Color(4293126887),
-      'dark': Color(4280625962),
+      'light': Color(0xFFE3EAE7),
+      'dark': Color(0xFF252B2A),
     },
     'surfaceContainerHighest': {
-      'light': Color(4292732129),
-      'dark': Color(4281349684),
+      'light': Color(0xFFDDE4E1),
+      'dark': Color(0xFF303634),
+    },
+    'white': {
+      'light': Color(0xFFFFFFFF),
+      'dark': Color(0xFFFFFFFF),
+    },
+    'black': {
+      'light': Color.fromARGB(255, 0, 0, 0),
+      'dark': Color.fromARGB(255, 0, 0, 0),
     },
   };
 }

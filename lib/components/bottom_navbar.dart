@@ -47,7 +47,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             icon: Icons.notifications_outlined,
             activeIcon: Icons.notifications_rounded,
             label: "Notification",
-            badgeCount: 3,
+            badgeCount: 1,
             showBadge: true,
             isActive: isNotifActive,
             onTap: () => toggleActive('notif'),

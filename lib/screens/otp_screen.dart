@@ -35,13 +35,15 @@ class _OtpScreenState extends State<OtpScreen> {
     _scrollController.dispose();
     super.dispose();
   }
- @override
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     customColor = ColorManager(context);
     appBarColor = customColor.getColor("surfaceContainerLowest");
     bodyColor = customColor.getColor("surfaceContainerLowest");
   }
+
   void _onScroll() {
     setState(() {
       appBarColor = _scrollController.offset > 10
@@ -173,7 +175,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 // Composant OTP
                 OtpInputField(
                   length: 6, // Nombre de champs
-                  onChanged: _updateButtonState, // Callback pour notifier la mère
+                  onChanged: (value) {
+                    _updateButtonState(value.length == 6);
+                  }, // Callback pour notifier la mère
                 ),
                 const SizedBox(height: 56.0),
                 Padding(
